@@ -1,0 +1,2 @@
+$(document).ready(function () {$("#submit-79450554").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#enviando").fadeIn();}, data:$("#submit-79450554").closest("form").serialize(), dataType:"html", success:function (data, textStatus) {$("#enviando").fadeOut();$("#resultado").html(data);}, type:"post", url:"\/lab\/copias\/add_copias"});
+return false;});});
