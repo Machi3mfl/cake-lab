@@ -63,5 +63,5 @@ class Categoria extends AppModel {
 			'insertQuery' => ''
 		)
 	);
-
+	public $actsAs = array('Containable');
 }
