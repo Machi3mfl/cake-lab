@@ -55,6 +55,8 @@ class CategoriasController extends AppController {
 				$this->Session->setFlash('The categoria could not be saved. Please, try again.','error');
 			}
 		}
+
+		$this->_setearModelos();
 	}
 
 /**
@@ -100,5 +102,9 @@ class CategoriasController extends AppController {
 			$this->Session->setFlash('The categoria could not be deleted. Please, try again.','error');
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	private function _setearModelos() {
+		$this->set('superficies', $this->Categoria->Superficie->find('list'));
 	}
 }

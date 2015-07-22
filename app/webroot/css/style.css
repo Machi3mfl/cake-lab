@@ -29,3 +29,7 @@
 body{
     margin-bottom:3%;
 }
+
+.clear {
+  clear: both;
+}

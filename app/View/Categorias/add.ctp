@@ -14,10 +14,19 @@
         <div class="col-md-5">
         <div class="form-group">
             <?php
-                    echo $this->Form->input('nombre',array('class'=>'form-control'));
+                echo $this->Form->input('nombre',array('class'=>'form-control'));
             ?>
         </div>
-        <?php echo $this->Form->end(__('Agregar')); ?>
+        <div class="form-group multi">
+            <?php echo $this->Form->label('Superficie', 'Superificie');?>
+            <?php
+                echo $this->Form->input('Superficie',array('label' => false, 'class'=>'form-control', 'multiple' => 'multiple'));
+            ?>
+        </div>
+        <div class="form-group clear"></div>
+        
+        <?php echo $this->Form->submit(__('Agregar'), array('class' => 'btn btn-primary')); ?>
+        <?php echo $this->Form->end();?>
         </div>
 </div>
 

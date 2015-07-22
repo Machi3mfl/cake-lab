@@ -3,7 +3,9 @@ App::uses('AppModel', 'Model');
 /**
  * Categoria Model
  *
+ * @property CategoriaSuperficy $CategoriaSuperficy
  * @property Producto $Producto
+ * @property Superficie $Superficie
  */
 class Categoria extends AppModel {
 
@@ -35,6 +37,30 @@ class Categoria extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		)
+	);
+
+
+/**
+ * hasAndBelongsToMany associations
+ *
+ * @var array
+ */
+	public $hasAndBelongsToMany = array(
+		'Superficie' => array(
+			'className' => 'Superficie',
+			'joinTable' => 'categoria_superficies',
+			'foreignKey' => 'categoria_id',
+			'associationForeignKey' => 'superficie_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
 		)
 	);
 

@@ -22,7 +22,7 @@
     <!-- Bootstrap Validator CSS file -->
     <?php echo $this->Html->css('/bootstrapValidator/css/bootstrapValidator'); ?>
     <?php echo $this->Html->css('style'); ?>
-    
+    <?php echo $this->Html->css('/css/twitter/bootstrap-multiselect'); ?>
     
     
     
@@ -31,6 +31,8 @@
     <!-- Bootstrap Validator Js file -->
     <?php echo $this->Html->script('/bootstrapValidator/js/bootstrapValidator'); ?>
     <?php echo $this->Html->script('/bootstrapValidator/js/language/es_ES'); ?>
+    <?php echo $this->Html->script('/js/twitter/bootstrap-multiselect'); ?>
+    <?php echo $this->Html->script('/js/default'); ?>
     <script type="text/javascript">
         var base_url = "<?php echo Router::url('/');?>";
     </script>
