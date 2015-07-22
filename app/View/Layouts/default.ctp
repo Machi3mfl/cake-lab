@@ -31,39 +31,41 @@
     <!-- Bootstrap Validator Js file -->
     <?php echo $this->Html->script('/bootstrapValidator/js/bootstrapValidator'); ?>
     <?php echo $this->Html->script('/bootstrapValidator/js/language/es_ES'); ?>
-    
-<style>
-        
-        @import url(http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
-.fa-fw {width: 2em;}
-    </style>
+    <script type="text/javascript">
+        var base_url = "<?php echo Router::url('/');?>";
+    </script>
     <style>
+            
+            @import url(http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+    .fa-fw {width: 2em;}
+        </style>
+        <style>
 
-.panel-new {
-    border-color: #dfe8f1;
-    background-color: #fff;
-    border-radius: 4px;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
-}
+    .panel-new {
+        border-color: #dfe8f1;
+        background-color: #fff;
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+    }
 
-h4.title-table {
-    font-size: 15px;
-}
-.title-lead {
-    color: #3f3f3f;
-}
-.title-table .title-lead {
-    font-size: 65%;
-    margin: 5px 0 0;
-}
-.title-table + .title-lead {
-    margin-top: -10px;
-}
+    h4.title-table {
+        font-size: 15px;
+    }
+    .title-lead {
+        color: #3f3f3f;
+    }
+    .title-table .title-lead {
+        font-size: 65%;
+        margin: 5px 0 0;
+    }
+    .title-table + .title-lead {
+        margin-top: -10px;
+    }
 
-</style>
+    </style>
 </head>
 <body>
     <?php echo $this->element('navbar-admin', array(), array('plugin' => 'AclManagement'));?>
