@@ -61,7 +61,6 @@ class PedidosController extends AppController {
                 $this->Session->write('imagenes',$ant);
                 $this->set('imgs',$ant); 
                 $this->set('cantidad',count($ant));
-                //debug($ant);
             }
             else{
                 $this->Session->write('imagenes',$imgs);  
@@ -78,7 +77,7 @@ class PedidosController extends AppController {
         }
     }
     
-    public function setearModelos(){
+    public function setearModelos() {
         $categorias=$this->Upload->Copia->Producto->Categoria->find('list');
         $superficies=$this->Upload->Copia->Producto->Superficie->find('list');
         $tamanos=$this->Upload->Copia->Producto->Tamano->find('list');
