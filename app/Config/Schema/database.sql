@@ -294,3 +294,22 @@ ALTER TABLE `categoria_superficies`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+CREATE TABLE IF NOT EXISTS `superficie_tamanos` (
+  `id` bigint(20) unsigned NOT NULL,
+  `superficie_id` bigint(20) unsigned NOT NULL,
+  `tamano_id` bigint(20) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `superficie_tamanos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `superficie_id` (`superficie_id`,`tamano_id`),
+  ADD KEY `superficie_tamano_tamano_fk` (`tamano_id`);
+
+ALTER TABLE `superficie_tamanos`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `superficie_tamanos`
+  ADD CONSTRAINT `superficie_tamano_tamano_fk` FOREIGN KEY (`tamano_id`) REFERENCES `tamanos` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `superficie_tamano_superficie_fk` FOREIGN KEY (`superficie_id`) REFERENCES `superficies` (`id`) ON DELETE CASCADE;
