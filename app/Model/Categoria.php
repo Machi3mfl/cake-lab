@@ -52,7 +52,7 @@ class Categoria extends AppModel {
 			'joinTable' => 'categoria_superficies',
 			'foreignKey' => 'categoria_id',
 			'associationForeignKey' => 'superficie_id',
-			'unique' => 'keepExisting',
+			'unique' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

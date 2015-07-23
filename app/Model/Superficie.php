@@ -23,7 +23,7 @@ class Superficie extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'productos' => array(
+		'producto' => array(
 			'className' => 'Producto',
 			'foreignKey' => 'superficie_id',
 			'dependent' => false,
@@ -38,4 +38,22 @@ class Superficie extends AppModel {
 		)
 	);
 
+	public $hasAndBelongsToMany = array(
+		'Tamano' => array(
+			'className' => 'Tamano',
+			'joinTable' => 'superficie_tamanos',
+			'foreignKey' => 'superficie_id',
+			'associationForeignKey' => 'tamano_id',
+			'unique' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		)
+	);
+	public $actsAs = array('Containable');
 }

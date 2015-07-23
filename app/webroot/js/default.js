@@ -1,3 +1,3 @@
 $(function(e) {
-	$('[multiple="multiple"]').multiselect();
+	$('select[multiple="multiple"]').multiselect();
 });

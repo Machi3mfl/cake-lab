@@ -9,17 +9,23 @@
     </ul>    
 </div>
 <div class="col-md-9">
-<?php echo $this->Form->create('Superficy'); ?>
-    
-	<legend>
-            <?php echo __('Agregar Superficie'); ?>
-        </legend>
+    <legend><?php echo __('Añadir nueva Superficie'); ?></legend>
+        <?php echo $this->Form->create('Superficie'); ?>
         <div class="col-md-5">
-            <div class="form-group">
+        <div class="form-group">
             <?php
-                    echo $this->Form->input('tipo',array('class'=>'form-control'));
+                echo $this->Form->input('tipo',array('class'=>'form-control'));
             ?>
-            </div>
-            <?php echo $this->Form->end(__('Aceptar')); ?>
+        </div>
+        <div class="form-group multi">
+            <?php echo $this->Form->label('Tamano');?>
+            <?php
+                echo $this->Form->input('Tamano',array('label' => false, 'class'=>'form-control', 'multiple' => 'multiple'));
+            ?>
+        </div>
+        <div class="form-group clear"></div>
+        
+        <?php echo $this->Form->submit(__('Agregar'), array('class' => 'btn btn-primary')); ?>
+        <?php echo $this->Form->end();?>
         </div>
 </div>

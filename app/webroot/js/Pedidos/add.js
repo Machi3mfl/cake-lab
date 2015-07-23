@@ -1,19 +1,21 @@
 $(function() {
 
-	$(document).on('change', 'select[id*=UploadCopias][id*=Categoria]', function(event) {
+function cargar_change(modelo_padre, modelo_hijo, url) {
+	$(document).on('change', 'select[id*=UploadCopias][id*=' + modelo_padre + ']', function(event) {
 		var key,
 			option,
-			categoria_id,
+			modelo_padre_id,
 			position;
 
-		position = $(this).attr('id').replace('UploadCopias', '').replace('Categoria', '');
+		position = $(this).attr('id').replace('UploadCopias', '').replace(modelo_padre, '');
 
-		$('#UploadCopias' + position + 'Papel').html('');
+		$('#UploadCopias' + position + modelo_hijo).html('');
+		$('#UploadCopias' + position + modelo_hijo).change();
 		if (event.target !== null) {
 			
 
-			categoria_id = $(this).val();
-			$.get(base_url + '/CategoriaSuperficies/superficies_by_category/' + categoria_id, function(data) {
+			modelo_padre_id = $(this).val();
+			$.get(base_url + url + modelo_padre_id, function(data) {
 				
 
 				for (key in data) {
@@ -21,9 +23,15 @@ $(function() {
 						value: key,
 						text: data[key]
 					});
-					$('#UploadCopias' + position + 'Papel').append(option);
+					$('#UploadCopias' + position + modelo_hijo).append(option);
 				}
+
+				$('#UploadCopias' + position + modelo_hijo).change();
 			}, 'json');
 		}
 	});
+}
+cargar_change('Categoria', 'Papel', '/CategoriaSuperficies/superficies_by_category/');
+cargar_change('Papel', 'Tamano', '/SuperficieTamanos/tamano_by_superficie/');
+
 });

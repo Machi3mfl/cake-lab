@@ -3,9 +3,11 @@ App::uses('AppController', 'Controller');
 /**
  * Superficies Controller
  *
- * @property Superficy $Superficy
+ * @property Superficie $Superficie
  */
 class SuperficiesController extends AppController {
+
+	public $uses = 'Superficie';
 
 /**
  * index method
@@ -13,7 +15,7 @@ class SuperficiesController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Superficy->recursive = 0;
+		$this->Superficie->recursive = 0;
 		$this->set('superficies', $this->paginate());
 	}
 
@@ -25,11 +27,11 @@ class SuperficiesController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		$this->Superficy->id = $id;
-		if (!$this->Superficy->exists()) {
-			throw new NotFoundException(__('Invalid superficy'));
+		$this->Superficie->id = $id;
+		if (!$this->Superficie->exists()) {
+			throw new NotFoundException(__('Invalid superficie'));
 		}
-		$this->set('superficy', $this->Superficy->read(null, $id));
+		$this->set('superficie', $this->Superficie->read(null, $id));
 	}
 
 /**
@@ -39,14 +41,15 @@ class SuperficiesController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->Superficy->create();
-			if ($this->Superficy->save($this->request->data)) {
-				$this->Session->setFlash(__('The superficy has been saved'));
+			$this->Superficie->create();
+			if ($this->Superficie->save($this->request->data)) {
+				$this->Session->setFlash(__('Ha sido guardado correctamente'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The superficy could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('No se ha podido guardar.Por favor, intente de nuevo.'));
 			}
 		}
+		$this->_seterModelos();
 	}
 
 /**
@@ -57,20 +60,21 @@ class SuperficiesController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-		$this->Superficy->id = $id;
-		if (!$this->Superficy->exists()) {
-			throw new NotFoundException(__('Invalid superficy'));
+		$this->Superficie->id = $id;
+		if (!$this->Superficie->exists()) {
+			throw new NotFoundException(__('Invalid superficie'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Superficy->save($this->request->data)) {
-				$this->Session->setFlash(__('The superficy has been saved'));
+			if ($this->Superficie->save($this->request->data)) {
+				$this->Session->setFlash(__('The superficie has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The superficy could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The superficie could not be saved. Please, try again.'));
 			}
 		} else {
-			$this->request->data = $this->Superficy->read(null, $id);
+			$this->request->data = $this->Superficie->read(null, $id);
 		}
+		$this->_seterModelos();
 	}
 
 /**
@@ -85,15 +89,19 @@ class SuperficiesController extends AppController {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
-		$this->Superficy->id = $id;
-		if (!$this->Superficy->exists()) {
-			throw new NotFoundException(__('Invalid superficy'));
+		$this->Superficie->id = $id;
+		if (!$this->Superficie->exists()) {
+			throw new NotFoundException(__('Invalid superficie'));
 		}
-		if ($this->Superficy->delete()) {
-			$this->Session->setFlash(__('Superficy deleted'));
+		if ($this->Superficie->delete()) {
+			$this->Session->setFlash(__('Superficie deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Superficy was not deleted'));
+		$this->Session->setFlash(__('Superficie was not deleted'));
 		$this->redirect(array('action' => 'index'));
+	}
+
+	private function _seterModelos() {
+		$this->set('tamanos', $this->Superficie->Tamano->find('list'));
 	}
 }
