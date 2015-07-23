@@ -1,5 +1,5 @@
 <div class="col-md-2">
-	<h3><?php echo __('Actions'); ?></h3>
+	<h3><?php echo __('Acciones'); ?></h3>
 	<ul class="nav nav-sidebar">
 		<li><?php echo $this->Html->link(__('Edit Categoria'), array('action' => 'edit', $this->data['Categoria']['id'])); ?> </li>
 		<li><?php echo $this->Form->postLink(__('Delete Categoria'), array('action' => 'delete', $this->data['Categoria']['id']), array(), __('Are you sure you want to delete # %s?', $this->data['Categoria']['id'])); ?> </li>
@@ -10,7 +10,7 @@
 	</ul>
 </div>
 <div class="col-md-9">
-    <legend><?php echo __('Añadir nueva Categoria'); ?></legend>
+    <legend><?php echo __('Categoria'); ?></legend>
     <?php echo $this->Form->create('Categoria'); ?>
     <div class="col-md-5">
 	    <div class="form-group">
