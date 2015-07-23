@@ -40,7 +40,8 @@ class CategoriasController extends AppController {
 			array(
 				'conditions' => array(
 					'Categoria.' . $this->Categoria->primaryKey => $id
-				)
+				),
+				'recursive' => 2
 			)
 		);
 		$this->_setearModelos();

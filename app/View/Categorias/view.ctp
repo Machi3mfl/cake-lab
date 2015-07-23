@@ -28,36 +28,36 @@
 	    <?php echo $this->Form->end();?>
     </div>
     <div class="col-md-12">
-		<h3><?php echo __('Related Productos'); ?></h3>
+		<h3><?php echo __('Productos'); ?></h3>
 		<?php if (!empty($this->data['Producto'])): ?>
-		<table cellpadding = "0" cellspacing = "0">
-		<tr>
-			<th><?php echo __('Id'); ?></th>
-			<th><?php echo __('Precio'); ?></th>
-			<th><?php echo __('Activo'); ?></th>
-			<th><?php echo __('Categoria Id'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-		</tr>
-		<?php foreach ($this->data['Producto'] as $producto): ?>
+			<table cellpadding = "0" cellspacing = "0">
 			<tr>
-				<td><?php echo $producto['id']; ?></td>
-				<td><?php echo $producto['precio']; ?></td>
-				<td><?php echo $producto['activo']; ?></td>
-				<td><?php echo $producto['categoria_id']; ?></td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('controller' => 'productos', 'action' => 'view', $producto['id'])); ?>
-					<?php echo $this->Html->link(__('Edit'), array('controller' => 'productos', 'action' => 'edit', $producto['id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'productos', 'action' => 'delete', $producto['id']), array(), __('Are you sure you want to delete # %s?', $producto['id'])); ?>
-				</td>
+				<th class="col-md-2"><?php echo __('Id'); ?></th>
+				<th class="col-md-2"><?php echo __('Precio'); ?></th>
+				<th class="col-md-2"><?php echo __('Activo'); ?></th>
+				<th class="col-md-2"><?php echo __('Categoria'); ?></th>
+				<th class="col-md-2 actions">Acciones</th>
 			</tr>
-		<?php endforeach; ?>
-		</table>
-	<?php endif; ?>
+			<?php foreach ($this->data['Producto'] as $producto): ?>
+				<tr>
+					<td class="col-md-2" ><?php echo $producto['id']; ?></td>
+					<td class="col-md-2" ><?php //echo $producto['precio']; ?></td>
+					<td class="col-md-2" ><?php echo $producto['activo']; ?></td>
+					<td class="col-md-2" ><?php echo $producto['Categoria']['nombre']; ?></td>
+					<td class="col-md-2 actions">
+						<a href="<?php echo Router::url(array('controller' => 'productos', 'action' => 'view', $producto['id'])); ?>"><span class="glyphicon glyphicon-sunglasses"></span>
+						</a>
+						<a href="<?php echo Router::url(array('controller' => 'productos', 'action' => 'edit', $producto['id'])); ?>"><span class="glyphicon glyphicon-edit"></span>
+						</a>
+						<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-trash"></span>', array('controller' => 'productos', 'action' => 'delete', $producto['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $producto['id'])); ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</table>
+		<?php endif; ?>
 
 		<div class="actions">
-			<ul>
-				<li><?php echo $this->Html->link(__('New Producto'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
-			</ul>
+			<?php echo $this->Html->link(__('New Producto'), array('controller' => 'productos', 'action' => 'add'), array('class' => 'btn btn-primary')); ?>
 		</div>
     </div>
 </div>
