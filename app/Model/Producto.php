@@ -48,7 +48,7 @@ class Producto extends AppModel {
 		)
 	);
         
-        public $hasMany = array(
+    public $hasMany = array(
 		'precios' => array(
 			'className' => 'Precio',
 			'foreignKey' => 'producto_id',
@@ -63,4 +63,6 @@ class Producto extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+	public $actsAs = array('Containable');
 }

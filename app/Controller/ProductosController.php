@@ -106,39 +106,92 @@ class ProductosController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
         
-        public function buscar(){
-        $superficies= $this->Producto->Superficie->find('list');
-        $tamanos = $this->Producto->Tamano->find('list');
-        $categorias = $this->Producto->Categoria->find('list');
-        $selected_value=null;   
-        $this->set(compact('superficies','tamanos','categorias'));
-        
-            if($this->request->is('post'))
-                {
-                   
-                   debug($selected_value);
-                   
-                   $this->Session->setFlash('Producto Encontrado','success');
-                   
-                }
-            else {
-                $this->Session->setFlash('El producto no existe','error');
-                
+    public function buscar(){
+    $superficies= $this->Producto->Superficie->find('list');
+    $tamanos = $this->Producto->Tamano->find('list');
+    $categorias = $this->Producto->Categoria->find('list');
+    $selected_value=null;   
+    $this->set(compact('superficies','tamanos','categorias'));
+    
+        if($this->request->is('post'))
+            {
+               
+               debug($selected_value);
+               
+               $this->Session->setFlash('Producto Encontrado','success');
+               
             }
+        else {
+            $this->Session->setFlash('El producto no existe','error');
             
-            $conditions= array('Producto.superficie_id'=>'1','Producto.tamano_id'=>'1','Producto.categoria_id'=>'1');    
         }
         
-        public function getProducto($categoria_id,$superficie_id,$tamano_id){
-            $conditions = array(
-                    'AND' => array(
-                            array('categoria_id' => $categoria_id),
-                            array('superficie_id' => $superficie_id),
-                            array('tamano_id' => $tamano_id),
-                        ));
-            $prod= $this->Producto->find('first',
-                        array('conditions'=> $conditions)
-                    );
-            return $prod;
-        }
+        $conditions= array('Producto.superficie_id'=>'1','Producto.tamano_id'=>'1','Producto.categoria_id'=>'1');    
+    }
+    
+    public function getProducto($categoria_id,$superficie_id,$tamano_id){
+        $conditions = array(
+                'AND' => array(
+                        array('categoria_id' => $categoria_id),
+                        array('superficie_id' => $superficie_id),
+                        array('tamano_id' => $tamano_id),
+                    ));
+        $prod= $this->Producto->find('first',
+                    array('conditions'=> $conditions)
+                );
+        return $prod;
+    }
+
+    public function superficies_by_category($categoria_id = null) {
+		$this->layout = false;
+		if ($this->request->is('get')) {
+
+			if ($categoria_id == null) {
+				return;
+			}
+			$superficies = $this->Producto->find('all',
+				array(
+					'conditions' => array(
+						'categoria_id' => $categoria_id
+					),
+					'group' => 'superficie_id',
+					'fields' => 'Superficie.tipo',
+					'contain' => 'Superficie'
+				)
+			);
+
+			$ret = array();
+			foreach ($superficies as $value) {
+				$ret[$value['Superficie']['id']] = $value['Superficie']['tipo'];
+			}
+			$this->set('superficies', $ret);
+		}
+	}
+	
+	public function tamano_by_superficie($superficie_id = null, $categoria_id = null) {
+		$this->layout = false;
+		if ($this->request->is('get')) {
+
+			if ($superficie_id == null) {
+				return;
+			}
+
+			$tamanos = $this->Producto->find('all', 
+				array(
+					'conditions' => array(
+						'superficie_id' => $superficie_id
+					),
+					'group' => 'tamano_id',
+					'fields' => 'Tamano.tamano',
+					'contain' => 'Tamano'
+				)
+			);
+
+			$tamano_ids = array();
+			foreach ($tamanos as $key => $value) {
+				$tamano_ids[] = $value['Tamano']['tamano'];
+			}
+			$this->set('tamanos', $tamano_ids);
+		}
+	}
 }
