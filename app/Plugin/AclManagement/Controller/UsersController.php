@@ -134,13 +134,18 @@ class UsersController extends AclManagementAppController {
             throw new NotFoundException(__('Usuario invalido'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
+            
+
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('El usuario ha sido guardado correctamente'), 'success');
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('El usuario no se hace guardado correctamente. Por favor, vuelva a intentarlo.'), 'error');
+                $this->request->data['User']['password'] = null;
+                $this->request->data['User']['password2'] = null;
             }
         } else {
+
             $this->request->data = $this->User->read(null, $id);
             $this->request->data['User']['password'] = null;
         }

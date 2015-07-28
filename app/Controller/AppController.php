@@ -48,9 +48,6 @@ class AppController extends Controller {
             ),
             'Session'
         );
-
-    
-    
     
     public $helpers = array(
         'Session',
@@ -61,19 +58,10 @@ class AppController extends Controller {
         'Time'
         //,'FileUpload.UploadForm'
 
-    );
-    
-    
+    );    
 
-    
-    
     public function beforeFilter() {
         parent::beforeFilter();	
-        
-	
-        
-        
-        
         
         //Configure AuthComponent
         $this->Auth->flash = array("element"=>"AclManagement.error", "key"=>"auth", "params"=>array());
@@ -82,9 +70,6 @@ class AppController extends Controller {
         $this->Auth->loginRedirect = array('plugin'=>false, 'controller' => 'pages', 'action' => 'index');    
 		$this->Auth->allow();//must comment after generate action for cakephp 2.1
 		//$this->Auth->allow('home','display');//comment after generate action		
-	}
+	}  
 
-        
-
-        
-    }
+}

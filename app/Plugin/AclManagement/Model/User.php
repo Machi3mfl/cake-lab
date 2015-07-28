@@ -30,28 +30,28 @@ class User extends AclManagementAppModel {
             'required' => true,
             'allowEmpty' => false,
             'rule' => 'notEmpty',
-            'message' => 'You must enter your real name.'
+            'message' => 'Deberías poner un nomnre real.'
         ),
         'email' => array(
             'email' => array(
                 'required' => true,
                 'allowEmpty' => false,
                 'rule' => 'email',
-                'message' => 'Invalid email.',
+                'message' => 'Mail inválido.',
                 'last' => true
             ),
             'unique' => array(
                 'required' => true,
                 'allowEmpty' => false,
                 'rule' => 'isUnique',
-                'message' => 'Email already in use.'
+                'message' => 'El mail ya está en uso.'
             )
         ),
         'password' => array(
             'required' => false,
             'allowEmpty' => false,
             'rule' => 'comparePwd',
-            'message' => 'Password mismatch or less than 6 characters.'
+            'message' => 'La contraseñas no coinciden o tiene menos de 6 caracteres.'
         )
     );
 	
@@ -79,7 +79,8 @@ class User extends AclManagementAppModel {
      * @return array
      */
     function bindNode($user) {
-        return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
+        $data = AuthComponent::user();
+        return array('model' => 'Group', 'foreign_key' => $data['User']['group_id']);
     }
 
     public function beforeValidate($options = array()) {

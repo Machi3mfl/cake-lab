@@ -1,41 +1,43 @@
+<style type="text/css">
+    .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+        margin: 0;
+    }
+</style>
 <div class="users form">
 <ul class="breadcrumb">
     <li><?php echo $this->Html->link('User', array('action'=>'index'));?><span class="divider">/</span></li>
     <li class="active">Edit User</li>
 </ul>
 <?php echo $this->Form->create('User');?>
-	<fieldset>
+	<fieldset class="col-md-6">
 		<legend><?php echo __('Edit User'); ?></legend>
 	<?php
             echo $this->Form->input('id');
-            echo $this->Form->input('name', array('div'=>'clearfix',
-                'before'=>'<label>'.__('Name').'</label><div class="input">',
-                'after'=>$this->Form->error('name', array(), array('wrap' => 'span', 'class' => 'help-inline')).'</div>',
+            echo $this->Form->input('name', array(
+                'after'=> $this->Form->error('name', array(), array('wrap' => 'span', 'class' => 'help-inline')),
                 'error' => array('attributes' => array('style' => 'display:none')),
-                'label'=>false, 'class'=>'xlarge'));
-            echo $this->Form->input('email', array('div'=>'clearfix', 'readonly'=>true,
-                'before'=>'<label>'.__('Email').'</label><div class="input">',
-                'after'=>$this->Form->error('email', array(), array('wrap' => 'span', 'class' => 'help-inline')).'</div>',
+                'class'=>'form-control')
+            );
+            echo $this->Form->input('email', array(
+                'readonly'=>true,
+                'after'=>$this->Form->error('email', array(), array('wrap' => 'span', 'class' => 'help-inline')),
                 'error' => array('attributes' => array('style' => 'display:none')),
-                'label'=>false, 'class'=>'xlarge'));
+                'class'=>'form-control')
+            );
 
-            echo $this->Form->input('password', array('div'=>'clearfix',
-                'before'=>'<label>'.__('Password').'</label><div class="input">',
-                'after'=>$this->Form->error('password', array(), array('wrap' => 'span', 'class' => 'help-inline')).'</div>',
+            echo $this->Form->input('password', array(
+                'after'=>$this->Form->error('password', array(), array('wrap' => 'span', 'class' => 'help-inline')),
                 'error' => array('attributes' => array('style' => 'display:none')),
-                'label'=>false, 'class'=>'xlarge'));
-            echo $this->Form->input('password2', array('div'=>'clearfix', 'type'=>'password',
-                'before'=>'<label>'.__('Confirm Password').'</label><div class="input">',
-                'after'=>$this->Form->error('password2', array(), array('wrap' => 'span', 'class' => 'help-inline')).'</div>',
+                'class'=>'form-control'));
+            echo $this->Form->input('password2', array(
+                'type' => 'password',
+                'after'=>$this->Form->error('password2', array(), array('wrap' => 'span', 'class' => 'help-inline')),
                 'error' => array('attributes' => array('style' => 'display:none')),
-                'label'=>false, 'class'=>'xlarge'));
+                'class'=>'form-control'));
 
-            echo $this->Form->input('group_id', array('div'=>'clearfix',
-                'before'=>'<label>'.__('Group').'</label><div class="input">',
-                'after'=>'</div>','label'=>false, 'class'=>'xlarge'));
-            echo $this->Form->input('status', array('div'=>'clearfix',
-                'before'=>'<label>'.__('Status').'</label><div class="input">',
-                'after'=>'</div>','label'=>false, 'class'=>''));
+            echo $this->Form->input('group_id', array('class'=>'form-control'));
+
+            echo $this->Form->input('status', array('class'=>''));
         ?>
         <div class="actions">
             <?php 
