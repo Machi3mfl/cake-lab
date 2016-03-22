@@ -7,7 +7,7 @@ App::uses('ProductosController','Controller');
  * @property Precio $Precio
  */
 class PreciosController extends AppController {
-     
+
 /**
  * index method
  *
@@ -54,8 +54,8 @@ class PreciosController extends AppController {
             $productos=$this->Precio->productos->find('all');
             $lista = $this->Precio->lista->find('first', array('conditions' => array('Lista.id' => $id)));
             $this->set(compact('lista','productos'));
-           
-	
+
+
         }
 
 /**
@@ -108,8 +108,8 @@ class PreciosController extends AppController {
 		$this->Session->setFlash('Precio was not deleted','error');
 		$this->redirect(array('action' => 'index'));
 	}
-        
-        
+
+
         public function getPrecios(){
             $controller = new ProductosController();
             //debug($this->request->data);
@@ -119,7 +119,6 @@ class PreciosController extends AppController {
             //Buscar ID de producto
             foreach ($this->request->data['Upload']['Copias'] as $prod){
                 $productos[]=$controller->getProducto($prod['categoria'],$prod['papel'],$prod['tamano']);
-                
                 //debug($id[$productos]);
                 //Buscar precio del producto
                 $conditions = array(
@@ -128,8 +127,9 @@ class PreciosController extends AppController {
                             array('lista_id' => 3)
                         ));
                 $precios[]=$this->Precio->find('first',array('conditions'=>$conditions));
-                $cont++;             
+                $cont++;
             }
+
             $this->set('productos',$productos);
             $this->set('precios',$precios);
         }

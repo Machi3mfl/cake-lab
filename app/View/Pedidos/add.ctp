@@ -1,7 +1,7 @@
 <style>.table > tbody > tr > .thick-line {
     border-top: 2px solid;
 }
-body{ 
+body{
     margin-bottom:3%;
 }
 </style>
@@ -26,11 +26,11 @@ body{
                 <h3 class="text-center well"><?php echo __('Agregando nuevo Pedido'); ?></h3>
                 <legend><h3> Paso 1 <small>: Añadir copias</small></h3></legend>
                 <div>
-                    <h3> Seleccion de imagenes <small>: A continuacion seleccione los imágenes que desea enviar. 
+                    <h3> Seleccion de imagenes <small>: A continuacion seleccione los imágenes que desea enviar.
                         A traves del botón examinar puede seleccionar una o muchas fotos. Aprentando el atajo CTRL + E puede seleccionar todas las imagenes de una carpeta.</small></h3>
                     <div class="divider"></div>
                     <?php   echo $this->Form->create('Upload',array('type' => 'file','class'=>'form-inline','url' => array('controller' => 'pedidos', 'action' => $this->action))); ?>
-                        <div class="form-group">    
+                        <div class="form-group">
                             <?php   echo $this->Form->input('Upload.photo.', array('type' => 'file', 'multiple'=>true)); ?>
                         </div>
                         <div class="form-group">
@@ -41,21 +41,21 @@ body{
                         <?php   echo $this->Form->end(); ?>
                     <br>
 <script type="text/javascript">
-$("#submit").bind('click', function(){ 
+$("#submit").bind('click', function(){
     $.ajax({
-        async:true, 
-        type:'post', 
+        async:true,
+        type:'post',
         complete:function(request, json) {
-            $('#resultados').html(request.responseText); 
-        }, 
-        url:'/uploads/index', 
+            $('#resultados').html(request.responseText);
+        },
+        url:'/uploads/index',
         data:$(this).parents('form:first').serialize()
-    }) 
+    })
 });
-</script>    
+</script>
 
 <div id="resultados" >
-  <?php 
+  <?php
   if(isset($cantidad)) :  {
     echo $this->Form->input('cantidad',array('value'=>$cantidad,'hidden'=> true,'label'=>false));
   }
@@ -73,41 +73,18 @@ $("#submit").bind('click', function(){
     <table class="table table-hover">
         <thead>
           <tr>
-              <th>
-                  Miniatura
-              </th>
-              <th>
-                  Nombre
-              </th>
-              <th>
-                  Categoria
-              </th>
-              <th>
-                  Papel
-              </th>
-              <th>
-                  Tamaño
-              </th>
-              <th>
-                  Borde
-              </th>
-              <th>
-                  Cantidad
-              </th>
-              <th>
-                  Acciones
-              </th>
+              <th>Miniatura</th><th>Nombre</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Cantidad</th><th>Acciones</th>
           </tr>
       </thead>
-      
+
       <tbody>
-    <?php } 
+    <?php }
     $cant = 0;
-    foreach($imgs as $img) : 
-         
+    foreach($imgs as $img) :
+
         ?>
-    <tr> 
-        
+    <tr>
+
         <td>
             <?php echo $this->Form->input('Upload.'.$cant.'.id',array('value'=>$img['Upload']['id'],'hidden'=> true,'label'=>false));?>
             <?php echo $this->Form->input('Upload.'.$cant.'.photo_dir',array('value'=>$img['Upload']['photo_dir'],'hidden'=> true,'label'=>false));?>
@@ -115,7 +92,7 @@ $("#submit").bind('click', function(){
                         array('id'=>'imageresource') ); ?>
         </td>
         <td>
-            
+
             <?php echo $this->Form->input('Upload.'.$cant.'.photo',array('value'=>$img['Upload']['photo'],'hidden'=> true,'label'=>false));?>
             <?php echo $img['Upload']['photo']; ?>
         </td>
@@ -135,35 +112,35 @@ $("#submit").bind('click', function(){
         <td>
             <?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array('class'=>'form-control','placeholder'=>'Ingrese cantidad', 'label'=> false)); ?>
         </td>
-        
+
         <td>
             <button type="button" class="btn btn-info">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
             <button type="button" class="btn btn-danger">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </button>
         </td>
-    </tr>        
-<?php   
+    </tr>
+<?php
     $cant++;
     endforeach;
     $this->Form->end();
     else: ?>
-    
+
     <!-- Drop Zone -->
           <div class="upload-drop-zone" id="drop-zone">
             No se han subido fotos todavia. Seleccione las imagenes que desea subir a traves del botón examinar.
           </div>
 <?php
-    endif; 
+    endif;
 ?>
     </tbody>
     </table> <!-- div tabla imagenes -->
     </div>
     </div> <!-- div resultados -->
     </div>
-        <br>        
+        <br>
         <button id="activate-step-2" type="button" class="btn btn-primary btn-lg pull-right">Siguiente</button>
     </div>
     </div>
@@ -174,7 +151,7 @@ $("#submit").bind('click', function(){
                 <h3 class="text-center well">Completando pedido</h3>
                 <legend><h3> Paso 2 <small>: Confirmación del pedido</small></h3></legend>
 
-                <div class="col-md-6">             
+                <div class="col-md-6">
                 <blockquote>
                     <ul type="none">
                         <li>Cliente: <small>Apellido Nombre</small> </li>
@@ -202,21 +179,7 @@ $("#submit").bind('click', function(){
                 <table class="table table-hover" cellspacing="0" cellpadding="0">
                 <thead>
                     <tr>
-                        <th>
-                            Archivo
-                        </th>
-                        <th>
-                            Cantidad
-                        </th>
-                        <th>
-                            Categoria
-                        </th>
-                        <th>
-                            Papel
-                            
-                        </th>
-                        <th>
-                            Tamaño
+                        <th>Archivo</th><th>Cantidad</th><th>Categoria</th><th>Papel</th><th>maño
                         </th>
                         <th>
                             Borde
@@ -229,34 +192,34 @@ $("#submit").bind('click', function(){
                 <tbody>
                     <?php if(isset($imgs)) :  {
                         $cant = 0;
-                        foreach($imgs as $img) : ?>   
+                        foreach($imgs as $img) : ?>
                     <tr>
                         <td id="nombre">
-                           <?php echo $img['Upload']['photo']; ?> 
+                           <?php echo $img['Upload']['photo']; ?>
                         </td>
                         <td id='<?php echo 'cantidad'.$cant; ?>'>
-                            
+
                         </td>
                         <td id='<?php echo 'categoria'.$cant; ?>'>
-                            
+
                         </td>
                         <td id='<?php echo 'papel'.$cant; ?>'>
-                            
+
                         </td>
                         <td id='<?php echo 'tamano'.$cant; ?>'>
-                            
+
                         </td>
                         <td id='<?php echo 'borde'.$cant; ?>'>
-                          
+
                         </td>
                         <td id='<?php echo 'precio'.$cant; ?>'  class="text-right">
-                            
+
                         </td>
                     </tr>
-                    <?php 
+                    <?php
                     $cant++;
                     endforeach;
-                    } endif; ?>  
+                    } endif; ?>
                     <tr>
                         <td class="thick-line"></td>
                         <td class="thick-line"></td>
@@ -284,19 +247,19 @@ x.ready(inicializarEventos);
 function inicializarEventos(){
     var x1= $("#activate-step-2");
     x1.click(obtenerPrecios);
-    
+
     var x2= $("#activate-step-2");
     x2.click(obtenerDatos);
-    
+
     var c= $("#confirmar");
     c.click(confirmarPedido);
-    
-    
+
+
 }
 
 function obtenerPrecios(){
     var datos = $("#UploadCopiasAddForm").serialize();
-    
+
     $.ajax({
         method: "POST",
         url: "../precios/getPrecios",
@@ -320,7 +283,14 @@ function obtenerPrecios(){
 }
 
 function obtenerDatos(){
-    
+    /** obtiene datos de los select
+     *  categoria
+     *  papel
+     *  tamaño
+     *  borde
+     *  cantidad
+     *
+     * **/
     var cat,papel,tamano,borde,cant;
     var total= parseInt($("#cantidad").val());
     for(var i=0; i<total; i++){
@@ -329,16 +299,16 @@ function obtenerDatos(){
         tamano= $("#UploadCopias"+i+"Tamano option:selected");
         borde= $("#UploadCopias"+i+"Borde option:selected");
         cant = $("#UploadCopias"+i+"Cantidad");
-       
-            
+
+
         $("#categoria"+i).text(cat.text());
         $("#papel"+i).text(papel.text());
         $("#tamano"+i).text(tamano.text());
         $("#borde"+i).text(borde.text());
         $("#cantidad"+i).text(cant.val());
 
-        
-        
+
+
     }
     }
 
@@ -348,7 +318,7 @@ function confirmarPedido(){
 </script>
 <script>
 $(document).ready(function() {
-    
+
     var navListItems = $('ul.setup-panel li a'),
         allWells = $('.setup-content');
 
@@ -359,7 +329,7 @@ $(document).ready(function() {
         e.preventDefault();
         var $target = $($(this).attr('href')),
             $item = $(this).closest('li');
-        
+
         if (!$item.hasClass('disabled')) {
             navListItems.closest('li').removeClass('active');
             $item.addClass('active');
@@ -367,18 +337,18 @@ $(document).ready(function() {
             $target.show();
         }
     });
-    
+
     $('ul.setup-panel li.active a').trigger('click');
-    
+
        $('#activate-step-2').on('click', function(e) {
         $('ul.setup-panel li:eq(1)').removeClass('disabled');
         $('ul.setup-panel li a[href="#step-2"]').trigger('click');
-        
-        //$(this).remove();
-    });  
 
-    
+        //$(this).remove();
+    });
+
+
 });
-    
+
 </script>
 <?php echo $this->Html->script('Pedidos/add');?>

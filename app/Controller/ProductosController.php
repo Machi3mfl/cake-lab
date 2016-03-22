@@ -105,30 +105,30 @@ class ProductosController extends AppController {
 		$this->Session->setFlash('Producto was not deleted','error');
 		$this->redirect(array('action' => 'index'));
 	}
-        
+
     public function buscar(){
     $superficies= $this->Producto->Superficie->find('list');
     $tamanos = $this->Producto->Tamano->find('list');
     $categorias = $this->Producto->Categoria->find('list');
-    $selected_value=null;   
+    $selected_value=null;
     $this->set(compact('superficies','tamanos','categorias'));
-    
+
         if($this->request->is('post'))
             {
-               
+
                debug($selected_value);
-               
+
                $this->Session->setFlash('Producto Encontrado','success');
-               
+
             }
         else {
             $this->Session->setFlash('El producto no existe','error');
-            
+
         }
-        
-        $conditions= array('Producto.superficie_id'=>'1','Producto.tamano_id'=>'1','Producto.categoria_id'=>'1');    
+
+        $conditions= array('Producto.superficie_id'=>'1','Producto.tamano_id'=>'1','Producto.categoria_id'=>'1');
     }
-    
+
     public function getProducto($categoria_id,$superficie_id,$tamano_id){
         $conditions = array(
                 'AND' => array(
@@ -167,7 +167,7 @@ class ProductosController extends AppController {
 			$this->set('superficies', $ret);
 		}
 	}
-	
+
 	public function tamano_by_superficie($superficie_id = null, $categoria_id = null) {
 		$this->layout = false;
 		if ($this->request->is('get')) {
@@ -176,7 +176,7 @@ class ProductosController extends AppController {
 				return;
 			}
 
-			$tamanos = $this->Producto->find('all', 
+			$tamanos = $this->Producto->find('all',
 				array(
 					'conditions' => array(
 						'superficie_id' => $superficie_id
@@ -186,10 +186,9 @@ class ProductosController extends AppController {
 					'contain' => 'Tamano'
 				)
 			);
-
-			$tamano_ids = array();
+      $tamano_ids = array();
 			foreach ($tamanos as $key => $value) {
-				$tamano_ids[] = $value['Tamano']['tamano'];
+				$tamano_ids[$value['Tamano']['id']] = $value['Tamano']['tamano'];
 			}
 			$this->set('tamanos', $tamano_ids);
 		}

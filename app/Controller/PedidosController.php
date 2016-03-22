@@ -41,19 +41,19 @@ class PedidosController extends AppController {
         $this->loadModel('Upload');
         $usuario=$this->Auth->user();
         //$this->Session->delete('imagenes');
-        if (!empty($this->request->data)){
+        if (!empty($this->request->data)){ // si hay imagenes
             //debug($this->request->data);
-            foreach($this->request->data["Upload"]["photo"] as $file) {
+            foreach($this->request->data["Upload"]["photo"] as $file) { // por cada photo setea un file
                 $this->Upload->set(array('photo' => $file));
                 $photo = $this->Upload->data;
                 $this->Upload->create();
-                if ($this->Upload->save($photo)) {
-                    $ultimo = $this->Upload->getLastInsertId();
+                if ($this->Upload->save($photo)) { // guarda el file
+                    $ultimo = $this->Upload->getLastInsertId(); //obtiene el ultimo id , para crear una pila
                     $guardados[]= $ultimo;
                 }
             }
             $imgs=$this->listarGuardados($guardados);
-            if (!empty($this->Session->read('imagenes'))){
+            if (!empty($this->Session->read('imagenes'))){ //
                 $ant = $this->Session->read('imagenes');
                 foreach($imgs as $img) {
                     array_push($ant, $img);
