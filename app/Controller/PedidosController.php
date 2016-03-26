@@ -59,36 +59,36 @@ class PedidosController extends AppController {
                     array_push($ant, $img);
                 }
                 $this->Session->write('imagenes',$ant);
-                $this->set('imgs',$ant); 
+                $this->set('imgs',$ant);
                 $this->set('cantidad',count($ant));
             }
             else{
-                $this->Session->write('imagenes',$imgs);  
-                $this->set('imgs',$imgs); 
+                $this->Session->write('imagenes',$imgs);
+                $this->set('imgs',$imgs);
             }
         $this->setearModelos();
         }else{
             if($this->Session->check('imagenes')){
                 $img = $this->Session->read('imagenes');
-                $this->set('imgs',$img); 
+                $this->set('imgs',$img);
                 $this->set('cantidad',count($img));
                 $this->setearModelos();
             }
         }
     }
-    
+
     public function setearModelos() {
         $categorias=$this->Upload->Copia->Producto->Categoria->find('list');
         $superficies=$this->Upload->Copia->Producto->Superficie->find('list');
         $tamanos=$this->Upload->Copia->Producto->Tamano->find('list');
         $this->set(compact('superficies','tamanos','categorias'));
     }
- 
+
     /*
      * public
-     * 
+     *
      * obtiene los ultimos uploads por ID
-     * 
+     *
      * return array de Uploads
      */
     public function listarGuardados(array $guardados){
@@ -155,7 +155,7 @@ class PedidosController extends AppController {
         $usuario=$this->Auth->user();
         if($this->Session->check('imagenes')){
             $img = $this->Session->read('imagenes');
-            $this->set('imgs',$img); 
+            $this->set('imgs',$img);
             $this->set('cantidad',count($img));
             $this->setearModelos();
         }
@@ -178,20 +178,21 @@ class PedidosController extends AppController {
                     array_push($ant, $img);
                 }
                 $this->Session->write('imagenes',$ant);
-                $this->set('imgs',$ant); 
+                $this->set('imgs',$ant);
                 $this->set('cantidad',count($ant));
             }
             else{
-                $this->Session->write('imagenes',$imgs);  
-                $this->set('imgs',$imgs); 
+                $this->Session->write('imagenes',$imgs);
+                $this->set('imgs',$imgs);
             }
         $this->setearModelos();
         }
     }
-    
+
     public function confirmar(){
         debug($this->request->data);
-        
+
     }
+
 
 }

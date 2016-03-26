@@ -1,5 +1,5 @@
 
- 
+
        /* layout.css Style */
 .upload-drop-zone {
   height: 200px;
@@ -32,4 +32,23 @@ body{
 
 .clear {
   clear: both;
+}
+
+
+.table > tbody > tr > .thick-line {
+    border-top: 2px solid;
+}
+body{
+    margin-bottom:3%;
+}
+
+
+/*******************AUTOCOMPLETE****************************************************************/
+
+#buscador{
+  width: 50% !important;
+}
+
+.ui-autocomplete-loading {
+    background: white url('../img/ui-anim_basic_16x16.gif') right center no-repeat !important;
 }

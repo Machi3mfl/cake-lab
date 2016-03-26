@@ -11,10 +11,10 @@ class ClientesController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        
 
-    } 
-    
+
+    }
+
 /**
  * index method
  *
@@ -65,8 +65,8 @@ class ClientesController extends AppController {
                         $this->Session->setFlash('The cliente could not be saved. Please, try again.','error');
                 }
             }
-            
-        
+
+
         $group = ClassRegistry::init('Group');
         $groups = $group->find('list', array('conditions' => array('Group.name' => 'cliente')));
         $this->cargar_provincia();
@@ -139,13 +139,13 @@ class ClientesController extends AppController {
 				$this->Session->setFlash('The cliente could not be saved. Please, try again.','error');
 			}
 		}
-                
+
 		$group = ClassRegistry::init('Group');
                 $users = $this->Cliente->User->find('list');
                 $groups = $group->find('list');
                 $this->set(compact('users','groups'));
 	}
-        
+
         function cargar_provincia(){
             $prov = ClassRegistry::init('Provincia');
             $datos=$prov->find('list',array('order'=>'nom_prov ASC'));
@@ -154,7 +154,7 @@ class ClientesController extends AppController {
 
         function cargar_localidad(){
             $loc = ClassRegistry::init('Localidad');
-            $datos=$loc->find('list',array('order'=>'nom_loc ASC'));    
+            $datos=$loc->find('list',array('order'=>'nom_loc ASC'));
             //$datos=$loc->find('list',array('order'=>'nom_loc ASC', 'conditions'=>"(substring(Localidad.cod_loc from 1 for 2))::integer=($cod_prov)"));
             $this->set("localidades",$datos);
         }
@@ -171,5 +171,41 @@ class ClientesController extends AppController {
         public function home(){
             $this->layout= 'login';
         }
-        
+
+      public function buscarPorNombre(){
+        $this->autoRender=false;
+        $terms=$this->request->query['term'];
+        $this->Cliente->recursive=-1;
+        $datos = $this->Cliente->find('all',array(
+          'conditions'=>array(
+            'OR'=> array(
+                'Cliente.nombre LIKE' => '%'.$terms.'%',
+                'Cliente.apellido LIKE' => '%'.$terms.'%'
+              )
+            )
+          )
+          );
+
+        $resultados=array();
+        if (!empty($datos)){
+          $resultados = "[";
+          foreach($datos as $d){
+            $id = $d['Cliente']['id'];
+            $nombre = strtoupper(stripslashes($d['Cliente']['nombre']));
+            $apellido = strtoupper(stripslashes($d['Cliente']['apellido']));
+            $resultados.= "{ ";
+            $resultados.= "\"value\": \"$id\", ";
+            $resultados.= "\"label\": \"$apellido $nombre\" ";
+            $resultados.= "}, ";
+          }
+        $resultados = substr($resultados, 0, -2);
+        $resultados.= "]";
+        }
+        else{
+          $resultados = "[{ \"value\": \"\", \"label\": \"No hay resultados\" }]";
+        }
+        return $resultados;
+
+      }
+
 }

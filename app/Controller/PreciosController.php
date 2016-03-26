@@ -39,24 +39,22 @@ class PreciosController extends AppController {
  * @return void
  */
 	public function add($id=null) {
-            if ($this->request->is('post')) {
-                $precios=$this->request->data['Precio'];
-                foreach($precios as $data){
-                    $this->Precio->create();
-                        if ($this->Precio->save($data)) {
-                                $this->Session->setFlash('Los precios han sido guardados correctamente','success');
-                                $this->redirect(array('controller'=>'listas','action' => 'index'));
-                        } else {
-                                $this->Session->setFlash('The precio could not be saved. Please, try again.','error');
-                        }
-                    }
-            }
-            $productos=$this->Precio->productos->find('all');
-            $lista = $this->Precio->lista->find('first', array('conditions' => array('Lista.id' => $id)));
-            $this->set(compact('lista','productos'));
-
-
-        }
+	  if ($this->request->is('post')) {
+      $precios=$this->request->data['Precio'];
+      foreach($precios as $data){
+          $this->Precio->create();
+              if ($this->Precio->save($data)) {
+                      $this->Session->setFlash('Los precios han sido guardados correctamente','success');
+                      $this->redirect(array('controller'=>'listas','action' => 'index'));
+              } else {
+                      $this->Session->setFlash('The precio could not be saved. Please, try again.','error');
+              }
+          }
+	  }
+	  $productos=$this->Precio->productos->find('all');
+	  $lista = $this->Precio->lista->find('first', array('conditions' => array('Lista.id' => $id)));
+	  $this->set(compact('lista','productos'));
+	}
 
 /**
  * edit method
@@ -110,27 +108,27 @@ class PreciosController extends AppController {
 	}
 
 
-        public function getPrecios(){
-            $controller = new ProductosController();
-            //debug($this->request->data);
-            $this->layout = 'ajax';
-            $lista = 2;
-            $cont= 0;
-            //Buscar ID de producto
-            foreach ($this->request->data['Upload']['Copias'] as $prod){
-                $productos[]=$controller->getProducto($prod['categoria'],$prod['papel'],$prod['tamano']);
-                //debug($id[$productos]);
-                //Buscar precio del producto
-                $conditions = array(
-                    'AND' => array(
-                            array('producto_id' => $productos[$cont]['Producto']['id']),
-                            array('lista_id' => 3)
-                        ));
-                $precios[]=$this->Precio->find('first',array('conditions'=>$conditions));
-                $cont++;
-            }
-
-            $this->set('productos',$productos);
-            $this->set('precios',$precios);
-        }
+  public function getPrecios(){
+      $controller = new ProductosController();
+      //s$this->layout = 'ajax';
+			$this->autoRender=false;
+      $lista = 2;
+      $cont= 0;
+      //Buscar ID de producto
+      foreach ($this->request->data['Upload']['Copias'] as $prod){
+          $productos[]=$controller->getProducto($prod['categoria'],$prod['papel'],$prod['tamano']);
+          //debug($id[$productos]);
+          //Buscar precio del producto
+          $conditions = array(
+              'AND' => array(
+                      array('producto_id' => $productos[$cont]['Producto']['id']),
+                      array('lista_id' => 3)
+                  ));
+          $precios[]=$this->Precio->find('first',array('conditions'=>$conditions));
+          $cont++;
+      }
+      //$this->set('productos',$productos);
+      //$this->set('precios',$precios);
+			return json_encode($precios);
+  }
 }
