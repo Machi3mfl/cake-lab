@@ -130,10 +130,15 @@
       <legend><h3> Paso 2 <small>: Confirmación del pedido</small></h3></legend>
       <div class="col-md-6">
         <blockquote>
+					Datos del Cliente
           <ul type="none" id="datosCliente" class="datosCliente">
-            <li id="clienteNombre">Cliente: <small>Apellido Nombre</small> </li>
-            <li id="clienteDir">Direccion: <small> Provincia / Localidad / Calle Numero Piso </small> </li>
-            <li id="clienteContacto">Contacto: <small> Email / Telefono </small></li>
+						<input id="ClienteId" data="data['Pedido']['cliente_id']" style="display:none">
+            <li id="clienteNombre"></li>
+						<li><small>Cliente - Apellido Nombre</small></li>
+            <li id="clienteDir"></li>
+						<li><small> Dirección - Provincia / Localidad / Calle Numero Piso </small></li>
+            <li id="clienteContacto"></li>
+						<li><small> Contacto - Email / Telefono </small></li>
           </ul>
         </blockquote>
       </div> <!-- FIN COL-MD-6 -->
@@ -255,11 +260,13 @@ $(document).ready(function(){
 	}
 
 	function llenarCliente($datos){
-	  var nombre= $("#clienteNombre small");
-		var dir = $("#clienteDir small");
-		var contacto = $("#clienteContacto small");
+		var cli= $("#ClienteId");
+	  var nombre= $("#clienteNombre");
+		var dir = $("#clienteDir");
+		var contacto = $("#clienteContacto");
 
-		nombre.text($datos.Cliente.apellido+' '+$datos.Cliente.nombre);
+		cli.text($datos.Cliente.id);
+		nombre.text($datos.Cliente.apellido+' '+$datos.Cliente.nombre+'');
 		dir.text($datos.Cliente.calle+' '+$datos.Cliente.numero+' Piso/Dpto: '+$datos.Cliente.piso);
 		contacto.text($datos.User.email+' '+$datos.Cliente.telefono);
 	}

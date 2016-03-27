@@ -8,12 +8,12 @@ App::uses('AclManagementAppController', 'AclManagement.Controller');
  * @property User $User
  */
 class UsersController extends AclManagementAppController {
-    
+
     public $uses = array('AclManagement.User');
 
     function beforeFilter() {
         parent::beforeFilter();
-        
+
         $this->layout = "twitter_full";
 
         $this->Auth->allow('login', 'logout');
@@ -55,7 +55,7 @@ class UsersController extends AclManagementAppController {
      */
     function login() {
         $this->layout = 'login';
-        
+
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 $this->redirigir($this->Auth->User('group_id'));
@@ -70,11 +70,11 @@ class UsersController extends AclManagementAppController {
      * @return void
      */
     function logout() {
-        
+
         $this->Session->setFlash('Se ha cerrado sesión correctamente', 'success');
         $this->Session->destroy();
         $this->redirect($this->Auth->logout());
-    }    
+    }
     /**
      * index method
      *
@@ -83,7 +83,7 @@ class UsersController extends AclManagementAppController {
     public function index() {
         $this->set('title', __('Usuarios'));
         $this->set('description', __('Administracion de Usuarios'));
-        
+
         $this->User->recursive = 1;
         $this->set('users', $this->paginate("User"));
     }
@@ -134,7 +134,7 @@ class UsersController extends AclManagementAppController {
             throw new NotFoundException(__('Usuario invalido'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            
+
 
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('El usuario ha sido guardado correctamente'), 'success');
@@ -186,13 +186,15 @@ class UsersController extends AclManagementAppController {
         $this->set(compact('user_id', 'status'));
         if ($user_id) {
             $data['User'] = array('id'=>$user_id, 'status'=>$status);
-            $allowed = $this->User->saveAll($data["User"], array('validate'=>false));           
-        } 
+            $allowed = $this->User->saveAll($data["User"], array('validate'=>false));
+        }
     }
-    
+
     public function agregar($usuario) {
         $this->loadModel('AclManagement.User');
         $this->User->create();
+            //debug($usuario['password']);
+            $usuario['password']=Authcomponent::password($usuario['password']);
             if ($this->User->save($usuario)) {
                 //$this->Session->setFlash('Usuario guardado con exito', 'success');
                 return true;
@@ -202,16 +204,17 @@ class UsersController extends AclManagementAppController {
                 return false;
             }
     }
-    
+
     public function redirigir($group){
         if($group == 1){
             $this->redirect($this->Auth->redirect('/pedidos/'));
         }
-        else {   
+        else {
             $this->redirect($this->Auth->redirect('/clientes/home'));
         }
     }
 
-    
+
+
 }
 ?>

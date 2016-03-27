@@ -212,16 +212,14 @@ class ClientesController extends AppController {
 
       public function buscarPorId(){
         $this->autoRender=false;
-        $id = $this->request->data['id'];
-        $this->Cliente->recursive= -1;
+        $id = $this->request->data['id']; // ajax data
+        $this->Cliente->recursive= -1; // ver porque recursive
 
         $cliente = $this->Cliente->findById($id);
         $user = $this->Cliente->User->find('first',$cliente['Cliente']['user_id']);
-
         $cliente['User']= $user['User'];
 
         return json_encode($cliente);
-
       }
 
 }
