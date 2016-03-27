@@ -27,6 +27,7 @@ class Pedido extends AppModel {
 		'Cliente' => array(
 			'className' => 'Cliente',
 			'foreignKey' => 'cliente_id',
+			'dependent'=> false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

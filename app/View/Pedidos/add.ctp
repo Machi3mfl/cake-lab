@@ -130,10 +130,10 @@
       <legend><h3> Paso 2 <small>: Confirmación del pedido</small></h3></legend>
       <div class="col-md-6">
         <blockquote>
-          <ul type="none" class="datosCliente">
-            <li>Cliente: <small>Apellido Nombre</small> </li>
-            <li>Direccion: <small> Provincia / Localidad / Calle Numero Piso </small> </li>
-            <li>Contacto: <small> Email / Telefono </small></li>
+          <ul type="none" id="datosCliente" class="datosCliente">
+            <li id="clienteNombre">Cliente: <small>Apellido Nombre</small> </li>
+            <li id="clienteDir">Direccion: <small> Provincia / Localidad / Calle Numero Piso </small> </li>
+            <li id="clienteContacto">Contacto: <small> Email / Telefono </small></li>
           </ul>
         </blockquote>
       </div> <!-- FIN COL-MD-6 -->
@@ -231,6 +231,7 @@ $(document).ready(function(){
       if($valor!=null && $valor!='No hay resultados'){
         $buscador.val(ui.item.label);
         $buscador.prop('disabled',true);
+				buscarCliente(ui.item.value);
       }
       else{
         $buscador.attr('value','');
@@ -239,14 +240,35 @@ $(document).ready(function(){
     }
   });
 });
-function buscarCliente(){
+	function buscarCliente($id){
+		$.ajax({
+			async:true,
+			type:'post',
+			complete: function (request,response){
+				var data= $.parseJSON(request.responseText);
+				llenarCliente(data);
+			},
+			url:'/laboratorio/clientes/buscarPorId',
+			data: {id: $id}
+		})
 
-}
+	}
 
-function habilitarBuscador(){
-  $buscador= $("#buscador");
-  $buscador.prop('disabled',false);
-}
+	function llenarCliente($datos){
+	  var nombre= $("#clienteNombre small");
+		var dir = $("#clienteDir small");
+		var contacto = $("#clienteContacto small");
+
+		nombre.text($datos.Cliente.apellido+' '+$datos.Cliente.nombre);
+		dir.text($datos.Cliente.calle+' '+$datos.Cliente.numero+' Piso/Dpto: '+$datos.Cliente.piso);
+		contacto.text($datos.User.email+' '+$datos.Cliente.telefono);
+	}
+
+	function habilitarBuscador(){
+	  $buscador= $("#buscador");
+	  $buscador.prop('disabled',false);
+		$buscador.val('');
+	}
 </script>
 <script>
   var x;

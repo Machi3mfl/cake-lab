@@ -172,10 +172,12 @@ class ClientesController extends AppController {
             $this->layout= 'login';
         }
 
+
       public function buscarPorNombre(){
         $this->autoRender=false;
         $terms=$this->request->query['term'];
         $this->Cliente->recursive=-1;
+        //buscar Cliente por nombre y apellido
         $datos = $this->Cliente->find('all',array(
           'conditions'=>array(
             'OR'=> array(
@@ -187,6 +189,7 @@ class ClientesController extends AppController {
           );
 
         $resultados=array();
+        // armar Array con datos de Clientes encontrados
         if (!empty($datos)){
           $resultados = "[";
           foreach($datos as $d){
@@ -205,6 +208,19 @@ class ClientesController extends AppController {
           $resultados = "[{ \"value\": \"\", \"label\": \"No hay resultados\" }]";
         }
         return $resultados;
+      }
+
+      public function buscarPorId(){
+        $this->autoRender=false;
+        $id = $this->request->data['id'];
+        $this->Cliente->recursive= -1;
+
+        $cliente = $this->Cliente->findById($id);
+        $user = $this->Cliente->User->find('first',$cliente['Cliente']['user_id']);
+
+        $cliente['User']= $user['User'];
+
+        return json_encode($cliente);
 
       }
 
