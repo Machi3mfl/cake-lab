@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('UploadsController','Controller');
 
 /**
  * Copias Controller
@@ -12,8 +13,8 @@ class CopiasController extends AppController {
     public $components = array('RequestHandler');
 
     public function beforeFilter() {
-        parent::beforeFilter();	
-    
+        parent::beforeFilter();
+
     }
  /**
  * index method
@@ -112,18 +113,48 @@ class CopiasController extends AppController {
 		$this->Session->setFlash('Copia was not deleted','error');
 		$this->redirect(array('action' => 'index'));
 	}
-        
-        
-        
-        public function add_inline(){
-        
-        }
-        
-        public function add_pedido(){
-        
-        }
-        
-            
 
-    
+
+
+        public function add_inline(){
+
+        }
+
+        public function add_pedido(){
+
+        }
+
+
+      public function guardarCopias(array $copias, $pedido_id){
+        foreach($copias as $copia){
+          if(!empty($copia)){
+            $copia["pedido_id"]= $pedido_id;
+            $this->Copia->set($copia);
+            $this->Copia->create();
+            $this->Copia->save($copia);
+          }else{
+            $this->Session->setFlash("No se pudo guardar");
+          }
+        }
+        /*foreach($copias as $copia){
+          $this->Copia->create();
+
+          if(!empty($uploads[$cont]["Upload"]["photo"])){
+            $this->Upload->create();
+            $uploads[$cont]["Upload"]["photo_dir"]=$pedido_id;
+            $this->Upload->save($uploads[$cont]);
+            $upload_id=$this->Upload->getLastInsertId();
+
+            $copia["upload_id"]=$upload_id;
+            $copia["pedido_id"]= $pedido_id;
+
+            $this->Copia->set($copia);
+            $this->Copia->save($this->Copia->data);
+          }else{
+            $this->Session->setFlash("No se pudo guardar");
+          }
+          $cont++;
+        }*/
+
+      }
 }

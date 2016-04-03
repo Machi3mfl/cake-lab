@@ -129,6 +129,7 @@ class PreciosController extends AppController {
       }
       //$this->set('productos',$productos);
       //$this->set('precios',$precios);
+
 			return json_encode($precios);
   }
 }

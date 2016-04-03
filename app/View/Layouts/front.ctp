@@ -8,10 +8,11 @@
     <!-- Jquery v 2.1.3
          Jquery UI v 1.11.2
          Bootstrap v 3.3.2
-         JqueryFileUpload - CakePHP v 0.1
-         Bootstrap Validator v 5.2.0
+         JqueryFileUpload - CakePHP v 0.1 http://cakephp-upload.readthedocs.org/en/2.x/
+         Bootstrap Validator v 5.2.0 https://github.com/nghuuphuoc/bootstrapvalidator
+         creo que es el mismo http://formvalidation.io/
     -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <!-- Bootstrap Validator CSS file -->
@@ -25,7 +26,7 @@
   	<?php
 		echo $this->Html->meta('icon');
 		echo $scripts_for_layout;
-	?>	
+	?>
     <style>
         @import url(http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
 .fa-fw {width: 3em;}
@@ -46,7 +47,7 @@
                 </div>
     <footer>
         <!-- AGREGAR FOOTER
-        
+
         p><a href="mailto:vukhanhtruong@gmail.com">vukhanhtruong@gmail.com</a> &copy; 2015</p-->
     </footer>
 </div> <!-- /container -->

@@ -37,45 +37,43 @@ class UploadsController extends AppController {
  *
  * @return void
  */
-    public function add(){ 
-
-        $usuario=$this->Auth->user();
-        
-       //$this->Session->delete('imagenes');
-       if (!empty($this->request->data)){  debug($this->request->data); 
-           foreach($this->request->data["Upload"]["photo"] as $file) {
-               $this->Upload->set(array('photo' => $file));
-               $photo = $this->Upload->data;
-               $this->Upload->create();
-               if ($this->Upload->save($photo)) {
-                   $ultimo = $this->Upload->getLastInsertId();
-                   $guardados[]= $ultimo;
-               }
-           }
-           $imgs=$this->listarGuardados($guardados);
-           if (!empty($this->Session->read('imagenes'))){
-               $ant = $this->Session->read('imagenes');
-               foreach($imgs as $img) {
-                   array_push($ant, $img);
-               }
-               $this->Session->write('imagenes',$ant);
-               $this->set('imgs',$ant); 
-           }
-           else{
-               $this->Session->write('imagenes',$imgs);  
-               $this->set('imgs',$imgs); 
-           }
-            $categorias=$this->Upload->Copia->Producto->Categoria->find('list');
-            $superficies=$this->Upload->Copia->Producto->Superficie->find('list');
-            $tamanos=$this->Upload->Copia->Producto->Tamano->find('list');
-            $this->set(compact('superficies','tamanos','categorias'));
-       }
+    public function add(){
+      $usuario=$this->Auth->user();
+     //$this->Session->delete('imagenes');
+     if (!empty($this->request->data)){  debug($this->request->data);
+         foreach($this->request->data["Upload"]["photo"] as $file) {
+             $this->Upload->set(array('photo' => $file));
+             $photo = $this->Upload->data;
+             $this->Upload->create();
+             if ($this->Upload->save($photo)) {
+                 $ultimo = $this->Upload->getLastInsertId();
+                 $guardados[]= $ultimo;
+             }
+         }
+         $imgs=$this->listarGuardados($guardados);
+         if (!empty($this->Session->read('imagenes'))){
+             $ant = $this->Session->read('imagenes');
+             foreach($imgs as $img) {
+                 array_push($ant, $img);
+             }
+             $this->Session->write('imagenes',$ant);
+             $this->set('imgs',$ant);
+         }
+         else{
+             $this->Session->write('imagenes',$imgs);
+             $this->set('imgs',$imgs);
+         }
+          $categorias=$this->Upload->Copia->Producto->Categoria->find('list');
+          $superficies=$this->Upload->Copia->Producto->Superficie->find('list');
+          $tamanos=$this->Upload->Copia->Producto->Tamano->find('list');
+          $this->set(compact('superficies','tamanos','categorias'));
+     }
    }
     /*
      * public
-     * 
+     *
      * obtiene los ultimos uploads por ID
-     * 
+     *
      * return array de Uploads
      */
     public function listarGuardados(array $guardados){
@@ -134,4 +132,8 @@ class UploadsController extends AppController {
 		$this->Session->setFlash(__('Upload was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
+
+
+
 }

@@ -55,33 +55,22 @@
         <legend><h3>Imagenes Agregadas</h3></legend>
       </div>
       <br>
-			<?php if(isset($imgs)) :  {?>
-		    <!-- Table -->
-		    <div class="table-responsive">
-		    <table class="table table-hover">
-		        <thead>
-		          <tr>
-		              <th>Miniatura</th><th>Nombre</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Cantidad</th><th>Acciones</th>
-		          </tr>
-		      </thead>
-
-		      <tbody>
-		    <?php }
-		    $cant = 0;
-		    foreach($imgs as $img) :
-		        ?>
-		    <tr>
-		        <td>
-		            <?php echo $this->Form->input('Upload.'.$cant.'.id',array('value'=>$img['Upload']['id'],'hidden'=> true,'label'=>false));?>
-		            <?php echo $this->Form->input('Upload.'.$cant.'.photo_dir',array('value'=>$img['Upload']['photo_dir'],'hidden'=> true,'label'=>false));?>
-		            <?php echo $this->Html->image('../files/uploads/'.$img['Upload']['photo_dir'].'/thumb_'.$img['Upload']['photo'],
-		                        array('id'=>'imageresource') ); ?>
-		        </td>
-		        <td>
-
-		            <?php echo $this->Form->input('Upload.'.$cant.'.photo',array('value'=>$img['Upload']['photo'],'hidden'=> true,'label'=>false));?>
-		            <?php echo $img['Upload']['photo']; ?>
-		        </td>
+			<?php if(isset($files)) :  { ?>
+      <!--?php if(isset($imgs)) :  {?-->
+      <!-- Table -->
+      <div class="table-responsive"> <!--- TABLA PARA IMAGENES SUBIDAS - ----->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Miniatura</th><th>Nombre</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Cantidad</th><th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+					<?php }
+          $cant = 0;
+          foreach($files as $file) : ?>
+					<td><img src="<?php echo $file['Upload']["photo"]['tmp_name'] ?>"/></td>
+		      <td><?php echo $file['Upload']['photo']['name']; ?></td>
 		        <?php echo $this->Form->create('Upload.Copias',array('type' => 'file','class'=>'form-inline','url' => array('controller' => 'pedidos', 'action' => 'confirmar'))); ?>
 		      <td>
 		        <?php echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array('class'=>'form-control')); ?>
@@ -99,8 +88,8 @@
 		        <?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array('class'=>'form-control','placeholder'=>'Ingrese cantidad', 'label'=> false)); ?>
 		      </td>
 		      <td>
-		        <button id="copiarUpload" type="button" class="btn btn-info"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-						<button id="eliminarUpload" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+		        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		        </button><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 		      </td>
 				</tr>
 					<?php
@@ -152,17 +141,18 @@
       </div> <!-- FIN COL-MD-5 -->
       <div id="detalle" class="col-md-12">
         <legend><h3> Copias </h3></legend>
+      <div id="precios" style="display: none;"></div>
       <div class="table-responsive">
         <table id="tablaPrecios" class="table table-hover" cellspacing="0" cellpadding="0">
         <thead>
 					<tr><th>Archivo</th><th>Cantidad</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Precio Unitario</th></tr>
 				</thead>
         <tbody>
-          <?php if(isset($imgs)) :  {
+          <?php if(isset($files)) :  {
 	          $cant = 0;
-	          foreach($imgs as $img) : ?>
+	          foreach($files as $img) : ?>
 		        <tr>
-							<td id="nombre"><?php echo $img['Upload']['photo']; ?></td>
+		          <td><?php echo $img['Upload']['photo']['name']; ?></td>
 							<input id='<?php echo 'UploadCopias'.$cant.'ProductoId'; ?>' style="visibility:hidden" name='<?php echo 'data[Upload][Copias]['.$cant.'][producto_id]'; ?>'>
 							<td id='<?php echo 'cantidad'.$cant; ?>'></td>
 		          <td id='<?php echo 'categoria'.$cant; ?>'></td>
@@ -171,7 +161,6 @@
 		          <td id='<?php echo 'borde'.$cant; ?>'></td>
 							<td id='<?php echo 'precio'.$cant; ?>'></td>
 		          <input id='<?php echo 'UploadCopias'.$cant.'Precio'; ?>' style="visibility:hidden" name='<?php echo 'data[Upload][Copias]['.$cant.'][precio]'; ?>'>
-							<input id='<?php echo 'UploadCopias'.$cant.'UploadId'; ?>' value="<?php echo $img['Upload']['id']; ?>" style="visibility:hidden" name='<?php echo 'data[Upload][Copias]['.$cant.'][upload_id]'; ?>'>
 		        </tr>
 	          <?php
 	          $cant++;
@@ -302,7 +291,7 @@ function obtenerPrecios(){
 				borde= $("#UploadCopias"+i+"Borde option:selected");
 				cant = $("#UploadCopias"+i+"Cantidad");
 				cantidad = parseInt($("#UploadCopias"+i+"Cantidad").val());
-				precio= precios[i].Precio.precio;
+				precio = precios[i].Precio.precio;
 
 				$("#UploadCopias"+i+"ProductoId").val(precios[i].Precio.producto_id);
 				$("#categoria"+i).text(cat.text());

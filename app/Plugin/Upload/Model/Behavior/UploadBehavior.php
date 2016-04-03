@@ -106,6 +106,8 @@ class UploadBehavior extends ModelBehavior {
 		}
 	}
 
+
+
 /**
  * Setup a particular upload field
  *
@@ -356,7 +358,7 @@ class UploadBehavior extends ModelBehavior {
  * @param string $dirname Path to the directory
  * @return bool
  **/
-	public function rmdir($dirname) {
+	public function rmdir($dirname) { //aca esta el error
 		if (is_dir($dirname)) {
 			return rmdir($dirname);
 		}

@@ -1,0 +1,1 @@
+Datos del pedido confirmado:
