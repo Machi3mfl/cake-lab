@@ -8,6 +8,7 @@ App::uses('CopiasController','Controller');
  * @property Pedido $Pedido
  */
 class PedidosController extends AppController {
+
 /**
  * index method
  *
@@ -26,11 +27,21 @@ class PedidosController extends AppController {
  * @return void
  */
     public function view($id = null) {
+      $this->loadModel("Upload");
       $this->Pedido->id = $id;
+      $uploads=array();
       if (!$this->Pedido->exists()) {
               throw new NotFoundException(__('Invalid pedido'));
       }
+      $pedido=$this->Pedido->read(null, $id);
+
+      foreach( $pedido['Copia'] as $copia){
+        $upload=$this->Upload->read(null,$copia['upload_id']);
+        array_push($uploads,$upload);
+      }
       $this->set('pedido', $this->Pedido->read(null, $id));
+      //debug($uploads);
+      $this->set('uploads',$uploads);
     }
 
 /**
@@ -199,8 +210,6 @@ class PedidosController extends AppController {
 
 
     public function confirmar(){
-
-
       $pedido=$this->request->data["Pedido"];
       $copias=$this->request->data["Upload"]["Copias"];
       $uploads=$this->Session->read('imagenes');
@@ -220,8 +229,8 @@ class PedidosController extends AppController {
     }
 
     public function testUpload(){
-        $this->loadModel("Upload");
-        $pila=array();
+    $this->loadModel("Upload");
+    $pila=array();
       if(!empty($this->request->data)){
         foreach($this->request->data["Upload"]["photo"]  as $index => $foto){
           $this->Upload->set(array("photo" => $foto));
@@ -230,7 +239,6 @@ class PedidosController extends AppController {
           /*$this->Upload->create();
           if($this->Upload->save($upload)){
             $this->Session->setFlash("Archivo ".$index." guardado");
-
           }
           else{
             $this->Session->getFlash("Archivo ".$index." NO SE HA GUARDADO");
@@ -244,20 +252,20 @@ class PedidosController extends AppController {
     }
 
     public function guardar(){
-      $this->loadModel("Upload");
-      $files=array();
-      if($this->Session->check("files")){
-        $files=$this->Session->read("files");
-        foreach($files as $file){
-          $this->Upload->set(array("photo" => $file["Upload"]["photo"]));
-          $arch=$this->Upload->data;
-          debug($arch["Upload"]);
-          $this->Upload->create();
-          /*if($this->Upload->save($arch["Upload"])){
-            $this->Session->setFlash("Archivo guardado.");
-          }else{
-            $this->Session->setFlash("Archivo falló.");
-          }*/
+    $this->loadModel("Upload");
+    $files=array();
+    if($this->Session->check("files")){
+      $files=$this->Session->read("files");
+      foreach($files as $file){
+        $this->Upload->set(array("photo" => $file["Upload"]["photo"]));
+        $arch=$this->Upload->data;
+        debug($arch["Upload"]);
+        $this->Upload->create();
+        /*if($this->Upload->save($arch["Upload"])){
+          $this->Session->setFlash("Archivo guardado.");
+        }else{
+          $this->Session->setFlash("Archivo falló.");
+        }*/
         }
       }else{
         $this->Session->setFlash("Session vacio.");

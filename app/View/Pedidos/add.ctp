@@ -70,45 +70,34 @@
 		    $cant = 0;
 		    foreach($imgs as $img) :
 		        ?>
-		    <tr>
-		        <td>
-		            <?php echo $this->Form->input('Upload.'.$cant.'.id',array('value'=>$img['Upload']['id'],'hidden'=> true,'label'=>false));?>
-		            <?php echo $this->Form->input('Upload.'.$cant.'.photo_dir',array('value'=>$img['Upload']['photo_dir'],'hidden'=> true,'label'=>false));?>
-		            <?php echo $this->Html->image('../files/uploads/'.$img['Upload']['photo_dir'].'/thumb_'.$img['Upload']['photo'],
-		                        array('id'=>'imageresource') ); ?>
-		        </td>
-		        <td>
-
-		            <?php echo $this->Form->input('Upload.'.$cant.'.photo',array('value'=>$img['Upload']['photo'],'hidden'=> true,'label'=>false));?>
-		            <?php echo $img['Upload']['photo']; ?>
-		        </td>
-		        <?php echo $this->Form->create('Upload.Copias',array('type' => 'file','class'=>'form-inline','url' => array('controller' => 'pedidos', 'action' => 'confirmar'))); ?>
-		      <td>
+		    <tr id="copia<?php echo $cant?>">
+	        <td>
+            <?php echo $this->Form->input('Upload.'.$cant.'.id',array('value'=>$img['Upload']['id'],'hidden'=> true,'label'=>false));?>
+            <?php echo $this->Form->input('Upload.'.$cant.'.photo_dir',array('value'=>$img['Upload']['photo_dir'],'hidden'=> true,'label'=>false));?>
+            <?php echo $this->Html->image('../files/uploads/'.$img['Upload']['photo_dir'].'/thumb_'.$img['Upload']['photo'],
+                        array('id'=>'imageresource',"class"=>'miniatura', 'alt' => $img['Upload']['photo'],'style' => 'cursor:pointer !important;') ); ?>
+        	</td>
+	        <td>
+            <?php echo $this->Form->input('Upload.'.$cant.'.photo',array('value'=>$img['Upload']['photo'],'hidden'=> true,'label'=>false));?>
+            <?php echo $img['Upload']['photo']; ?>
+	        </td><?php echo $this->Form->create('Upload.Copias',array('type' => 'file','class'=>'form-inline','url' => array('controller' => 'pedidos', 'action' => 'confirmar'))); ?><td>
 		        <?php echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array('class'=>'form-control')); ?>
 		      </td>
+		      <td><?php echo $this->Form->select('Upload.Copias.'.$cant.'.papel', $superficies ,array('class'=>'form-control')); ?></td>
+		      <td><?php echo $this->Form->select('Upload.Copias.'.$cant.'.tamano', $tamanos ,array('class'=>'form-control')); ?></td>
+		      <td><?php echo $this->Form->select('Upload.Copias.'.$cant.'.borde', array("Sí","No") ,array('class'=>'form-control')); ?></td>
+		      <td><?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array('class'=>'form-control','placeholder'=>'Ingrese cantidad', 'label'=> false)); ?></td>
 		      <td>
-		        <?php echo $this->Form->select('Upload.Copias.'.$cant.'.papel', $superficies ,array('class'=>'form-control')); ?>
-		      </td>
-		      <td>
-		        <?php echo $this->Form->select('Upload.Copias.'.$cant.'.tamano', $tamanos ,array('class'=>'form-control')); ?>
-		      </td>
-		      <td>
-		        <?php echo $this->Form->select('Upload.Copias.'.$cant.'.borde', array("Sí","No") ,array('class'=>'form-control')); ?>
-		      </td>
-		      <td>
-		        <?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array('class'=>'form-control','placeholder'=>'Ingrese cantidad', 'label'=> false)); ?>
-		      </td>
-		      <td>
-		        <button id="copiarUpload" type="button" class="btn btn-info"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-						<button id="eliminarUpload" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+						<button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+						<button id="eliminarUpload<?php echo $cant ?>" type="button" class="btn btn-danger borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 		      </td>
 				</tr>
-					<?php
-						$cant++;
-					endforeach;
-						$this->Form->end();
-						else:
-					?>
+				<?php
+					$cant++;
+				endforeach;
+					$this->Form->end();
+					else:
+				?>
     	<!-- Drop Zone -->
       <div class="upload-drop-zone" id="drop-zone">
         No se han subido fotos todavia. Seleccione las imagenes que desea subir a traves del botón examinar.
@@ -197,6 +186,20 @@
       <button id="confirmar" class="btn btn-success btn-lg pull-right">Confirmar</button>
     </div> <!-- FIN COLS 12 --------------------------->
   </div> <!-- FIN PASO 2 ------------------------------>
+	<!-- Img Modal -->
+	<div id="imgModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title"></h4>
+	      </div>
+	      <div class="modal-body">
+					<img style="max-width:100%;" alt="" class="" src="">
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div> <!--    FIN CONTAINER GENERAL ---->
 <script type="text/javascript">
 	$("#submit").bind('click', function(){
@@ -353,4 +356,87 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+$(document).ready(function(){
+	$(".table-responsive .copiar").bind("click",function(event){
+		var id=$(this).attr('id');
+		var cantidad=$("#resultados #cantidad").val();
+		var posicion = this.id.replace('copiarUpload','');
+		duplicar(id.replace('copiarUpload','copia'),cantidad,posicion.toString());
+		cambiarData('copia'+cantidad,cantidad,posicion.toString());
+
+	});
+});
+
+
+
+function duplicar(id,cantidad,posicion){
+	//	var cant= this.cantidad;
+		//posicion;
+		$("#"+id).after('<tr id="copia'+cantidad+'"></tr>');
+		$("#"+id).children().clone().find("td").each(function(){
+			//td = $(this).clone();
+			td = $(this);
+			if (td.children().prop("tagName") != 'BUTTON'){
+				td.children().attr({
+		      'id': function(_, id) {
+						return this.id.replace(posicion,cantidad);
+					},
+					'name': function(_, name) {
+						return name;
+					}
+	    	});
+			}else{
+
+			}
+		}).end().appendTo("#copia"+cantidad);
+		$("#resultados #cantidad").val(parseInt(cantidad)+1);
+	}
+
+	function cambiarData(id,cantidad,posicion){
+		console.log(id);
+		console.log(cantidad);
+		console.log(posicion);
+			$("#"+id).children().each(function(){
+				//td = $(this).clone();
+				if ($(this).children().prop("tagName") != 'BUTTON'){
+					//console.log($(this).children().attr("name"));
+					//$(this).children().attr();
+				}else{
+
+				}
+			});
+
+		}
+
+
+</script>
+<script>
+	$(".table-responsive .borrar").bind("click",function(event){
+		var id=$(this).attr('id');
+		var cantidad=$("#resultados #cantidad").val();
+		borrar(id.replace('copiarUpload','copia'),cantidad);
+	});
+
+function borrar(){
+
+}
+
+</script>
+<script>
+	$(".miniatura").bind("click",function(event){
+		var url=$(this).attr('src');
+		link=url.replace('thumb_','');
+		var nombre=$(this).attr('alt');
+		asignarImagen(link,nombre);
+		$('#imgModal').modal('show');
+	});
+
+	function asignarImagen(url,nombre){
+		$("#imgModal .modal-title").text(nombre);
+		$("#imgModal img").attr('src',url);
+
+	}
+</script>
+
 <?php echo $this->Html->script('Pedidos/add');?>

@@ -1,14 +1,12 @@
 <div class="col-sm-3 col-md-2 sidebar">
-    <legend>
-        <h3><?php echo __('Acciones'); ?></h3>
-    </legend>
+    <legend><h3><?php echo __('Acciones'); ?></h3></legend>
     <ul class="nav nav-colapse">
             <li><?php echo $this->Html->link(__('Nuevo Pedido'), array('action' => 'add')); ?></li>
             <li><?php echo $this->Html->link(__('Listar Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
             <li><?php echo $this->Html->link(__('Nuevo Cliente'), array('controller' => 'clientes', 'action' => 'add')); ?> </li>
             <li><?php echo $this->Html->link(__('Listar Copias'), array('controller' => 'copias', 'action' => 'index')); ?> </li>
             <li><?php echo $this->Html->link(__('Nueva Copia'), array('controller' => 'copias', 'action' => 'add')); ?> </li>
-    </ul>   
+    </ul>
 </div>
 <div class="col-md-9">
     <leyend>
@@ -35,7 +33,7 @@
 		<td><?php echo h($pedido['Pedido']['importe']); ?>&nbsp;</td>
 		<td><?php echo h($pedido['Pedido']['cantidad']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($pedido['Cliente']['id'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>
+			<?php echo $this->Html->link($pedido['Cliente']["apellido"]." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>
 		</td>
 		<td><?php echo h($pedido['Pedido']['sucursal']); ?>&nbsp;</td>
 		<td><?php echo h($pedido['Pedido']['forma_pago']); ?>&nbsp;</td>
@@ -49,13 +47,13 @@
 			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $pedido['Pedido']['id']),array(
                             'type'=>'button',
                             'class'=>'btn btn-warning')
-                            ); 
+                            );
                         ?>
 			<?php echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $pedido['Pedido']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-danger'), 
+                            'class'=>'btn btn-danger'),
                             __('Are you sure you want to delete # %s?', $pedido['Pedido']['id'])
-                                ); 
+                                );
                         ?>
 		</td>
 
@@ -68,7 +66,7 @@
             echo $this->Paginator->counter(array(
             'format' => __('Página {:page} de {:pages}, mostrando {:current} registros de un total de {:count} , comienza en el registro {:start}, finaliza en el registro {:end}')
             ));
-            ?>	
+            ?>
         </p>
 	<nav>
             <div>
@@ -80,11 +78,11 @@
                         <?php echo $this->Paginator->numbers(array('separator' => '')); ?>
                     </li>
                     <li>
-                        <?php echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));?>    
+                        <?php echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));?>
                     </li>
                 </ul>
             </div>
-        </nav>     
+        </nav>
         </div>
     </div>
 </div>
