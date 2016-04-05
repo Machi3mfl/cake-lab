@@ -169,11 +169,17 @@ class PedidosController extends AppController {
       $guardados=array();
       $files=array(); // PARA DESPUES : GUARDAR FILES TEMPORALES Y LUEGO GUARDAR EN BD - USAR TMP EN FORMULARIO
       //$this->Session->delete('imagenes');
+      $this->Pedido->create();
+      $this->Pedido->set(array("fecha"=>date("Y-m-d H:i:s")));
+      $this->Pedido->save();
+      $pedido_id = $this->Pedido->getLastInsertId();
       if (!empty($this->request->data)){ // si hay imagenes
+          //$file["Upload"]["pedido_id"]
           foreach($this->request->data["Upload"]["photo"] as $file) { // por cada photo setea un file
               $this->Upload->set(array('photo' => $file));
               $photo = $this->Upload->data;
               array_push($files,$photo);
+              $photo["Upload"]["pedido_id"] = $pedido_id;
               $this->Upload->create();
               if ($this->Upload->save($photo)) { // guarda el file en BD
                   $ultimo = $this->Upload->getLastInsertId(); //obtiene el ultimo id , para crear una pila
@@ -261,11 +267,11 @@ class PedidosController extends AppController {
         $arch=$this->Upload->data;
         debug($arch["Upload"]);
         $this->Upload->create();
-        /*if($this->Upload->save($arch["Upload"])){
+        if($this->Upload->save($arch["Upload"])){
           $this->Session->setFlash("Archivo guardado.");
         }else{
           $this->Session->setFlash("Archivo falló.");
-        }*/
+        }
         }
       }else{
         $this->Session->setFlash("Session vacio.");

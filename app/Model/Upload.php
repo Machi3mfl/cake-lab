@@ -19,11 +19,11 @@ class Upload extends AppModel {
 	 * @access public
 	 * @var array
 	 */
-         
+
 	public $actsAs = array(
         'Upload.Upload' => array(
             'photo' => array(
-                'path' => '{ROOT}{DS}webroot{DS}files{DS}uploads{DS}', 
+                'path' => '{ROOT}{DS}webroot{DS}files{DS}uploads{DS}',
                 'fields' => array(
                     'dir' => 'photo_dir'
                 ),
@@ -58,5 +58,12 @@ class Upload extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+	public function beforeSave($options = array()) {
+		$pedido = $this->data["Upload"]["pedido_id"];
+	  $this->Behaviors->Upload->settings["Upload"]["photo"]["path"] = "/var/www/laboratorio/app/webroot/files/uploads/".$pedido."/";
+		$this->Behaviors->Upload->settings["Upload"]["photo"]["thumbnailPath"] = "/var/www/laboratorio/app/webroot/files/uploads/thumbs/";
+		return true;
+	}
 
 }
