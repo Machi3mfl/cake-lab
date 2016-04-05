@@ -80,26 +80,23 @@ img{
 				<?php echo $this->Html->link($copia['producto_id'], array('controller' => 'productos', 'action' => 'view', $copia['producto_id'])); ?>	&nbsp;
 			</td>
 			<td><?php echo $copia['upload_id']; ?></td>
-
-
 			<td style="display:none;">
-
-				<?php echo $this->Html->link(__('Ver'), array('controller'=> 'copias','action' => 'view', $copia['id']),array(
-															'type'=>'button',
-															'class'=>'btn btn-success')
-																	);
-													?>
-				<?php echo $this->Html->link(__('Editar'), array('controller'=> 'copias','action' => 'edit', $copia['id']),array(
-															'type'=>'button',
-															'class'=>'btn btn-warning')
-															);
-													?>
-				<?php echo $this->Form->postLink(__('Eliminar'), array('controller'=> 'copias','action' => 'delete', $copia['id']),array(
-															'type'=>'button',
-															'class'=>'btn btn-danger'),
-															__('Are you sure you want to delete # %s?', $copia['id'])
-																	);
-													?>
+			<?php echo $this->Html->link(__('Ver'), array('controller'=> 'copias','action' => 'view', $copia['id']),array(
+														'type'=>'button',
+														'class'=>'btn btn-success')
+																);
+												?>
+			<?php echo $this->Html->link(__('Editar'), array('controller'=> 'copias','action' => 'edit', $copia['id']),array(
+														'type'=>'button',
+														'class'=>'btn btn-warning')
+														);
+												?>
+			<?php echo $this->Form->postLink(__('Eliminar'), array('controller'=> 'copias','action' => 'delete', $copia['id']),array(
+														'type'=>'button',
+														'class'=>'btn btn-danger'),
+														__('Are you sure you want to delete # %s?', $copia['id'])
+																);
+												?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -134,7 +131,5 @@ $(".miniatura").bind("click",function(event){
 function asignarImagen(url,nombre){
 	$("#imgModal .modal-title").text(nombre);
 	$("#imgModal img").attr('src',url);
-
 }
-
 </script>
