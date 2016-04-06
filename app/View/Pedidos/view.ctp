@@ -65,7 +65,7 @@ img{
 			<td><?php echo $copia['id']; ?></td>
 			<td>
 			<?php if(isset($uploads)): ?>
-				<?php echo $this->Html->image('../files/uploads/'.$uploads[$index]['Upload']['photo_dir'].'/thumb_'.$uploads[$index]['Upload']['photo'],
+				<?php echo $this->Html->image('../files/thumbs/'.$uploads[$index]['Upload']['photo_dir'].'/thumb_'.$uploads[$index]['Upload']['photo'],
 									array('id'=>'imageresource'.$index ,"class"=>'miniatura', 'alt' => $uploads[$index]['Upload']['photo']) ); ?>
 			<?php endif; ?>
 			</td>
@@ -122,6 +122,7 @@ img{
 <script>
 $(".miniatura").bind("click",function(event){
 	var url=$(this).attr('src');
+	url=url.replace('/thumbs/','/pedidos/');
 	link=url.replace('thumb_','');
 	var nombre=$(this).attr('alt');
 	asignarImagen(link,nombre);

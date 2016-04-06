@@ -49,49 +49,7 @@ class PedidosController extends AppController {
  *
  * @return void
  */
-    public function add2() {
-        $this->loadModel('Upload');
-        $usuario=$this->Auth->user();
-        $guardados=array();
-        // PARA DESPUES : GUARDAR FILES TEMPORALES Y LUEGO GUARDAR EN BD - USAR TMP EN FORMULARIO
-        //$this->Session->delete('imagenes');
-        if (!empty($this->request->data)){
-            $files=array();
-            foreach($this->request->data["Upload"]["photo"] as $file) { // por cada photo setea un file
-                $this->Upload->set(array('photo' => $file));
-                $photo = $this->Upload->data;
-                array_push($files,$photo);
-            } /**** fin foreach ***/
-            if (!empty($this->Session->read('files'))){ //lee las imagenes de la session, las apila y luego guarda
-                $ant = $this->Session->read('files');
-                foreach($files as $img) {
-                  array_push($ant, $img);
-                }
-                $this->Session->write('files',$ant);
-                $this->set('files',$ant);
-                $this->set('imgs',$ant);
-                $this->set('cantidad',count($ant));
-            }
-            else{ // si no hay imagenes en la session solo guarda
-                $this->Session->write('files',$files);
-                $this->set('files',$files);
-                $this->set('imgs',$files);
-            }
-        $this->setearModelos();
-        //debug($this->Session->read('files'));//$this->set('uploads',$guardados);
-        }else{
-            if($this->Session->check('files')){
-                $img = $this->Session->read('files');
-                $this->set('files',$img);
-                $this->set('imgs',$img);
-                $this->set('cantidad',count($img));
-                $this->setearModelos();
-            }
-        }
-
-    }
-
-    public function setearModelos() {
+      public function setearModelos() {
       $categorias=$this->Upload->Copia->Producto->Categoria->find('list');
       $superficies=null;
       $tamanos=null;
@@ -169,17 +127,19 @@ class PedidosController extends AppController {
       $guardados=array();
       $files=array(); // PARA DESPUES : GUARDAR FILES TEMPORALES Y LUEGO GUARDAR EN BD - USAR TMP EN FORMULARIO
       //$this->Session->delete('imagenes');
-      $this->Pedido->create();
-      $this->Pedido->set(array("fecha"=>date("Y-m-d H:i:s")));
-      $this->Pedido->save();
-      $pedido_id = $this->Pedido->getLastInsertId();
+      if (!$this->Session->check('pedido_id')){ /***********  Crear pedido id para guardar uploads en carpeta con id ********************/
+        $this->Pedido->create();
+        $this->Pedido->set(array("fecha"=>date("Y-m-d H:i:s")));
+        $this->Pedido->save();
+        $this->Session->write('pedido_id',$this->Pedido->getLastInsertId());
+      }
       if (!empty($this->request->data)){ // si hay imagenes
-          //$file["Upload"]["pedido_id"]
           foreach($this->request->data["Upload"]["photo"] as $file) { // por cada photo setea un file
               $this->Upload->set(array('photo' => $file));
               $photo = $this->Upload->data;
               array_push($files,$photo);
-              $photo["Upload"]["pedido_id"] = $pedido_id;
+              $photo["Upload"]["pedido_id"]= $this->Session->read('pedido_id');
+              $photo["Upload"]["photo_dir"]= $this->Session->read('pedido_id');
               $this->Upload->create();
               if ($this->Upload->save($photo)) { // guarda el file en BD
                   $ultimo = $this->Upload->getLastInsertId(); //obtiene el ultimo id , para crear una pila
@@ -219,15 +179,17 @@ class PedidosController extends AppController {
       $pedido=$this->request->data["Pedido"];
       $copias=$this->request->data["Upload"]["Copias"];
       $uploads=$this->Session->read('imagenes');
+      $pedido_id=$this->Session->read('pedido_id');
       $Copias= new CopiasController;
-
+      debug($copias);
       if(!empty($pedido)){
         $pedido["fecha"]=date("Y-m-d H:i:s");//fecha del pedido
+        $this->Pedido->id=$pedido_id;
         $this->Pedido->save($pedido);
-        $id= $this->Pedido->getLastInsertId();
-        $Copias->guardarCopias($copias,$id);
+        $Copias->guardarCopias($copias,$pedido_id);
         $this->Session->setFlash("Pedido guardado");
         $this->Session->delete('imagenes');
+        $this->Session->delete('pedido_id');
       }else{
         $this->Session->setFlash("No se ha podido guardar el pedido");
       }

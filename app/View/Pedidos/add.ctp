@@ -90,7 +90,7 @@
 							'value'=>$img['Upload']['photo_dir'],
 							'hidden'=> true,'label'=>false));
 						?>
-            <?php echo $this->Html->image('../files/uploads/'.$img['Upload']['photo_dir'].'/thumb_'.$img['Upload']['photo'],
+            <?php echo $this->Html->image('../files/thumbs/'.$img['Upload']['photo_dir'].'/thumb_'.$img['Upload']['photo'],
                         array( 'id'=>'imageresource',"class"=>'miniatura', 'alt' => $img['Upload']['photo'],'style' => 'cursor:pointer !important;') ); ?>
         	</td>
 	        <td>
@@ -126,7 +126,7 @@
 						'class'=>'form-control')); ?></td>
 		      <td>
 					<?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array(
-						'name' => 'data[Upload][Copias]['.$cant.'][borde]',
+						'name' => 'data[Upload][Copias]['.$cant.'][cantidad]',
 						'class'=>'form-control',
 						'placeholder'=>'Ingrese cantidad',
 						'label'=> false));
