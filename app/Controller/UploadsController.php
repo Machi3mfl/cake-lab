@@ -32,43 +32,32 @@ class UploadsController extends AppController {
             $this->set('upload', $this->Upload->read(null, $id));
     }
 
-/**
- * add method
- *
- * @return void
- */
-    public function add(){
-      $usuario=$this->Auth->user();
-     //$this->Session->delete('imagenes');
-     if (!empty($this->request->data)){  debug($this->request->data);
-         foreach($this->request->data["Upload"]["photo"] as $file) {
-             $this->Upload->set(array('photo' => $file));
-             $photo = $this->Upload->data;
-             $this->Upload->create();
-             if ($this->Upload->save($photo)) {
-                 $ultimo = $this->Upload->getLastInsertId();
-                 $guardados[]= $ultimo;
-             }
-         }
-         $imgs=$this->listarGuardados($guardados);
-         if (!empty($this->Session->read('imagenes'))){
-             $ant = $this->Session->read('imagenes');
-             foreach($imgs as $img) {
-                 array_push($ant, $img);
-             }
-             $this->Session->write('imagenes',$ant);
-             $this->set('imgs',$ant);
-         }
-         else{
-             $this->Session->write('imagenes',$imgs);
-             $this->set('imgs',$imgs);
-         }
-          $categorias=$this->Upload->Copia->Producto->Categoria->find('list');
-          $superficies=$this->Upload->Copia->Producto->Superficie->find('list');
-          $tamanos=$this->Upload->Copia->Producto->Tamano->find('list');
-          $this->set(compact('superficies','tamanos','categorias'));
-     }
-   }
+		/**
+		 * public
+		 *
+		 * guarda el FILE y retorna el ID del upload
+		 *
+		 * return array de Uploads
+		 *
+		 * @throws NotFoundException
+		 * @param string $id
+		 * @return
+
+		**/
+
+
+		public function guardar($file = array()){
+			$this->Upload->set(array('photo' => $file));
+			$photo = $this->Upload->data;
+			//array_push($files,$photo); creo que no hace nada
+			$photo["Upload"]["pedido_id"]= $this->Session->read('pedido_id');
+			$photo["Upload"]["photo_dir"]= $this->Session->read('pedido_id');
+			$this->Upload->create();
+			if ($this->Upload->save($photo)) { // guarda el file en BD
+					$guardado = $this->Upload->getLastInsertId(); //obtiene el ultimo id , para crear una pila
+					return $guardado;
+			}
+		}
     /*
      * public
      *
@@ -134,6 +123,7 @@ class UploadsController extends AppController {
 	}
 
 
-	
+
+
 
 }

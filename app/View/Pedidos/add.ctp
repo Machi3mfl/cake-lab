@@ -394,7 +394,6 @@ $(document).ready(function() {
         $target.show();
       }
     });
-
     $('ul.setup-panel li.active a').trigger('click');
     $('#activate-step-2').on('click', function(e) {
     $('ul.setup-panel li:eq(1)').removeClass('disabled');
@@ -409,6 +408,7 @@ $(document).ready(function(){
 		var cantidad=$("#resultados #cantidad").val();
 		var posicion = this.id.replace('copiarUpload','');
 		duplicar(id.replace('copiarUpload','copia'),cantidad,posicion);
+		guardarDuplicados(cantidad);
 		var idnombre,name;
 		//cambia valor de id incrementandolo
 		$("#copia"+cantidad).children().each(function(){
@@ -423,30 +423,29 @@ $(document).ready(function(){
 				$(this).children().attr('name',name);
 			}
 		});
+		$("#copiarUpload"+cantidad).remove();
 	});
 });
 
 
 
 function duplicar(id,cantidad,posicion){
-		var $id = this.id, $cantidad = this.cantidad, $posicion = this.posicion;
-		$("#"+id).after('<tr id="copia'+cantidad+'"></tr>');
-		$("#"+id).children().clone().find("td").each(function(){
-			//td = $(this).clone();
-			/*td = $(this)
-				td.children().attr({
-		      'id': function(_, id) {
-						console.log(this.id.replace(posicion,cantidad));
-						return this.id.replace(posicion,cantidad);
-					},
-					'name': function(_, name) {
-						return name;
-					}
-	    	});
-		console.log(td);*/
+	var $id = this.id, $cantidad = this.cantidad, $posicion = this.posicion;
+	$("#"+id).after('<tr id="copia'+cantidad+'"></tr>');
+	$("#"+id).children().clone().find("td").each(function(){
 	}).end().appendTo("#copia"+cantidad);
 		$("#resultados #cantidad").val($("#resultados #cantidad").val()+1);
 	}
+
+function guardarDuplicados(cantidad){
+	var upload = $("#Upload"+cantidad+"Id").val();
+		$.ajax({
+		async: true,
+		method: "post",
+		url: "../pedidos/duplicarUpload",
+		data: {id:  upload}
+	})
+}
 </script>
 <script>
 	$(".table-responsive .borrar").bind("click",function(event){

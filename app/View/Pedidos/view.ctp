@@ -20,7 +20,7 @@ img{
 				<li><?php echo $this->Html->link(__('New Copia'), array('controller' => 'copias', 'action' => 'add')); ?> </li>
 			</ul>
 	</div>
-<div class="col-md-9">
+<div class="col-md-10">
 		<h3><?php  echo __('Pedido'); ?></h3>
 		<div class="table-responsive">
 			<table class="table table-hover">
@@ -33,6 +33,7 @@ img{
 				<th><?php echo __('Sucursal'); ?></th>
 				<th><?php echo __('Forma Pago'); ?></th>
 				<th><?php echo __('Observaciones'); ?></th>
+				<th><?php echo __('Estado'); ?></th>
 			</tr>
 			<tr>
 				<td><?php echo h($pedido['Pedido']['id']); ?>&nbsp;</td>
@@ -43,6 +44,7 @@ img{
 				<td><?php echo h($pedido['Pedido']['sucursal']); ?>&nbsp;</td>
 				<td><?php echo h($pedido['Pedido']['forma_pago']); ?>&nbsp;</td>
 				<td><?php echo h($pedido['Pedido']['observaciones']); ?>&nbsp;</td>
+				<td><?php echo h($pedido['Pedido']['estado']); ?>&nbsp;</td>
 			</tr>
 		</table>
 		</div><!--- FIN TABLE RESPONSIVE --------->

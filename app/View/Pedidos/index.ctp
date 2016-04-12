@@ -8,7 +8,7 @@
             <li><?php echo $this->Html->link(__('Nueva Copia'), array('controller' => 'copias', 'action' => 'add')); ?> </li>
     </ul>
 </div>
-<div class="col-md-9">
+<div class="col-md-10">
     <leyend>
         <h3>Pedidos <small> > Administración</small></h3>
     </leyend>
@@ -23,6 +23,7 @@
 			<th><?php echo $this->Paginator->sort('sucursal'); ?></th>
 			<th><?php echo $this->Paginator->sort('forma_pago'); ?></th>
 			<th><?php echo $this->Paginator->sort('observaciones'); ?></th>
+      <th><?php echo $this->Paginator->sort('estado'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
         <?php
@@ -38,6 +39,7 @@
 		<td><?php echo h($pedido['Pedido']['sucursal']); ?>&nbsp;</td>
 		<td><?php echo h($pedido['Pedido']['forma_pago']); ?>&nbsp;</td>
 		<td><?php echo h($pedido['Pedido']['observaciones']); ?>&nbsp;</td>
+    <td><?php echo h($pedido['Pedido']['estado']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $pedido['Pedido']['id']),array(
                             'type'=>'button',
