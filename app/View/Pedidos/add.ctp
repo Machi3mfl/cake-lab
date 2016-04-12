@@ -408,7 +408,7 @@ $(document).ready(function(){
 		var cantidad=$("#resultados #cantidad").val();
 		var posicion = this.id.replace('copiarUpload','');
 		duplicar(id.replace('copiarUpload','copia'),cantidad,posicion);
-		guardarDuplicados(cantidad);
+		guardarDuplicados(posicion);
 		var idnombre,name;
 		//cambia valor de id incrementandolo
 		$("#copia"+cantidad).children().each(function(){
@@ -437,13 +437,14 @@ function duplicar(id,cantidad,posicion){
 		$("#resultados #cantidad").val($("#resultados #cantidad").val()+1);
 	}
 
-function guardarDuplicados(cantidad){
-	var upload = $("#Upload"+cantidad+"Id").val();
-		$.ajax({
+function guardarDuplicados(posicion){
+	var value = $("#Upload"+posicion+"Id").val();
+	console.log(posicion);
+	$.ajax({
 		async: true,
 		method: "post",
 		url: "../pedidos/duplicarUpload",
-		data: {id:  upload}
+		data: {upload_id:  value}
 	})
 }
 </script>

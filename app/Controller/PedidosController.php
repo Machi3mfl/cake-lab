@@ -2,6 +2,7 @@
 App::uses('AppController', 'Controller');
 App::uses('ClientesController', 'Controller');
 App::uses('CopiasController','Controller');
+App::uses('Upload','Model');
 /**
  * Pedidos Controller
  *
@@ -220,9 +221,29 @@ class PedidosController extends AppController {
     }
 
     public function duplicarUpload(){
+      $this->loadModel('Upload');
       $this->autoRender=false;
-      debug($this->request->data);
+      $upload_id = $this->request->data['upload_id'];
+      if (!empty($upload_id)){
+        $upload = $this->Upload->find('first', array(
+          "conditions" => array(
+            'id' => $upload_id)
+          )
+        );
+      $this->agregarASession($upload);
+      }
     }
+
+    public function agregarASession(array $upload){
+      if($this->Session->check('imagenes')){
+      $imgs = $this->Session->read('imagenes');
+      array_push($imgs, $upload);
+      $this->Session->write('imagenes',$imgs);
+      }
+    }
+
+
+
     /*
      * public
      *
