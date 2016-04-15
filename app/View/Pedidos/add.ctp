@@ -88,7 +88,7 @@
             <?php echo $this->Form->input('Upload.'.$cant.'.photo_dir',array(
 							'name' => 'data[Upload]['.$cant.'][photo_dir]',
 							'value'=>$img['Upload']['photo_dir'],
-							'hidden'=> true,'label'=>false));
+							'hidden'=> true,'label'=>false,'div'=> false));
 						?>
             <?php echo $this->Html->image('../files/thumbs/'.$img['Upload']['photo_dir'].'/thumb_'.$img['Upload']['photo'],
                         array( 'id'=>'imageresource',"class"=>'miniatura', 'alt' => $img['Upload']['photo'],'style' => 'cursor:pointer !important;') ); ?>
@@ -97,7 +97,7 @@
             <?php echo $this->Form->input('Upload.'.$cant.'.photo',array(
 							'name' => 'data[Upload]['.$cant.'][photo]',
 							'value'=>$img['Upload']['photo'],
-							'hidden'=> true,'label'=>false));
+							'hidden'=> true,'label'=>false,'div'=> false));
 						?>
             <?php echo $img['Upload']['photo']; ?>
 	        </td>
@@ -129,6 +129,7 @@
 						'name' => 'data[Upload][Copias]['.$cant.'][cantidad]',
 						'class'=>'form-control',
 						'placeholder'=>'Ingrese cantidad',
+						'div' => false,
 						'label'=> false));
 						?>
 					</td>
@@ -214,7 +215,7 @@
 						echo '<input id="PedidoImporte" name="data[Pedido][importe]" style="visibility:hidden">';
 					}
 					endif; ?>
-          <tr>
+          <tr id="totales">
             <td class="thick-line"></td>
             <td class="thick-line"></td>
             <td class="thick-line"></td>
@@ -334,6 +335,7 @@ $(document).ready(function(){
 
 function obtenerPrecios(){
     var datos = $("#UploadCopiasAddForm").serialize();
+		console.log(datos);
     $.ajax({
       method: "POST",
       url: "../precios/getPrecios",
@@ -422,8 +424,9 @@ $(document).ready(function(){
 				name= name.replace(posicion,cantidad);
 				$(this).children().attr('name',name);
 			}
+
 		});
-		$("#copiarUpload"+cantidad).remove();
+	$("#copiarUpload"+cantidad).remove();
 	});
 });
 
@@ -439,13 +442,28 @@ function duplicar(id,cantidad,posicion){
 
 function guardarDuplicados(posicion){
 	var value = $("#Upload"+posicion+"Id").val();
-	console.log(posicion);
+	var cant = parseInt(posicion)+1;
 	$.ajax({
 		async: true,
 		method: "post",
 		url: "../pedidos/duplicarUpload",
 		data: {upload_id:  value}
-	})
+	}).done(function(respuesta){
+
+		var upload = $.parseJSON(respuesta);
+
+		nom = '<td id="nombre'+cant+'">'+upload["Upload"]["photo"]+'</td>';
+		cantidad = '<td id="cantidad'+cant+'"></td>';
+		cat = '<td id="categoria'+cant+'"></td>';
+		papel = '<td id="papel'+cant+'"></td>';
+		tam = '<td id="tamano'+cant+'"></td>';
+		borde = '<td id="borde'+cant+'">';
+		pre = '</td><td id="precio'+cant+'"></td>';
+		upre = '<input id="UploadCopias'+cant+'Precio" style="visibility:hidden" name="">';
+		uid = '<input id="UploadCopias'+cant+'UploadId" value="" style="visibility:hidden" name="">';
+
+		$("#tablaPrecios #totales").before("<tr>"+nom+cantidad+cat+papel+tam+borde+pre+"</tr>");
+	});
 }
 </script>
 <script>

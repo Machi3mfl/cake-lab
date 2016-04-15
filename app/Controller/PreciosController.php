@@ -114,6 +114,7 @@ class PreciosController extends AppController {
 			$this->autoRender=false;
       $lista = 2;
       $cont= 0;
+			debug($this->request->data['Upload']['Copias']);
       //Buscar ID de producto
       foreach ($this->request->data['Upload']['Copias'] as $prod){
           $productos[]=$controller->getProducto($prod['categoria'],$prod['papel'],$prod['tamano']);

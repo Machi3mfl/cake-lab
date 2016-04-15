@@ -189,10 +189,7 @@ class PedidosController extends AppController {
       $this->setearModelos();
       //$this->set('uploads',$guardados);
     }elseif ($this->Session->check('imagenes')) //Muestra si se recarga la pagina
-      $this->recargarFotosSubidas();
-
-    $uploads=$this->Session->read('imagenes');
-    debug($uploads);
+    $this->recargarFotosSubidas();
     }
 
 
@@ -231,6 +228,7 @@ class PedidosController extends AppController {
           )
         );
       $this->agregarASession($upload);
+      return json_encode($upload);
       }
     }
 
@@ -304,7 +302,6 @@ class PedidosController extends AppController {
       foreach($files as $file){
         $this->Upload->set(array("photo" => $file["Upload"]["photo"]));
         $arch=$this->Upload->data;
-        debug($arch["Upload"]);
         $this->Upload->create();
         if($this->Upload->save($arch["Upload"])){
           $this->Session->setFlash("Archivo guardado.");
