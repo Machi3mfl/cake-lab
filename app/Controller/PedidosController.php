@@ -189,7 +189,9 @@ class PedidosController extends AppController {
       $this->setearModelos();
       //$this->set('uploads',$guardados);
     }elseif ($this->Session->check('imagenes')) //Muestra si se recarga la pagina
-    $this->recargarFotosSubidas();
+      $this->set('imgs',$this->Session->read('imagenes'));
+      $this->set('cantidad',count($this->Session->read('imagenes')));
+      $this->setearModelos();
     }
 
 

@@ -57,6 +57,14 @@
       <br>
 			<?php if(isset($imgs)) :  {?>
 		    <!-- Table -->
+				<?php echo $this->Form->create('Upload.Copias',array(
+					'type' => 'file',
+					'class'=>'form-inline',
+					'url' => array(
+						'controller' => 'pedidos',
+						'action' => 'confirmar')
+					));
+				?>
 		    <div class="table-responsive">
 		    <table class="table table-hover">
 		        <thead>
@@ -66,14 +74,7 @@
 		      </thead>
 
 		      <tbody>
-						<?php echo $this->Form->create('Upload.Copias',array(
-							'type' => 'file',
-							'class'=>'form-inline',
-							'url' => array(
-								'controller' => 'pedidos',
-								'action' => 'confirmar')
-							));
-						?>
+
 		    <?php }
 		    $cant = 0;
 		    foreach($imgs as $img) :
@@ -335,27 +336,25 @@ $(document).ready(function(){
 
 function obtenerPrecios(){
     var datos = $("#UploadCopiasAddForm").serialize();
-		console.log(datos);
     $.ajax({
       method: "POST",
       url: "../precios/getPrecios",
       data: datos
     })
     .done(function( precios ) {
-			var precios = $.parseJSON(precios);
-			importe=0;
-			cant_total=0;
+			var prec = $.parseJSON(precios);
+			var importe=0,	cant_total=0;
 
-			for(i=0;i<precios.length;i++){
+			for(i=0;i<prec.length;i++){
 				cat= $("#UploadCopias"+i+"Categoria option:selected");
 				papel= $("#UploadCopias"+i+"Papel option:selected");
 				tamano= $("#UploadCopias"+i+"Tamano option:selected");
 				borde= $("#UploadCopias"+i+"Borde option:selected");
 				cant = $("#UploadCopias"+i+"Cantidad");
 				cantidad = parseInt($("#UploadCopias"+i+"Cantidad").val());
-				precio= precios[i].Precio.precio;
+				precio= prec[i].Precio.precio;
 
-				$("#UploadCopias"+i+"ProductoId").val(precios[i].Precio.producto_id);
+				$("#UploadCopias"+i+"ProductoId").val(prec[i].Precio.producto_id);
 				$("#categoria"+i).text(cat.text());
 				$("#papel"+i).text(papel.text());
 				$("#tamano"+i).text(tamano.text());
@@ -369,8 +368,8 @@ function obtenerPrecios(){
 				importe= importe + subtotal;
 			}
 			$("#PedidoCantidad").val(cant_total);
-			$("#PedidoImporte").val(importe.toFixed(2));
-			$("#importe-total").text("$ "+importe.toFixed(2));
+			$("#PedidoImporte").val(importe);
+			$("#importe-total").html("$ "+importe);
     });
 }
 
@@ -409,6 +408,7 @@ $(document).ready(function(){
 		var id=$(this).attr('id');
 		var cantidad=$("#resultados #cantidad").val();
 		var posicion = this.id.replace('copiarUpload','');
+		console.log(cantidad);
 		duplicar(id.replace('copiarUpload','copia'),cantidad,posicion);
 		guardarDuplicados(posicion);
 		var idnombre,name;
@@ -433,7 +433,8 @@ $(document).ready(function(){
 
 
 function duplicar(id,cantidad,posicion){
-	var $id = this.id, $cantidad = this.cantidad, $posicion = this.posicion;
+	//var id = this.id, cant = this.cantidad, posicion = this.posicion;
+	console.log(cantidad);
 	$("#"+id).after('<tr id="copia'+cantidad+'"></tr>');
 	$("#"+id).children().clone().find("td").each(function(){
 	}).end().appendTo("#copia"+cantidad);
