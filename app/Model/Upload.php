@@ -63,8 +63,8 @@ class Upload extends AppModel {
 		$pedido = $this->data["Upload"]["pedido_id"];
 	  //$this->Behaviors->Upload->settings["Upload"]["photo"]["path"] = "/wamp/www/laboratorio/app/webroot/files/pedidos/".$pedido."/";
 		//$this->Behaviors->Upload->settings["Upload"]["photo"]["thumbnailPath"] = "/wamp/www/laboratorio/app/webroot/files/thumbs/".$pedido."/";
-		$this->Behaviors->Upload->settings["Upload"]["photo"]["path"] = "/var/www/laboratorio/app/webroot/files/pedidos/".$pedido."/";
-		$this->Behaviors->Upload->settings["Upload"]["photo"]["thumbnailPath"] = "/var/www/laboratorio/app/webroot/files/thumbs/".$pedido."/";
+		$this->Behaviors->Upload->settings["Upload"]["photo"]["path"] = "/wamp/www/laboratorio/app/webroot/files/pedidos/".$pedido."/";
+		$this->Behaviors->Upload->settings["Upload"]["photo"]["thumbnailPath"] = "/wamp/www/laboratorio/app/webroot/files/thumbs/".$pedido."/";
 		return true;
 	}
 

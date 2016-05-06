@@ -137,7 +137,7 @@ class ProductosController extends AppController {
                         array('tamano_id' => $tamano_id),
                     ));
         $prod= $this->Producto->find('first',
-                    array('conditions'=> $conditions)
+                    array('conditions'=> $conditions,'contain' => true)										
                 );
         return $prod;
     }
@@ -145,7 +145,6 @@ class ProductosController extends AppController {
     public function superficies_by_category($categoria_id = null) {
 		$this->layout = false;
 		if ($this->request->is('get')) {
-
 			if ($categoria_id == null) {
 				return;
 			}

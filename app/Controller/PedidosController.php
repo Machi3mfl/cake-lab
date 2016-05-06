@@ -108,51 +108,6 @@ class PedidosController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
-    public function add2(){
-      $this->loadModel('Upload');
-      $usuario=$this->Auth->user();
-      $guardados=array();
-      $files=array(); // PARA DESPUES : GUARDAR FILES TEMPORALES Y LUEGO GUARDAR EN BD - USAR TMP EN FORMULARIO
-      $this->inicializarPedido();
-      if (!empty($this->request->data)){ // si hay imagenes
-        foreach($this->request->data["Upload"]["photo"] as $file) { // por cada photo setea un file
-          $this->Upload->set(array('photo' => $file));
-          $photo = $this->Upload->data;
-          //array_push($files,$photo);
-          $photo["Upload"]["pedido_id"]= $this->Session->read('pedido_id');
-          $photo["Upload"]["photo_dir"]= $this->Session->read('pedido_id');
-          $this->Upload->create();
-          if ($this->Upload->save($photo)) { // guarda el file en BD
-            $ultimo = $this->Upload->getLastInsertId(); //obtiene el ultimo id , para crear una pila
-            array_push($guardados,$ultimo); //guarda en array los id files guardados
-          }
-        } /**** fin foreach ***/
-        $imgs=$this->listarGuardados($guardados);
-        if (!empty($this->Session->read('imagenes'))){ //lee las imagenes de la session, las apila y luego guarda
-          $ant = $this->Session->read('imagenes');
-          foreach($imgs as $img) {
-            array_push($ant, $img);
-          }
-          $this->Session->write('imagenes',$ant);
-          $this->set('imgs',$ant);
-          $this->set('cantidad',count($ant));
-        }
-        else{ // si no hay imagenes en la session solo guarda
-            $this->Session->write('imagenes',$imgs);
-            $this->set('imgs',$imgs);
-        }
-      $this->setearModelos();
-      //$this->set('uploads',$guardados);
-      }elseif ($this->Session->check('imagenes')){
-        $img = $this->Session->read('imagenes');
-        $this->set('imgs',$img);
-        $this->set('cantidad',count($img));
-        $this->setearModelos();
-      }
-      $uploads=$this->Session->read('imagenes');
-    }
-
-
     public function add(){
       $this->loadModel('Upload');
       $usuario=$this->Auth->user();
@@ -160,7 +115,6 @@ class PedidosController extends AppController {
       $files=array(); // PARA DESPUES : GUARDAR FILES TEMPORALES Y LUEGO GUARDAR EN BD - USAR TMP EN FORMULARIO
       $this->inicializarPedido();
       if (!empty($this->request->data)){ // SI HAY FILES EN REQUEST DATA
-        debug($this->request->data);
         foreach($this->request->data["Upload"]["photo"] as $file) { // por cada photo setea un file
           $this->Upload->set(array('photo' => $file));
           $photo = $this->Upload->data;
@@ -198,7 +152,7 @@ class PedidosController extends AppController {
     public function inicializarPedido (){
       if (!$this->Session->check('pedido_id')){ /***********  Crear pedido id para guardar uploads en carpeta con id ********************/
         $this->Pedido->create();
-        $this->Pedido->set(array("fecha"=>date("Y-m-d H:i:s"),"estado" => "INCOMPLETO"));
+        $this->Pedido->set(array("fecha"=>date("Y-m-d H:i:s"),"estado" => "Incompleto"));
         $this->Pedido->save();
         $this->Session->write('pedido_id',$this->Pedido->getLastInsertId());
       }
@@ -242,8 +196,6 @@ class PedidosController extends AppController {
       }
     }
 
-
-
     /*
      * public
      *
@@ -252,32 +204,36 @@ class PedidosController extends AppController {
      * return array de Uploads
      */
     public function listarGuardados(array $guardados){
-        if(!empty($guardados)){
-            foreach($guardados as $id){
-                $result[]=$this->Upload->findById($id);
-            }
-            return $result;
-        }
+      if(!empty($guardados)){
+          foreach($guardados as $id){
+              $result[]=$this->Upload->findById($id);
+          }
+          return $result;
+      }
     }
 
     public function confirmar(){
       $pedido=$this->request->data["Pedido"];
-      $copias=$this->request->data["Upload"]["Copias"];
+      $copias=$this->request->data["Copias"];
       $uploads=$this->Session->read('imagenes');
       $pedido_id=$this->Session->read('pedido_id');
       $Copias= new CopiasController;
       if(!empty($pedido)){
         $pedido["fecha"]=date("Y-m-d H:i:s");//fecha del pedido
-        $this->Pedido->id=$pedido_id;
-        $this->Pedido->save($pedido);
+        if($this->Session->check('cliente_id')){
+          $this->Pedido->set(array(
+            "id"=> $pedido_id, "fecha"=>date("Y-m-d H:i:s"),"estado" => "Cargado", "cliente_id"=> $this->Session->read('cliente_id')
+          ));
+          $this->Pedido->save($pedido);
+        }
         $Copias->guardarCopias($copias,$pedido_id);
         $this->Session->setFlash("Pedido guardado");
         $this->Session->delete('imagenes');
         $this->Session->delete('pedido_id');
+        $this->Session->delete('cliente_id');
       }else{
         $this->Session->setFlash("No se ha podido guardar el pedido");
       }
-
     }
 
     public function testUpload(){
@@ -315,7 +271,7 @@ class PedidosController extends AppController {
         $this->Session->setFlash("Session vacio.");
       }
 
-      //rename(C:\wamp\tmp\php203A.tmp,C:\wamp\www\laboratorio\app\webroot\files\uploads\232\maximilianoibarra-perfil.jpg);
+
     }
 
 

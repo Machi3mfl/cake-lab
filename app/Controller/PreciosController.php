@@ -109,24 +109,22 @@ class PreciosController extends AppController {
 
 
   public function getPrecios(){
-      $controller = new ProductosController();
-      //s$this->layout = 'ajax';
-			$this->autoRender=false;
-      $lista = 2;
-      $cont= 0;
-      //Buscar ID de producto
-      foreach ($this->request->data['Upload']['Copias'] as $prod){
-          $productos[]=$controller->getProducto($prod['categoria'],$prod['papel'],$prod['tamano']);
-          //debug($id[$productos]);
-          //Buscar precio del producto
-          $conditions = array(
-              'AND' => array(
-                      array('producto_id' => $productos[$cont]['Producto']['id']),
-                      array('lista_id' => 3)
-                  ));
-          $precios[]=$this->Precio->find('first',array('conditions'=>$conditions));
-          $cont++;
-      }
-			return json_encode($precios);
+		$controller = new ProductosController();
+		$this->layout = false;
+		$lista = 2;
+		$cont= 0;
+		//Buscar ID de producto
+		foreach ($this->request->data['Copias'] as $prod){
+			$productos[]=$controller->getProducto($prod['categoria'],$prod['papel'],$prod['tamano']);
+			$conditions = array(
+					'AND' => array(
+									array('producto_id' => $productos[$cont]['Producto']['id']),
+									array('lista_id' => 3)
+							));
+			$precios[]=$this->Precio->find('first',array('conditions'=>$conditions));
+			$cont++;
+		}
+		$this->set("precios", $precios);
+		$this->set("data", $this->request->data);
   }
 }

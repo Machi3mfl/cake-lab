@@ -16,19 +16,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <!-- Bootstrap Validator CSS file -->
-    <?php echo $this->Html->css('/bootstrapValidator/css/bootstrapValidator'); ?>
+    <!--?php echo $this->Html->css('/bootstrapValidator/css/bootstrapValidator'); ?-->
     <?php echo $this->Html->css('style'); ?>
-    <?php echo $this->Html->css('/css/twitter/bootstrap-multiselect'); ?>
+    <!--?php echo $this->Html->css('/css/twitter/bootstrap-multiselect'); ?-->
 
 
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- Bootstrap Validator Js file -->
-    <?php echo $this->Html->script('/bootstrapValidator/js/bootstrapValidator'); ?>
-    <?php echo $this->Html->script('/bootstrapValidator/js/language/es_ES'); ?>
-    <?php echo $this->Html->script('/js/twitter/bootstrap-multiselect'); ?>
-    <?php echo $this->Html->script('/js/default'); ?>
+    <!--?php echo $this->Html->script('/bootstrapValidator/js/bootstrapValidator'); ?-->
+    <!--?php echo $this->Html->script('/bootstrapValidator/js/language/es_ES'); ?-->
+    <!--?php echo $this->Html->script('/js/twitter/bootstrap-multiselect'); ?-->
+    <!--?php echo $this->Html->script('/js/default'); ?-->
     <script type="text/javascript">
         var base_url = "<?php echo Router::url('/');?>";
     </script>
