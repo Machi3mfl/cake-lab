@@ -16,7 +16,7 @@
       <tr><th>Archivo</th><th>Cantidad</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Precio Unitario</th></tr>
     </thead>
       <tbody>
-        <?php if(isset($precios)) :  {
+        <?php if(isset($precios) && isset($data)) :  {
           $cant=0;
           $copias_total=0;
           $importe=0;
@@ -50,7 +50,7 @@
           $cant++;
           endforeach;
         }
-        endif; ?>
+      endif; ?>
         <tr id="totales">
           <td class="thick-line"></td>
           <td class="thick-line"></td>

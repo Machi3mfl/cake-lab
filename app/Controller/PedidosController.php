@@ -16,8 +16,8 @@ class PedidosController extends AppController {
  * @return void
  */
     public function index() {
-            $this->Pedido->recursive = 0;
-            $this->set('pedidos', $this->paginate());
+      $this->Pedido->recursive = 0;
+      $this->set('pedidos', $this->paginate());
     }
 
 /**
@@ -32,16 +32,14 @@ class PedidosController extends AppController {
       $this->Pedido->id = $id;
       $uploads=array();
       if (!$this->Pedido->exists()) {
-              throw new NotFoundException(__('Invalid pedido'));
+        throw new NotFoundException(__('Invalid pedido'));
       }
       $pedido=$this->Pedido->read(null, $id);
-
       foreach( $pedido['Copia'] as $copia){
         $upload=$this->Upload->read(null,$copia['upload_id']);
         array_push($uploads,$upload);
       }
       $this->set('pedido', $this->Pedido->read(null, $id));
-      //debug($uploads);
       $this->set('uploads',$uploads);
     }
 
@@ -94,15 +92,15 @@ class PedidosController extends AppController {
 */
     public function delete($id = null) {
         if (!$this->request->is('post')) {
-                throw new MethodNotAllowedException();
+          throw new MethodNotAllowedException();
         }
         $this->Pedido->id = $id;
         if (!$this->Pedido->exists()) {
-                throw new NotFoundException(__('Invalid pedido'));
+          throw new NotFoundException(__('Invalid pedido'));
         }
         if ($this->Pedido->delete()) {
-                $this->Session->setFlash(__('Pedido deleted'));
-                $this->redirect(array('action' => 'index'));
+          $this->Session->setFlash(__('Pedido deleted'));
+          $this->redirect(array('action' => 'index'));
         }
         $this->Session->setFlash(__('Pedido was not deleted'));
         $this->redirect(array('action' => 'index'));
@@ -118,7 +116,6 @@ class PedidosController extends AppController {
         foreach($this->request->data["Upload"]["photo"] as $file) { // por cada photo setea un file
           $this->Upload->set(array('photo' => $file));
           $photo = $this->Upload->data;
-          //array_push($files,$photo);
           $photo["Upload"]["pedido_id"]= $this->Session->read('pedido_id');
           $photo["Upload"]["photo_dir"]= $this->Session->read('pedido_id');
           $this->Upload->create();
@@ -141,11 +138,12 @@ class PedidosController extends AppController {
             $this->set('imgs',$imgs);
         }
       $this->setearModelos();
-      //$this->set('uploads',$guardados);
-    }elseif ($this->Session->check('imagenes')) //Muestra si se recarga la pagina
-      $this->set('imgs',$this->Session->read('imagenes'));
-      $this->set('cantidad',count($this->Session->read('imagenes')));
-      $this->setearModelos();
+    }elseif ($this->Session->check('imagenes')){ //Muestra si se recarga la pagina
+        $this->set('imgs',$this->Session->read('imagenes'));
+        $this->set('cantidad',count($this->Session->read('imagenes')));
+        $this->setearModelos();
+      }
+      debug($this->Session->read('imagenes'));
     }
 
 
@@ -173,6 +171,8 @@ class PedidosController extends AppController {
       $this->setearModelos();
     }
 
+
+// PONER EN UPLOAD CONTROLLER
     public function duplicarUpload(){
       $this->loadModel('Upload');
       $this->autoRender=false;
@@ -183,6 +183,7 @@ class PedidosController extends AppController {
             'id' => $upload_id)
           )
         );
+      $upload['Upload']['duplicado']=true;
       $this->agregarASession($upload);
       return json_encode($upload);
       }
@@ -205,10 +206,12 @@ class PedidosController extends AppController {
      */
     public function listarGuardados(array $guardados){
       if(!empty($guardados)){
-          foreach($guardados as $id){
-              $result[]=$this->Upload->findById($id);
-          }
-          return $result;
+        foreach($guardados as $id){
+          $upload=$this->Upload->findById($id);
+          $upload['Upload']['duplicado']=false;
+          $result[]=$upload;
+        }
+        return $result;
       }
     }
 

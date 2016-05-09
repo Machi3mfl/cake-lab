@@ -78,7 +78,7 @@
 											'value'=>$img['Upload']['id'],'hidden'=> true,'label'=>false));
 										?>
 				            <?php echo $this->Form->input('Upload.'.$cant.'.photo_dir',array('name' => 'data[Upload]['.$cant.'][photo_dir]',
-											'value'=>$img['Upload']['photo_dir'],'hidden'=> true,'label'=>false,'div'=> false));
+											'value'=>$img['Upload']['photo_dir'],'hidden'=> true,'label'=>false,'div'=> false, 'class'=> 'photoDir'));
 										?>
 				            <?php echo $this->Html->image('../files/thumbs/'.$img['Upload']['photo_dir'].'/thumb_'.$img['Upload']['photo'],
 				                        array( 'id'=>'imageresource',"class"=>'miniatura', 'alt' => $img['Upload']['photo'],'style' => 'cursor:pointer !important;') );
@@ -117,7 +117,10 @@
 										?>
 									</td>
 						      <td>
-										<button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+										<?php if($img['Upload']['duplicado']!='false') : { ?>
+											<button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+										<?php }
+											endif; ?>
 										<button id="eliminarUpload<?php echo $cant ?>" type="button" class="btn btn-danger borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 						      </td>
 								</tr>
@@ -328,6 +331,8 @@ $(document).ready(function(){
 				$(this).children().attr('name',name);
 			}
 		});
+	$("#copia"+cantidad+" td .photoDir").attr('name','data[Upload]['+cantidad+'][photo_dir]');
+	$("#copia"+cantidad+" td .photoDir").attr('id','Upload'+cantidad+'PhotoDir');
 	$("#copiarUpload"+cantidad).remove();
 	});
 });
@@ -335,8 +340,8 @@ $(document).ready(function(){
 function duplicar(id,cantidad,posicion){
 	$("#"+id).after('<tr id="copia'+cantidad+'"></tr>');
 	$("#"+id).children().clone().find("td").each(function(){
-	}).end().appendTo("#copia"+cantidad);
-		$("#resultados #cantidad").val($("#resultados #cantidad").val()+1);
+		}).end().appendTo("#copia"+cantidad);
+	$("#resultados #cantidad").attr('value',parseInt($("#resultados #cantidad").val())+1);
 	}
 
 function guardarDuplicados(posicion){
@@ -353,10 +358,21 @@ function guardarDuplicados(posicion){
 <script>
 	$(".table-responsive .borrar").bind("click",function(event){
 		var id=$(this).attr('id');
-		var cantidad=$("#resultados #cantidad").val();
-		borrar(id.replace('copiarUpload','copia'),cantidad);
+		var res= confirm("¿Está seguro que desea eliminar esta copia?");
+		if (res) borrar(id,id.replace('eliminarUpload',''));
 	});
-function borrar(){
+function borrar(id,posicion){
+	var value = $("#Upload"+posicion+"Id").val();
+	$.ajax({
+		async: true,
+		method: "post",
+		url: "/laboratorio/uploads/borrarUpload",
+		data: {upload_id:  value, posicion: posicion}
+	}).done(function(respuesta){
+		$("#copia"+posicion).remove();
+		var nueva_cant=$("#resultados #cantidad").val()-1;
+		//$("#resultados #cantidad").attr('value',nueva_cant);
+	});
 }
 </script>
 <script>

@@ -122,6 +122,32 @@ class UploadsController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 
+	public function borrarUpload(){
+		$this->autoRender=false;
+		$pos=$this->request->data['posicion'];
+		$id=$this->request->data['upload_id'];
+		if($this->Session->check('imagenes')){
+			$uploads=$this->Session->read('imagenes');
+		}
+		debug($uploads);
+		if(isset($uploads[$pos])){
+			if($uploads[$pos]['Upload']['duplicado']==false){
+				$result= $this->Upload->findById($uploads[$pos]['Upload']['id']);
+				$result['Upload']['remove']=true;
+				$result['Upload']['pedido_id']=$result['Upload']['photo_dir'];
+				debug($result);
+
+				//debug($this->Upload->save($result));
+				//$upload[$pos]['Upload']['remove']=true;
+				//$this->Upload->set()
+			}
+			unset($uploads[$pos]);
+			array_values($uploads);
+			$this->Session->write('imagenes',$uploads);
+		}
+		debug($uploads);
+		return true;
+	}
 
 
 
