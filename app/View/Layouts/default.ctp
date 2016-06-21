@@ -86,7 +86,7 @@
         p><a href="mailto:vukhanhtruong@gmail.com">vukhanhtruong@gmail.com</a> &copy; 2015</p-->
     </footer>
 </div> <!-- /container -->
-</body>
+<?php echo $this->Html->script('validator'); ?>
 <script>
 $(document).ready(function(){
     //Handles menu drop down
@@ -94,5 +94,8 @@ $(document).ready(function(){
         e.stopPropagation();
     });
 });</script>
+
+</body>
+
 
 </html>

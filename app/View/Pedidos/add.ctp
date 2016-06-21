@@ -32,7 +32,7 @@
           <legend><h3> Paso 2 <small>: Añadir copias</small></h3></legend>
         </div>
       </div>
-      <div>
+      <div id="paso-2" style="position: relative;">
         <h3> Seleccion de imagenes <small>: A continuacion seleccione los imágenes que desea enviar.
             A traves del botón examinar puede seleccionar una o muchas fotos. Aprentando el atajo CTRL + E puede seleccionar todas las imagenes de una carpeta.</small></h3>
         <div class="divider"></div>
@@ -60,7 +60,7 @@
 		      <br>
 					<?php if(isset($imgs)) :  {?>
 				    <!-- Table -->
-						<?php echo $this->Form->create('Upload.Copias',array('type' => 'file','class'=>'form-inline','url' =>
+						<?php echo $this->Form->create('Upload.Copias',array('data-toggle' => 'validator', 'type' => 'file','class'=>'form-inline','url' =>
 							array('controller' => 'pedidos','action' => 'confirmar')));
 						?>
 				    <div class="table-responsive">
@@ -97,7 +97,7 @@
 						      </td>
 						      <td>
 										<?php echo $this->Form->select('Upload.Copias.'.$cant.'.papel', $superficies ,array(
-											'name' => 'data[Copias]['.$cant.'][papel]','class'=>'form-control'));
+											'name' => 'data[Copias]['.$cant.'][papel]','class'=>'form-control', 'required'));
 										?>
 									</td>
 						      <td>
@@ -140,7 +140,11 @@
 			      	</tbody>
 			    	</table> <!-- div tabla imagenes -->
 		  		</div> <!--- TABLA PARA IMAGENES SUBIDAS - ----->
+                                
+                        <div class="disabled-div" style="display:block;"></div>
+                        
 		  	</div> <!-- div resultados -->
+                        
 			</div><br>
 			<button id="activate-step-2" type="button" class="btn btn-primary btn-lg pull-right">Siguiente</button>
 		</div> <!-- COL-MD-12 COL-XS-12 - -->
@@ -150,6 +154,7 @@
       <h3 class="text-center well">Completando pedido</h3>
       <legend><h3> Paso 2 <small>: Confirmación del pedido</small></h3></legend>
     	<div class="col-md-6">
+            
         <blockquote>Datos del Cliente
           <ul type="none" id="datosCliente" class="datosCliente">
 						<input id="ClienteId" name="data[Pedido][cliente_id]" style="visibility:hidden">
@@ -216,6 +221,7 @@ $(document).ready(function(){
         $buscador.val(ui.item.label);
         $buscador.prop('disabled',true);
 				buscarCliente(ui.item.value);
+        $('.disabled-div').fadeOut();
       }
       else{
         $buscador.attr('value','');
@@ -254,6 +260,7 @@ function habilitarBuscador(){
   $buscador= $("#buscador");
   $buscador.prop('disabled',false);
 	$buscador.val('');
+  $('#paso-2 .disabled-div').fadeIn();
 }
 </script>
 <script>
@@ -374,6 +381,7 @@ function borrar(id,posicion){
 		//$("#resultados #cantidad").attr('value',nueva_cant);
 	});
 }
+
 </script>
 <script>
 	$(".miniatura").bind("click",function(event){
@@ -384,9 +392,27 @@ function borrar(id,posicion){
 		$('#imgModal').modal('show');
 	});
 
+        if ( $('#buscador').val() ){
+            $('#paso-2 .disabled-div').hide();
+        }
+
 	function asignarImagen(url,nombre){
 		$("#imgModal .modal-title").text(nombre);
 		$("#imgModal img").attr('src',url);
 	}
 </script>
 <?php echo $this->Html->script('Pedidos/add');?>
+<style>
+    .disabled-div{
+        background-color: #555;
+        opacity: 0.5;
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        cursor: not-allowed;
+        top: 0;
+        left: 0;
+        z-index: 50;
+    }
+    </style>
