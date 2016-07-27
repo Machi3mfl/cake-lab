@@ -59,8 +59,12 @@ class ClientesController extends AppController {
                 debug($user_id);
                 $this->request->data('Cliente.user_id', $user_id);
                 //debug($this->request->data);
-                $this->Cliente->save($this->request->data['Cliente']);
-                $this->Session->setFlash('The cliente has been saved','success');
+                if ( $this->Cliente->save($this->request->data['Cliente']) ){
+                    $this->Session->setFlash('Nuevo Cliente guardado.','success');
+                }
+                else{
+                    $this->Session->setFlash('Existe un problema con alguno/s de los campos. Revise e intente nuevamente.','error');
+                }
             } else {
                         $this->Session->setFlash('The cliente could not be saved. Please, try again.','error');
                 }
@@ -129,6 +133,7 @@ class ClientesController extends AppController {
  *
  * @return void
  */
+        /*
 	public function nuevo() {
 		if ($this->request->is('post')) {
 			$this->Cliente->create();
@@ -145,7 +150,7 @@ class ClientesController extends AppController {
                 $groups = $group->find('list');
                 $this->set(compact('users','groups'));
 	}
-
+*/
         function cargar_provincia(){
             $prov = ClassRegistry::init('Provincia');
             $datos=$prov->find('list',array('order'=>'nom_prov ASC'));

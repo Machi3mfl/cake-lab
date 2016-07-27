@@ -22,7 +22,7 @@
                 <th><?php echo $this->Paginator->sort('telefono'); ?></th>
                 <th><?php echo $this->Paginator->sort('provincia'); ?></th>
                 <th><?php echo $this->Paginator->sort('localidad'); ?></th>
-                <th><?php echo $this->Paginator->sort('codigo_postal'); ?></th>
+                <th><?php echo $this->Paginator->sort('codigo_postal','C.P'); ?></th>
                 <th><?php echo $this->Paginator->sort('email'); ?></th>
                 
                 <th class="actions"><?php echo __('Actions'); ?></th>

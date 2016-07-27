@@ -54,3 +54,69 @@ body{
 }
 
 /*************** ADD PEDIDOS *****************************************************************/
+
+
+/*************** FORMS *****************************************************************/
+
+
+/*************** DEFAULT *****************************************************************/
+
+    .panel-new {
+        border-color: #dfe8f1;
+        background-color: #fff;
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+    }
+
+    h4.title-table {
+        font-size: 15px;
+    }
+    .title-lead {
+        color: #3f3f3f;
+    }
+    .title-table .title-lead {
+        font-size: 65%;
+        margin: 5px 0 0;
+    }
+    .title-table + .title-lead {
+        margin-top: -10px;
+    }
+
+    
+    /* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: auto;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.nav.nav-sidebar{
+    border-right: 1px solid #dedede;
+}
