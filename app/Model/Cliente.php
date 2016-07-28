@@ -130,11 +130,11 @@ class Cliente extends AppModel {
 			'order' => ''
 		)
 	);
-
+/*
 	public $hasMany = array(
 	    'Pedido' => array(
-        'className' => 'Pedido',
-        'foreignKey' => 'user_id',
+                'className' => 'Pedido',
+                'foreignKey' => 'user_id',
 				'conditions' => '',
 				'dependent' => false,
 				'fields' => '',
@@ -142,4 +142,6 @@ class Cliente extends AppModel {
 		            )
 
         );
+ * 
+ */
 }

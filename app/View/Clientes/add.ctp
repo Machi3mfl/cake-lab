@@ -39,11 +39,11 @@
                 <?php   echo $this->Form->input('calle',array('class'=>'form-control','placeHolder'=>'Ingrese Calle','label'=>false,'required'=>true)); ?>
             </div>
             <div class='form-group'>  
-                <?php   echo $this->Form->input('numero',array('class'=>'form-control','placeHolder'=>'Ingrese Altura','label'=>false,'required'=>true,'type'=>'number')); ?>
+                <?php   echo $this->Form->input('numero',array('class'=>'form-control','placeHolder'=>'Ingrese Altura','label'=>false, 'type'=>'number')); ?>
             </div>
             <label class='control-label'>Departamento/Piso</label>
             <div class='form-group'>
-                <?php   echo $this->Form->input('piso',array('class'=>'form-control','placeHolder'=>'Ingrese Departamento o piso','label'=>false,'required'=>true,'type'=>'number')); ?>
+                <?php   echo $this->Form->input('piso',array('class'=>'form-control','placeHolder'=>'Ingrese Departamento o piso','label'=>false, 'type'=>'number')); ?>
             </div>
             <div class='form-group'>
                 <?php   echo $this->Form->input('telefono',array('class'=>'form-control','placeHolder'=>'Ingrese número de telefono','required'=>true)); ?>
@@ -68,7 +68,7 @@
                 <?php   echo $this->Form->input('User.password',array('class'=>'form-control','placeHolder'=>'Ingrese contraseña','required'=>true  )); ?>
             </div>
             <div class='form-group'>
-                <?php   echo $this->Form->input('User.password2',array('class'=>'form-control','placeHolder'=>'Ingrese contraseña','type'=>'password','required'=>true)); ?>
+                <?php   echo $this->Form->input('User.password2',array('class'=>'form-control','placeHolder'=>'Ingrese contraseña','type'=>'password','required'=>true,'data-match'=>"#UserPassword")); ?>
             </div>
             <div class="form-group">
                 <?php    echo $this->Form->input('User.group_id',array('class'=>'form-control'), array('div'=>'clearfix',
