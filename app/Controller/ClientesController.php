@@ -50,8 +50,8 @@ class ClientesController extends AppController {
         $controller = new UsersController();
         if ($this->request->is('post')) {
             $this->request->data(
-                    'User.name', $this->request->data['Cliente']['apellido'].' '.$this->request->data['Cliente']['nombre']
-                   );
+                'User.name', $this->request->data['Cliente']['apellido'].' '.$this->request->data['Cliente']['nombre']
+            );
             $this->Cliente->User->create();
             if ($controller->agregar($this->request->data['User'])) {
                 $this->Cliente->create();
@@ -125,7 +125,19 @@ class ClientesController extends AppController {
 		if (!$this->Cliente->exists()) {
 			throw new NotFoundException('Invalid cliente','error');
 		}
+                
+                $cl = $this->Cliente->findById($id);
 		if ($this->Cliente->delete()) {
+                        // Controlador de Users
+                        $uController = new UsersController();
+                        if ( $uController->borrar($cl['Cliente']['user_id']) ){
+                            debug($cl['Cliente']['user_id']);
+                        }
+                        else{
+                            die("asdf");
+                        }
+                        
+                        //$uController->agregar($this->request->data['User']);
 			$this->Session->setFlash('Cliente deleted','success');
 			$this->redirect(array('action' => 'index'));
 		}

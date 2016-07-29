@@ -14,9 +14,12 @@ class Tamano extends AppModel {
  */
 	public $displayField = 'tamano';
 
-
+        public $validate = array(
+            'tamano' => 'notEmpty'
+        );
+        
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
+        
 /**
  * hasMany associations
  *

@@ -37,8 +37,8 @@
                         <li><a href="<?php echo $this->Html->url('/productos/add');?>">Nuevo Producto</a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo $this->Html->url('/categorias');?>">Ver Categorias</a></li>
-                        <li><a href="<?php echo $this->Html->url('/tamanos');?>">Ver Tamaños</a></li>
                         <li><a href="<?php echo $this->Html->url('/superficies');?>">Ver Superficies</a></li>
+                        <li><a href="<?php echo $this->Html->url('/tamanos');?>">Ver Tamaños</a></li>
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span

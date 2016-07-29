@@ -2,6 +2,7 @@
     <h3><?php echo __('Actions'); ?></h3>
     <ul class="nav nav-sidebar">
             <li><?php echo $this->Html->link(__('New Superficie'), array('action' => 'add')); ?></li>
+            <li><hr></li>
             <li><?php echo $this->Html->link(__('List Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
             <li><?php echo $this->Html->link(__('New Productos'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
     </ul>
@@ -21,11 +22,6 @@
 		<td><?php echo h($superficie['Superficie']['id']); ?>&nbsp;</td>
 		<td><?php echo h($superficie['Superficie']['tipo']); ?>&nbsp;</td>
                 <td>
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $superficie['Superficie']['id']),array(
-                            'type'=>'button',
-                            'class'=>'btn btn-success')
-                                );
-                        ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $superficie['Superficie']['id']),array(
                             'type'=>'button',
                             'class'=>'btn btn-warning')

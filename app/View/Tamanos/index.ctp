@@ -1,13 +1,14 @@
 <div class="col-md-2">
     <h3><?php echo __('Actions'); ?></h3>
-	<ul class="nav nav-sidebar">
-		<li><?php echo $this->Html->link(__('New Tamano'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Producto'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
-	</ul>
+    <ul class="nav nav-sidebar">
+            <li><?php echo $this->Html->link(__('Agregar Nuevo Tamaño'), array('action' => 'add')); ?></li>
+            <li><hr></li>
+            <li><?php echo $this->Html->link(__('List Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
+            <li><?php echo $this->Html->link(__('New Producto'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
+    </ul>
 </div>
 <div class="col-md-8">
-	<h2><?php echo __('Tamanos'); ?></h2>
+	<h2><?php echo __('Tamaños'); ?></h2>
         <div class="table-responsive">
 	<table cellpadding="0" cellspacing="0" class="table table-hover">
 	<tr>
@@ -21,11 +22,6 @@
 		<td><?php echo h($tamano['Tamano']['id']); ?>&nbsp;</td>
 		<td><?php echo h($tamano['Tamano']['tamano']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $tamano['Tamano']['id']),array(
-                            'type'=>'button',
-                            'class'=>'btn btn-success')
-                                );
-                        ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $tamano['Tamano']['id']),array(
                             'type'=>'button',
                             'class'=>'btn btn-warning')

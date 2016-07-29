@@ -14,7 +14,9 @@ class Superficie extends AppModel {
  */
 	public $displayField = 'tipo';
 
-
+        public $validate = array(
+            'tipo' => 'notEmpty'
+        );
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
@@ -38,6 +40,7 @@ class Superficie extends AppModel {
 		)
 	);
 
+        /*
 	public $hasAndBelongsToMany = array(
 		'Tamano' => array(
 			'className' => 'Tamano',
@@ -55,5 +58,6 @@ class Superficie extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+        */
 	public $actsAs = array('Containable');
 }

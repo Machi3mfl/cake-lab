@@ -4,6 +4,7 @@
     </legend>
     <ul class="nav nav-colapse">
             <li><?php echo $this->Html->link(__('Listar Tamaños'), array('action' => 'index')); ?></li>
+            <li><hr></li>
             <li><?php echo $this->Html->link(__('Listar Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
             <li><?php echo $this->Html->link(__('Nuevo Producto'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
     </ul>
@@ -18,7 +19,7 @@
                         echo $this->Form->input('tamano',array('class'=>'form-control'));
                 ?>
             </div>
-            <?php echo $this->Form->end(__('Agregar')); ?>
+            <?php echo $this->Form->end(array('label' => 'Agregar','class'=>'btn btn-primary','div' => array('class'=>'form-group') ));?>
         </div>
 </div>
 

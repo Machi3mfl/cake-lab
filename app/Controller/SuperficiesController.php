@@ -102,6 +102,6 @@ class SuperficiesController extends AppController {
 	}
 
 	private function _seterModelos() {
-		$this->set('tamanos', $this->Superficie->Tamano->find('list'));
+            // $this->set('tamanos', $this->Superficie->Tamano->find('list'));
 	}
 }

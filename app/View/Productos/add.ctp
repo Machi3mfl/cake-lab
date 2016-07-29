@@ -14,7 +14,7 @@
 	</ul>
 </div>
 <div class="col-md-8">
-<?php echo $this->Form->create('Producto'); ?>
+<?php echo $this->Form->create('Producto',["data-toggle"=>"validator","role"=>"form"]); ?>
         <legend>
             <h3><?php echo __('Agregando nuevo Producto'); ?></h3>
         </legend>
@@ -29,12 +29,11 @@
 	<?php	echo $this->Form->input('tamano_id',array('class'=>'form-control')); ?>
         </div>
    
-        <div class='checkbox'>
+        <div class='checkbox form-group'>
         <?php   echo $this->Form->input('activo',array('class'=>'form-control')); ?>
 	</div>
         
-            <?php echo $this->Form->end(__('Submit')); ?>
-        
+        <?php echo $this->Form->end(array('label' => 'Agregar Producto','class'=>'btn btn-primary','div' => array('class'=>'form-group') ));?>
     </div>
 </div>
 

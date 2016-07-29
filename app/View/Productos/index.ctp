@@ -12,7 +12,7 @@
 		<li><?php echo $this->Html->link(__('Nuevo Tamaño'), array('controller' => 'tamanos', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
-<div class="col-md-8">
+<div class="col-md-10">
         <h3><?php echo __('Productos '); ?><small> > Listado de productos</small></h3>
         <div class="table-responsive">
 	<table cellpadding="0" cellspacing="0"  class="table table-hover">
@@ -41,17 +41,17 @@
 		<td>
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $producto['Producto']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-success')
+                            'class'=>'btn btn-success  btn-xs')
                                 );
                         ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $producto['Producto']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-warning')
+                            'class'=>'btn btn-warning  btn-xs')
                             ); 
                         ?>
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $producto['Producto']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-danger'), 
+                            'class'=>'btn btn-danger  btn-xs'), 
                             __('Are you sure you want to delete # %s?', $producto['Producto']['id'])
                                 ); 
                         ?>

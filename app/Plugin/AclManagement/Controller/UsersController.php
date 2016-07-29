@@ -205,6 +205,21 @@ class UsersController extends AclManagementAppController {
             }
     }
 
+    public function borrar($id = null) {
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Usuario Invalido'));
+        }
+        if ($this->User->delete()) {
+//            $this->Session->setFlash(__('Usuario eliminado'), 'success');
+//            $this->redirect(array('action' => 'index'));
+            return true;
+        }
+//        $this->Session->setFlash(__('El usuario no se ha eliminado'), 'error');
+//        $this->redirect(array('action' => 'index'));
+        return false;
+    }
+    
     public function redirigir($group){
         if($group == 1){
             $this->redirect($this->Auth->redirect('/pedidos/'));
