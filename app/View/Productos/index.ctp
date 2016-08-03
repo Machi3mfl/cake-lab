@@ -4,10 +4,13 @@
     </legend>
 	<ul class="nav nav-sidebar">
 		<li><?php echo $this->Html->link(__('Nuevo Producto'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('Listar Categorias'), array('controller' => 'categorias', 'action' => 'index')); ?> </li>
+		<li><hr></li>
+                <li><?php echo $this->Html->link(__('Listar Categorias'), array('controller' => 'categorias', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('Nueva Categoria'), array('controller' => 'categorias', 'action' => 'add')); ?> </li>
+		<li><hr></li>
 		<li><?php echo $this->Html->link(__('Listar Superficies'), array('controller' => 'superficies', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('Nueva Superficie'), array('controller' => 'superficies', 'action' => 'add')); ?> </li>
+		<li><hr></li>
 		<li><?php echo $this->Html->link(__('Listar Tamaños'), array('controller' => 'tamanos', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('Nuevo Tamaño'), array('controller' => 'tamanos', 'action' => 'add')); ?> </li>
 	</ul>

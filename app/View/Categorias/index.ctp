@@ -4,6 +4,7 @@
     </legend>
     <ul class="nav nav-sidebar">
             <li><?php echo $this->Html->link(__('New Categoria'), array('action' => 'add')); ?></li>
+            <li><hr></li>
             <li><?php echo $this->Html->link(__('List Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
             <li><?php echo $this->Html->link(__('New Producto'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
     </ul>
@@ -25,11 +26,6 @@
 		<td><?php echo h($categoria['Categoria']['id']); ?>&nbsp;</td>
 		<td><?php echo h($categoria['Categoria']['nombre']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $categoria['Categoria']['id']),array(
-                            'type'=>'button',
-                            'class'=>'btn btn-success')
-                                );
-                        ?>
 			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $categoria['Categoria']['id']),array(
                             'type'=>'button',
                             'class'=>'btn btn-warning')

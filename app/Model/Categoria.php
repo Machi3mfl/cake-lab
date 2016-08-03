@@ -16,7 +16,9 @@ class Categoria extends AppModel {
  */
 	public $displayField = 'nombre';
 
-
+        public $validate = array(
+            'tipo' => 'notEmpty'
+        );
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
@@ -46,6 +48,7 @@ class Categoria extends AppModel {
  *
  * @var array
  */
+        /*
 	public $hasAndBelongsToMany = array(
 		'Superficie' => array(
 			'className' => 'Superficie',
@@ -63,5 +66,7 @@ class Categoria extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+         * 
+         */
 	public $actsAs = array('Containable');
 }

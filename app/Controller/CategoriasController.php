@@ -102,7 +102,7 @@ class CategoriasController extends AppController {
 		if (!$this->Categoria->exists()) {
 			throw new NotFoundException('Invalid categoria','error');
 		}
-		$this->request->allowMethod('post', 'delete');
+		// $this->request->allowMethod('post', 'delete');
 		if ($this->Categoria->delete()) {
 			$this->Session->setFlash('The categoria has been deleted.','success');
 		} else {
@@ -112,6 +112,6 @@ class CategoriasController extends AppController {
 	}
 
 	private function _setearModelos() {
-		$this->set('superficies', $this->Categoria->Superficie->find('list'));
+		// $this->set('superficies', $this->Categoria->Superficie->find('list'));
 	}
 }
