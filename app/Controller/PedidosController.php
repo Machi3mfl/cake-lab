@@ -112,18 +112,19 @@ class PedidosController extends AppController {
       $guardados=array();
       $files=array(); // PARA DESPUES : GUARDAR FILES TEMPORALES Y LUEGO GUARDAR EN BD - USAR TMP EN FORMULARIO
       $this->inicializarPedido();
+
       if (!empty($this->request->data)){ // SI HAY FILES EN REQUEST DATA
-        foreach($this->request->data["Upload"]["photo"] as $file) { // por cada photo setea un file
-          $this->Upload->set(array('photo' => $file));
-          $photo = $this->Upload->data;
-          $photo["Upload"]["pedido_id"]= $this->Session->read('pedido_id');
-          $photo["Upload"]["photo_dir"]= $this->Session->read('pedido_id');
-          $this->Upload->create();
-          if ($this->Upload->save($photo)) { // guarda el file en BD
-            $ultimo = $this->Upload->getLastInsertId(); //obtiene el ultimo id , para crear una pila
-            array_push($guardados,$ultimo); //guarda en array los id files guardados
-          }
-        } /**** fin foreach ***/
+          foreach($this->request->data["Upload"]["photo"] as $file) { // por cada photo setea un file
+            $this->Upload->set(array('photo' => $file));
+            $photo = $this->Upload->data;
+            $photo["Upload"]["pedido_id"]= $this->Session->read('pedido_id');
+            $photo["Upload"]["photo_dir"]= $this->Session->read('pedido_id');
+            $this->Upload->create();
+            if ($this->Upload->save($photo)) { // guarda el file en BD
+              $ultimo = $this->Upload->getLastInsertId(); //obtiene el ultimo id , para crear una pila
+              array_push($guardados,$ultimo); //guarda en array los id files guardados
+            }
+          } /**** fin foreach ***/
         $imgs=$this->listarGuardados($guardados);
         if (!empty($this->Session->read('imagenes'))){ //SI YA HAY IMAGENES CARGADAS ,lee las imagenes de la session,las apila y guarda
           $ant = $this->Session->read('imagenes');
@@ -134,16 +135,15 @@ class PedidosController extends AppController {
           $this->set('imgs',$ant);
           $this->set('cantidad',count($ant));
         }else{ // SI NO HAY IMAGENES CARGADAS -- solo guarda
-            $this->Session->write('imagenes',$imgs);
-            $this->set('imgs',$imgs);
+          $this->Session->write('imagenes',$imgs);
+          $this->set('imgs',$imgs);
         }
       $this->setearModelos();
-    }elseif ($this->Session->check('imagenes')){ //Muestra si se recarga la pagina
+    } elseif ($this->Session->check('imagenes')){ //Muestra si se recarga la pagina
         $this->set('imgs',$this->Session->read('imagenes'));
         $this->set('cantidad',count($this->Session->read('imagenes')));
         $this->setearModelos();
       }
-      debug($this->Session->read('imagenes'));
     }
 
 
@@ -177,12 +177,14 @@ class PedidosController extends AppController {
       $this->loadModel('Upload');
       $this->autoRender=false;
       $upload_id = $this->request->data['upload_id'];
+
       if (!empty($upload_id)){
         $upload = $this->Upload->find('first', array(
           "conditions" => array(
             'id' => $upload_id)
           )
         );
+
       $upload['Upload']['duplicado']=true;
       $this->agregarASession($upload);
       return json_encode($upload);

@@ -10,3 +10,4 @@
 /app/webroot/files/uploads/
 nbproject/private/private.xml
 app/Console/myapp/Config/database.php
+*.jpg

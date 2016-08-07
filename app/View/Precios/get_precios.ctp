@@ -16,7 +16,8 @@
       <tr><th>Archivo</th><th>Cantidad</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Precio Unitario</th></tr>
     </thead>
       <tbody>
-        <?php if(isset($precios) && isset($data)) :  {
+        <?php
+        if(isset($precios) && isset($data)) :  {
           $cant=0;
           $copias_total=0;
           $importe=0;
@@ -31,13 +32,17 @@
               ?>
             </td>
               <?php echo $this->Form->input('Copias.'.$cant.'.upload_id',array('type'=> 'hidden','value'=>$data['Upload'][$cant]['id'])); ?>
-            <td id='<?php echo 'categoria'.$cant; ?>'><?php echo $precio['productos']['categoria_id'] ?></td>
-            <td id='<?php echo 'papel'.$cant; ?>'><?php echo $precio['productos']['superficie_id'] ?></td>
-            <td id='<?php echo 'tamano'.$cant; ?>'><?php echo $precio['productos']['tamano_id'] ?></td>
+            <td id='<?php echo 'categoria'.$cant; ?>'><?php echo $productos[$cant]['Categoria']['nombre'] ?></td>
+            <td id='<?php echo 'papel'.$cant; ?>'><?php echo $productos[$cant]['Superficie']['tipo'] ?></td>
+            <td id='<?php echo 'tamano'.$cant; ?>'><?php echo $productos[$cant]['Tamano']['tamano']?></td>
             <td id='<?php echo 'borde'.$cant; ?>'>
               <?php
                 echo $this->Form->input('Copias.'.$cant.'.borde',array('type'=> 'hidden','value'=>$data['Copias'][$cant]['borde']));
-                echo $data['Copias'][$cant]['borde'];
+                if ($data['Copias'][$cant]['borde'] == 0){
+                  echo 'Sí';
+                } else {
+                  echo 'No';
+                }
               ?>
             </td>
             <td id='<?php echo 'precio'.$cant; ?>'>
