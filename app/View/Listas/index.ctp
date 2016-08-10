@@ -4,6 +4,7 @@
     </legend>
     <ul class="nav nav-sidebar">
             <li><?php echo $this->Html->link(__('Nueva Lista'), array('action' => 'add')); ?></li>
+            <li><hr></li>
             <li><?php echo $this->Html->link(__('Listar Precios'), array('controller' => 'precios', 'action' => 'index')); ?> </li>
             <li><?php echo $this->Html->link(__('Nuevos Precios'), array('controller' => 'precios', 'action' => 'add')); ?> </li>
     </ul>

@@ -4,8 +4,10 @@
     </legend>
     <ul class="nav nav-sidebar">
             <li><?php echo $this->Html->link(__('Nuevo Precio'), array('action' => 'add')); ?></li>
+            <li><hr></li>
             <li><?php echo $this->Html->link(__('Ver Listas'), array('controller' => 'listas', 'action' => 'index')); ?> </li>
             <li><?php echo $this->Html->link(__('Nueva Lista'), array('controller' => 'listas', 'action' => 'add')); ?> </li>
+            <li><hr></li>
             <li><?php echo $this->Html->link(__('Listar Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
             <li><?php echo $this->Html->link(__('Nuevo Productos'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
     </ul>

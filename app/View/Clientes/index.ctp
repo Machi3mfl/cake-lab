@@ -3,7 +3,8 @@
         <h3><?php echo __('Acciones'); ?></h3>
     </legend>
     <ul class="nav nav-sidebar">
-            <li><?php echo $this->Html->link(__('Nuevo Cliente'), array('action' => 'add'),['class' => 'btn btn-primary', 'style'=>'text-align: left;']); ?></li>
+            <li><?php echo $this->Html->link(__('Nuevo Cliente'), array('action' => 'add')); ?></li>
+            <li><hr></li>
             <li><?php echo $this->Html->link(__('Listar Usuario'), array('controller' => 'admin/users', 'action' => 'index')); ?> </li>
             <li><?php echo $this->Html->link(__('Nuevo Usuario'), array('controller' => 'admin/users', 'action' => 'add')); ?> </li>
     </ul>

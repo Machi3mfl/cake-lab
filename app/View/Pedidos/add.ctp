@@ -4,17 +4,17 @@
     <div class="col-xs-12">
       <ul class="nav nav-pills nav-justified thumbnail setup-panel">
           <li class="active">
-						<a href="#step-1">
-							<h4 class="list-group-item-heading">Paso 1</h4>
-              <p class="list-group-item-text">Añadir copias</p>
+                <a href="#step-1">
+                    <h4 class="list-group-item-heading">Paso 1</h4>
+                    <p class="list-group-item-text">Añadir copias</p>
           	</a>
-					</li>
-          <li class="disabled">
-						<a href="#step-2">
-              <h4 class="list-group-item-heading">Paso 2</h4>
-              <p class="list-group-item-text">Confirmación del pedido</p>
-          	</a>
-					</li>
+            </li>
+            <li class="disabled">
+                <a href="#step-2">
+                  <h4 class="list-group-item-heading">Paso 2</h4>
+                  <p class="list-group-item-text">Confirmación del pedido</p>
+                </a>
+            </li>
       </ul>
     </div>
 	</div>
@@ -92,36 +92,36 @@
 					        </td>
 									<td>
 						        <?php echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array(
-											'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control'));
-										?>
+                                                                'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control'));
+                                                        ?>
 						      </td>
 						      <td>
-										<?php echo $this->Form->select('Upload.Copias.'.$cant.'.papel', $superficies ,array(
-											'name' => 'data[Copias]['.$cant.'][papel]','class'=>'form-control', 'required'));
-										?>
-									</td>
+                                                        <?php echo $this->Form->select('Upload.Copias.'.$cant.'.papel', $superficies ,array(
+                                                                'name' => 'data[Copias]['.$cant.'][papel]','class'=>'form-control', 'required'));
+                                                        ?>
+                                                        </td>
 						      <td>
-										<?php echo $this->Form->select('Upload.Copias.'.$cant.'.tamano', $tamanos ,array(
-											'name' => 'data[Copias]['.$cant.'][tamano]','class'=>'form-control'));
-										?>
-									</td>
+                                                            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.tamano', $tamanos ,array(
+                                                                    'name' => 'data[Copias]['.$cant.'][tamano]','class'=>'form-control'));
+                                                            ?>
+                                                    </td>
 						      <td>
-										<?php echo $this->Form->select('Upload.Copias.'.$cant.'.borde', array("Sí","No") ,array(
-											'name' => 'data[Copias]['.$cant.'][borde]','class'=>'form-control'));
-										?>
-									</td>
+                                                            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.borde', array("Sí","No") ,array(
+                                                                    'name' => 'data[Copias]['.$cant.'][borde]','class'=>'form-control'));
+                                                            ?>
+                                                    </td>
 						      <td>
-										<?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array(
-											'name' => 'data[Copias]['.$cant.'][cantidad]','class'=>'form-control',
-											'placeholder'=>'Ingrese cantidad','div' => false,'label'=> false));
-										?>
-									</td>
+                                                            <?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array(
+                                                                    'name' => 'data[Copias]['.$cant.'][cantidad]','class'=>'form-control',
+                                                                    'placeholder'=>'Ingrese cantidad','div' => false,'label'=> false));
+                                                            ?>
+                                                    </td>
 						      <td>
-										<?php if($img['Upload']['duplicado']!='false') : { ?>
-											<button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-										<?php }
-											endif; ?>
-										<button id="eliminarUpload<?php echo $cant ?>" type="button" class="btn btn-danger borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                                        <?php if($img['Upload']['duplicado']!='false') : { ?>
+                                                                <button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                        <?php }
+                                                                endif; ?>
+                                                        <button id="eliminarUpload<?php echo $cant ?>" type="button" class="btn btn-danger borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 						      </td>
 								</tr>
 								<?php
@@ -148,8 +148,11 @@
 			</div><br>
 			<button id="activate-step-2" type="button" class="btn btn-primary btn-lg pull-right">Siguiente</button>
 		</div> <!-- COL-MD-12 COL-XS-12 - -->
-	</div> <!-- FIN PASO 1 ------------------------------->
-  <div class="row setup-content" id="step-2"> <!-- PASO 2 -------------------->
+	</div> 
+        <!-- FIN PASO 1 ------------------------------->
+        
+        <!-- PASO 2 -------------------->
+  <div class="row setup-content" id="step-2"> 
     <div class="col-xs-12 col-md-12">
       <h3 class="text-center well">Completando pedido</h3>
       <legend><h3> Paso 2 <small>: Confirmación del pedido</small></h3></legend>
@@ -310,8 +313,8 @@ $(document).ready(function() {
   });
   $('ul.setup-panel li.active a').trigger('click');
   $('#activate-step-2').on('click', function(e) {
-  $('ul.setup-panel li:eq(1)').removeClass('disabled');
-  $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+    $('ul.setup-panel li:eq(1)').removeClass('disabled');
+    $('ul.setup-panel li a[href="#step-2"]').trigger('click');
   });
 });
 </script>

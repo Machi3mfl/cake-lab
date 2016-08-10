@@ -16,7 +16,23 @@ class Producto extends AppModel {
  */
 	public $displayField = 'id';
 
-
+        public $validate = array(
+                        'categoria_id' => array(
+                                'notEmpty' => array(
+                                        'rule' => array('notEmpty')
+                                ),
+                        ),
+                        'superficie_id' => array(
+                                'notEmpty' => array(
+                                        'rule' => array('notEmpty')
+                                ),
+                        ),
+                        'tamano_id' => array(
+                                'notEmpty' => array(
+                                        'rule' => array('notEmpty')
+                                ),
+                        ),
+            );
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
