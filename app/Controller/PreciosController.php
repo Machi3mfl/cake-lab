@@ -126,5 +126,6 @@ class PreciosController extends AppController {
 		}
 		$this->set("precios", $precios);
 		$this->set("data", $this->request->data);
+		$this->set("productos", $productos);
   }
 }
