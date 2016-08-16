@@ -238,7 +238,7 @@ class ClientesController extends AppController {
         $cliente = $this->Cliente->findById($id);
         $user = $this->Cliente->User->find('first',$cliente['Cliente']['user_id']);
         $cliente['User']= $user['User'];
-        $this->Session->write('cliente_id',$cliente['Cliente']['id']);
+        $this->Session->write('cliente_id',$cliente['Cliente']['id']); //guarda id del cliente en Session
         return json_encode($cliente);
       }
 

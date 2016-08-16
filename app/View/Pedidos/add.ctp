@@ -19,12 +19,23 @@
     </div>
 	</div>
   <div class="row setup-content" id="step-1">
-	<!--              PASO 1 --------------------------->
+	<!-- ------ PASO 1 --------------------------->
     <div class="col-xs-12 col-md-12">
       <h3 class="text-center well"><?php echo __('Agregando nuevo Pedido'); ?></h3>
       <legend><h3> Paso 1 <small>: Seleccionar cliente</small></h3></legend>
       <div class="col-xs-12 form-inline" > Buscador de clientes:
-        <input id="buscador" type="text" class="form-control">
+          <?php 
+          (string) $cid = $this->Session->read('cliente_id'); 
+          if ( $cid != ''){
+              ?>
+          <script>
+              jQuery(document).ready(function(){
+                  buscarCliente(<?php echo $cid; ?>);          
+              });
+          </script>
+          <?php
+          } ?>
+        <input id="buscador" type="text" class="form-control" value="">
         <button type="button" class="btn btn-info" onClick="habilitarBuscador()">Cambiar</button>
       </div>
       <div class="row">
@@ -49,24 +60,30 @@
         <br>
 		    <div id="resultados" > <!--******************** DIV IMAGENES AGREGADAS ***************-->
 	      <?php
-				  $cantidad = count($this->Session->read('imagenes'));
+                      $cantidad = count($this->Session->read('imagenes'));
 		      if(isset($cantidad)) :
 		        echo $this->Form->input('cantidad',array('value'=>$cantidad,'hidden'=> true,'label'=>false));
-		      endif;
+                          $disabled_button = "disabled";
+                      endif;
+                      if ($cantidad > 0):
+                        $disabled_button = '';
+                      else:
+                        $disabled_button = 'disabled';
+                      endif;
 		      ?>
 		      <div>
 		        <legend><h3>Imagenes Agregadas</h3></legend>
 		      </div>
 		      <br>
-					<?php if(isset($imgs)) :  {?>
-				    <!-- Table -->
-						<?php echo $this->Form->create('Upload.Copias',array('data-toggle' => 'validator', 'type' => 'file','class'=>'form-inline','url' =>
-							array('controller' => 'pedidos','action' => 'confirmar')));
-						?>
+                                <?php if(isset($imgs)) :  {?>
+                             <!-- Table -->
+                                    <?php echo $this->Form->create('Upload.Copias',array('data-toggle' => 'validator', 'type' => 'file','class'=>'form-inline','url' =>
+                                        array('controller' => 'pedidos','action' => 'confirmar')));
+                                    ?>
 				    <div class="table-responsive">
 				    <table class="table table-hover">
 			        <thead>
-			          <tr><th>Miniatura</th><th>Nombre</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Cantidad</th><th>Acciones</th>			          </tr>
+			          <tr><th>Miniatura</th><th style="width:120px;">Nombre</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Cantidad</th><th>Acciones</th>			          </tr>
 			      	</thead>
 				      <tbody>
 						    <?php }
@@ -81,39 +98,13 @@
 				            <?php echo $this->Html->image('../files/thumbs/'.$img['Upload']['photo_dir'].'/thumb_'.$img['Upload']['photo'],
 				                        array( 'id'=>'imageresource',"class"=>'miniatura', 'alt' => $img['Upload']['photo'],'style' => 'cursor:pointer !important;'));	?>
 				        	</td>
-					        <td>
+					        <td class="pre" style="width:180px">
 				            <?php echo $this->Form->input('Upload.'.$cant.'.photo',array('name' => 'data[Upload]['.$cant.'][photo]',
 											'value'=>$img['Upload']['photo'],'hidden'=> true,'label'=>false,'div'=> false));
 			            		echo $img['Upload']['photo'];	?>
 					        </td>
 									<td>
 						        <?php echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array(
-<<<<<<< HEAD
-                                                                'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control'));
-                                                        ?>
-						      </td>
-						      <td>
-                                                        <?php echo $this->Form->select('Upload.Copias.'.$cant.'.papel', $superficies ,array(
-                                                                'name' => 'data[Copias]['.$cant.'][papel]','class'=>'form-control', 'required'));
-                                                        ?>
-                                                        </td>
-						      <td>
-                                                            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.tamano', $tamanos ,array(
-                                                                    'name' => 'data[Copias]['.$cant.'][tamano]','class'=>'form-control'));
-                                                            ?>
-                                                    </td>
-						      <td>
-                                                            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.borde', array("Sí","No") ,array(
-                                                                    'name' => 'data[Copias]['.$cant.'][borde]','class'=>'form-control'));
-                                                            ?>
-                                                    </td>
-						      <td>
-                                                            <?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array(
-                                                                    'name' => 'data[Copias]['.$cant.'][cantidad]','class'=>'form-control',
-                                                                    'placeholder'=>'Ingrese cantidad','div' => false,'label'=> false));
-                                                            ?>
-                                                    </td>
-=======
 											'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control'));	?>
 						      </td>
 						      <td>
@@ -133,7 +124,6 @@
 											'name' => 'data[Copias]['.$cant.'][cantidad]','class'=>'form-control',
 											'placeholder'=>'Ingrese cantidad','div' => false,'label'=> false));	?>
 									</td>
->>>>>>> 534a228c9ede68efa8e025479edba6d808755c69
 						      <td>
                                                         <?php if($img['Upload']['duplicado']!='false') : { ?>
                                                                 <button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
@@ -164,7 +154,7 @@
 		  	</div> <!-- div resultados -->
 
 			</div><br>
-			<button id="activate-step-2" type="button" class="btn btn-primary btn-lg pull-right">Siguiente</button>
+			<button id="activate-step-2" type="button" class="<?php echo $disabled_button; ?> btn btn-primary btn-lg pull-right">Siguiente</button>
 		</div> <!-- COL-MD-12 COL-XS-12 - -->
 	</div> 
         <!-- FIN PASO 1 ------------------------------->
@@ -177,7 +167,7 @@
     	<div class="col-md-6">
         <blockquote>Datos del Cliente
           <ul type="none" id="datosCliente" class="datosCliente">
-						<input id="ClienteId" name="data[Pedido][cliente_id]" style="visibility:hidden">
+						<input id="ClienteId" name="data[Pedido][cliente_id]" style="visibility:hidden_">
             <li id="clienteNombre"></li>
 						<li><small>Cliente - Apellido Nombre</small></li>
             <li id="clienteDir"></li>
@@ -221,6 +211,7 @@
 <script>
 $(document).ready(function(){
 	 /******** JQUERY AUTOCOMPLETE ***************/
+
   $('#buscador').autocomplete({
     minLength: 2,
     delay: 2,
@@ -240,7 +231,7 @@ $(document).ready(function(){
       if($valor!=null && $valor!='No hay resultados'){
         $buscador.val(ui.item.label);
         $buscador.prop('disabled',true);
-				buscarCliente(ui.item.value);
+        buscarCliente(ui.item.value);
         $('.disabled-div').fadeOut();
       }
       else{
@@ -266,7 +257,7 @@ function buscarCliente($id){
 
 function llenarCliente($datos){
 	var cli= $("#ClienteId");
-  var nombre= $("#clienteNombre");
+        var nombre= $("#clienteNombre");
 	var dir = $("#clienteDir");
 	var contacto = $("#clienteContacto");
 
@@ -274,13 +265,21 @@ function llenarCliente($datos){
 	nombre.text($datos.Cliente.apellido+' '+$datos.Cliente.nombre+'');
 	dir.text($datos.Cliente.calle+' '+$datos.Cliente.numero+' Piso/Dpto: '+$datos.Cliente.piso);
 	contacto.text($datos.User.email+' '+$datos.Cliente.telefono);
+        
+        // Si el buscador esta vacio (porque llenarCliente se llamo al haber un Cliente_id en sesion) lo relleno con el nombre.
+        if($("#buscador").val() == ""){
+            nom = $datos.Cliente.apellido+' '+$datos.Cliente.nombre+''; 
+            $("#buscador").val(nom.toUpperCase());
+            $('#paso-2 .disabled-div').fadeOut();
+        }
+        
 }
 
 function habilitarBuscador(){
-  $buscador= $("#buscador");
-  $buscador.prop('disabled',false);
-	$buscador.val('');
-  $('#paso-2 .disabled-div').fadeIn();
+    $buscador = $("#buscador");
+    $buscador.prop('disabled',false);
+    $buscador.val('');
+    $('#paso-2 .disabled-div').fadeIn();
 }
 </script>
 <script>
@@ -401,26 +400,24 @@ function borrar(id,posicion){
 	});
 }
 
-</script>
-<script>
-	$(".miniatura").bind("click",function(event){
-		var url=$(this).attr('src');
-		link=url.replace('/thumbs/','/pedidos/');
-		linkpedido=link.replace('thumb_','');
-		var nombre=$(this).attr('alt');
+    $(".miniatura").bind("click",function(event){
+            var url=$(this).attr('src');
+            link=url.replace('/thumbs/','/pedidos/');
+            linkpedido=link.replace('thumb_','');
+            var nombre=$(this).attr('alt');
 
-		asignarImagen(linkpedido,nombre);
-		$('#imgModal').modal('show');
-	});
+            asignarImagen(linkpedido,nombre);
+            $('#imgModal').modal('show');
+    });
 
     if ( $('#buscador').val() ){
         $('#paso-2 .disabled-div').hide();
     }
 
-	function asignarImagen(url,nombre){
-		$("#imgModal .modal-title").text(nombre);
-		$("#imgModal img").attr('src',url);
-	}
+    function asignarImagen(url,nombre){
+            $("#imgModal .modal-title").text(nombre);
+            $("#imgModal img").attr('src',url);
+    }
 </script>
 <?php echo $this->Html->script('Pedidos/add');?>
 <style>
