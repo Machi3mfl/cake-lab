@@ -15,9 +15,19 @@ class PedidosController extends AppController {
  *
  * @return void
  */
+    public $components = array('Paginator');
+
+    public $paginate = array(
+        'order' => array(
+            'Pedido.id' => 'desc'
+        )
+    );
+    
     public function index() {
+      $this->Paginator->settings = $this->paginate; 
+        
       $this->Pedido->recursive = 0;
-      $this->set('pedidos', $this->paginate());
+      $this->set('pedidos', $this->Paginator->paginate());
     }
 
 /**
