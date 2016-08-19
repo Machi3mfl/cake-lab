@@ -24,13 +24,13 @@
       <h3 class="text-center well"><?php echo __('Agregando nuevo Pedido'); ?></h3>
       <legend><h3> Paso 1 <small>: Seleccionar cliente</small></h3></legend>
       <div class="col-xs-12 form-inline" > Buscador de clientes:
-          <?php 
-          (string) $cid = $this->Session->read('cliente_id'); 
+          <?php
+          (string) $cid = $this->Session->read('cliente_id');
           if ( $cid != ''){
               ?>
           <script>
               jQuery(document).ready(function(){
-                  buscarCliente(<?php echo $cid; ?>);          
+                  buscarCliente(<?php echo $cid; ?>);
               });
           </script>
           <?php
@@ -78,78 +78,76 @@
 		        <legend><h3>Imagenes Agregadas</h3></legend>
 		      </div>
 		      <br>
-                                <?php if(isset($imgs)) :  {?>
-                             <!-- Table -->
-                                    
+          <?php if(isset($imgs)) :  {?>
+       <!-- Table -->
+
 				    <div class="table-responsive">
 				    <table class="table table-hover">
 			        <thead>
 			          <tr><th>Miniatura</th><th style="width:120px;">Nombre</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Cantidad</th><th>Acciones</th>			          </tr>
 			      	</thead>
 				      <tbody>
-                                    <?php }
-                                    $cant = 0;
-                                    foreach($imgs as $img) : ?>
-                                    <tr id="copia<?php echo $cant?>">
-                                <td>
-                            <?php echo $this->Form->input('Upload.'.$cant.'.id',array('name' => 'data[Upload]['.$cant.'][id]',
-                                                                        'value'=>$img['Upload']['id'],'hidden'=> true,'label'=>false, 'required'=>true));	?>
-                                    
-                            <?php echo $this->Form->input('Upload.'.$cant.'.photo_dir',array('name' => 'data[Upload]['.$cant.'][photo_dir]',
-                                                                        'value'=>$img['Upload']['photo_dir'],'hidden'=> true,'label'=>false,'div'=> false, 'class'=> 'photoDir')); ?>
-                            <?php echo $this->Html->image('../files/thumbs/'.$img['Upload']['photo_dir'].'/thumb_'.$img['Upload']['photo'],
-                                        array( 'id'=>'imageresource',"class"=>'miniatura', 'alt' => $img['Upload']['photo'],'style' => 'cursor:pointer !important;'));	?>
-                                </td>
-                                <td class="pre" style="width:180px">
-                            <?php echo $this->Form->input('Upload.'.$cant.'.photo',array('name' => 'data[Upload]['.$cant.'][photo]',
-                                                                        'value'=>$img['Upload']['photo'],'hidden'=> true,'label'=>false,'div'=> false));
-                                echo $img['Upload']['photo'];	?>
-                                </td>
-                                      <td><div class="form-group">
-                                        <?php echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array(
-                                                                        'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control', 'required'=>true));	?>
-                                     </div> </td>
-                                      <td><div class="form-group">
-                                            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.papel', $superficies ,array(
-                                                                        'name' => 'data[Copias]['.$cant.'][papel]','class'=>'form-control', 'required'));	?>
-                                                       </div> </td>
-                                      <td><div class="form-group">
-                                            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.tamano', $tamanos ,array(
-                                                                        'name' => 'data[Copias]['.$cant.'][tamano]','class'=>'form-control', 'required')); ?>
-                                                      </div>  </td>
-                                      <td><div class="form-group">
-                                            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.borde', array("Sí","No") ,array(
-                                                                        'name' => 'data[Copias]['.$cant.'][borde]','class'=>'form-control', 'required'));	?>
-                                                        </div></td>
-                                      <td>
-                                          <div class="form-group">
-                                            <?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array(
-                                                                        'name' => 'data[Copias]['.$cant.'][cantidad]','type'=>'number','value'=>'0','class'=>'form-control','div' => false,'label'=> false, 'required'=>true));	?>
-                                        </div>
-                                          </td>
-                                      <td>
-                                    <?php if($img['Upload']['duplicado']!='false') : { ?>
-                                        <button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    <?php }
-                                                endif; ?>
-                                        <button id="eliminarUpload<?php echo $cant ?>" type="button" class="btn btn-danger borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                                      </td>
-                                                </tr>
-                                        
-                                      
-                                      
-                                        <?php
-                                                        $cant++;
-                                                endforeach;
-                                        ?>
-                                        <script>
-                                            jQuery(document).ready(function(){
-                                                $('#UploadCopiasAddForm').submit(false);
-                                            });
-                                        </script>
-                                        <?php
-                                                else:
-                                        ?>
+		          <?php }
+		          $cant = 0;
+		          foreach($imgs as $img) : ?>
+		          <tr id="copia<?php echo $cant?>">
+		      <td>
+					  <?php echo $this->Form->input('Upload.'.$cant.'.id',array('name' => 'data[Upload]['.$cant.'][id]',
+					      'value'=>$img['Upload']['id'],'hidden'=> true,'label'=>false, 'required'=>true,'class'=> 'id'));	?>
+					  <?php echo $this->Form->input('Upload.'.$cant.'.photo_dir',array('name' => 'data[Upload]['.$cant.'][photo_dir]',
+					      'value'=>$img['Upload']['photo_dir'],'hidden'=> true,'label'=>false,'div'=> false, 'class'=> 'photoDir')); ?>
+					  <?php echo $this->Html->image('../files/thumbs/'.$img['Upload']['photo_dir'].'/thumb_'.$img['Upload']['photo'],
+					  	array( 'id'=>'imageresource',"class"=>'miniatura', 'alt' => $img['Upload']['photo'],'style' => 'cursor:pointer !important;'));	?>
+					</div>
+		      </td>
+		      <td class="pre" style="width:180px"><div class="form-group">
+		  <?php echo $this->Form->input('Upload.'.$cant.'.photo',array('name' => 'data[Upload]['.$cant.'][photo]',
+		                                              'value'=>$img['Upload']['photo'],'hidden'=> true,'label'=>false,'div'=> false));
+		      echo $img['Upload']['photo'];	?>
+
+		      </td>
+		            <td><div class="form-group">
+		              <?php echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array(
+		                  'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control', 'required'=>true));	?>
+		           </div> </td>
+		            <td><div class="form-group">
+		              <?php echo $this->Form->select('Upload.Copias.'.$cant.'.papel', $superficies ,array(
+		                  'name' => 'data[Copias]['.$cant.'][papel]','class'=>'form-control', 'required'));	?>
+		                             </div> </td>
+		            <td><div class="form-group">
+		              <?php echo $this->Form->select('Upload.Copias.'.$cant.'.tamano', $tamanos ,array(
+		                  'name' => 'data[Copias]['.$cant.'][tamano]','class'=>'form-control', 'required')); ?>
+		                            </div>  </td>
+		            <td><div class="form-group">
+		            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.borde', array("Sí","No") ,array(
+		                	'name' => 'data[Copias]['.$cant.'][borde]','class'=>'form-control', 'required'));	?>
+		                              </div></td>
+		            <td>
+		                <div class="form-group">
+		                <?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array(
+		                    'name' => 'data[Copias]['.$cant.'][cantidad]','type'=>'number','value'=>'0','class'=>'form-control','div' => false,'label'=> false, 'required'=>true));	?>
+		              </div>
+		                </td>
+		            <td>
+		          <?php if($img['Upload']['duplicado']!='false') : { ?>
+		              <button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+		          <?php }
+		                      endif; ?>
+		              <button id="eliminarUpload<?php echo $cant ?>" type="button" class="btn btn-danger borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+		            </td>
+		          </tr>
+              <?php
+              	$cant++;
+                endforeach;
+              ?>
+		              <script>
+		                  jQuery(document).ready(function(){
+		                      $('#UploadCopiasAddForm').submit(false);
+		                  });
+		              </script>
+		              <?php
+		                else:
+		              ?>
 				    	<!-- Drop Zone -->
 				      <div class="upload-drop-zone" id="drop-zone">
 				        No se han subido fotos todavia. Seleccione las imagenes que desea subir a traves del botón examinar.
@@ -160,20 +158,17 @@
 			      	</tbody>
 			    	</table> <!-- div tabla imagenes -->
 		  		</div> <!--- TABLA PARA IMAGENES SUBIDAS - ----->
-                                                                        <button id="activate-step-2" type="submit" class="<?php echo $disabled_button; ?> btn btn-primary btn-lg pull-right">Siguiente</button>
-
- <?php                                               $this->Form->end(); ?>
-                        <div class="disabled-div" style="display:block;"></div>
-
+          <button id="activate-step-2" type="submit" class="<?php echo $disabled_button; ?> btn btn-primary btn-lg pull-right">Siguiente</button>
+ 				<?php $this->Form->end(); ?>
+        <div class="disabled-div" style="display:block;"></div>
 		  	</div> <!-- div resultados -->
-
 			</div><br>
 		</div> <!-- COL-MD-12 COL-XS-12 - -->
-	</div> 
+	</div>
         <!-- FIN PASO 1 ------------------------------->
-        
+
         <!-- PASO 2 -------------------->
-  <div class="row setup-content" id="step-2"> 
+  <div class="row setup-content" id="step-2">
     <div class="col-xs-12 col-md-12">
       <h3 class="text-center well">Completando pedido</h3>
       <legend><h3> Paso 2 <small>: Confirmación del pedido</small></h3></legend>
@@ -270,7 +265,7 @@ function buscarCliente($id){
 
 function llenarCliente($datos){
 	var cli= $("#ClienteId");
-        var nombre= $("#clienteNombre");
+  var nombre= $("#clienteNombre");
 	var dir = $("#clienteDir");
 	var contacto = $("#clienteContacto");
 
@@ -278,14 +273,14 @@ function llenarCliente($datos){
 	nombre.text($datos.Cliente.apellido+' '+$datos.Cliente.nombre+'');
 	dir.text($datos.Cliente.calle+' '+$datos.Cliente.numero+' Piso/Dpto: '+$datos.Cliente.piso);
 	contacto.text($datos.User.email+' '+$datos.Cliente.telefono);
-        
-        // Si el buscador esta vacio (porque llenarCliente se llamo al haber un Cliente_id en sesion) lo relleno con el nombre.
-        if($("#buscador").val() == ""){
-            nom = $datos.Cliente.apellido+' '+$datos.Cliente.nombre+''; 
-            $("#buscador").val(nom.toUpperCase());
-            $('#paso-2 .disabled-div').fadeOut();
-        }
-        
+
+  // Si el buscador esta vacio (porque llenarCliente se llamo al haber un Cliente_id en sesion) lo relleno con el nombre.
+  if($("#buscador").val() == ""){
+      nom = $datos.Cliente.apellido+' '+$datos.Cliente.nombre+'';
+      $("#buscador").val(nom.toUpperCase());
+      $('#paso-2 .disabled-div').fadeOut();
+  }
+
 }
 
 function habilitarBuscador(){
@@ -351,13 +346,13 @@ $(document).ready(function() {
 $(document).ready(function(){
 	$(".table-responsive .copiar").bind("click",function(event){
 		var id=$(this).attr('id');
-		var cantidad=$("#resultados #cantidad").val();
+		var cantidad=$("#resultados #UploadCopiasCantidad").val();
 		var posicion = this.id.replace('copiarUpload','');
 		duplicar(id.replace('copiarUpload','copia'),cantidad,posicion);
 		guardarDuplicados(posicion);
 		var idnombre,name;
-		//cambia valor de id incrementandolo
-		$("#copia"+cantidad).children().each(function(){
+		//incrementa el valor del id y name del tr clonado
+		$("#copia"+cantidad+" td").children().each(function(){
 			if ($(this).children().attr('id')){
 				idnombre = $(this).children().attr('id');
 				idnombre= idnombre.replace(posicion,cantidad);
@@ -369,11 +364,13 @@ $(document).ready(function(){
 				$(this).children().attr('name',name);
 			}
 		});
+	$("#copia"+cantidad+" td .id").attr('name','data[Upload]['+cantidad+'][id]');
+	$("#copia"+cantidad+" td .id").attr('id','Upload'+cantidad+'Id');
 	$("#copia"+cantidad+" td .photoDir").attr('name','data[Upload]['+cantidad+'][photo_dir]');
 	$("#copia"+cantidad+" td .photoDir").attr('id','Upload'+cantidad+'PhotoDir');
-	$("#copiarUpload"+cantidad).remove();
-        // Actualiza las validaciones para incluir los campos nuevos
-        $('#UploadCopiasAddForm').validator('update');
+	$("#copia"+cantidad+" td .borrar").attr('id','eliminarUpload'+cantidad);
+	$("#copia"+cantidad+" .copiar").remove();
+
 	});
 });
 
@@ -381,7 +378,6 @@ function duplicar(id,cantidad,posicion){
 	$("#"+id).after('<tr id="copia'+cantidad+'"></tr>');
 	$("#"+id).children().clone().find("td").each(function(){
 		}).end().appendTo("#copia"+cantidad);
-	$("#resultados #cantidad").attr('value',parseInt($("#resultados #cantidad").val())+1);
 	}
 
 function guardarDuplicados(posicion){
@@ -392,7 +388,12 @@ function guardarDuplicados(posicion){
 		method: "post",
 		url: "../pedidos/duplicarUpload",
 		data: {upload_id:  value}
-	}).done(function(respuesta){});
+	}).done(function(respuesta){
+		var nueva_cant=parseInt($("#resultados #UploadCopiasCantidad").val())+1;
+			// Actualiza las validaciones para incluir los campos nuevos
+			$('#UploadCopiasAddForm').validator('update');
+		$("#resultados #UploadCopiasCantidad").attr('value',nueva_cant);
+	});
 }
 </script>
 <script>
@@ -410,21 +411,21 @@ function borrar(id,posicion){
 		data: {upload_id:  value, posicion: posicion}
 	}).done(function(respuesta){
 		$("#copia"+posicion).remove();
-		var nueva_cant=$("#resultados #cantidad").val()-1;
-                // Actualiza las validaciones para incluir los campos nuevos 
-                $('#UploadCopiasAddForm').validator('update');
-		//$("#resultados #cantidad").attr('value',nueva_cant);
+		var nueva_cant=parseInt($("#resultados #UploadCopiasCantidad").val())-1;
+		  // Actualiza las validaciones para incluir los campos nuevos
+		  $('#UploadCopiasAddForm').validator('update');
+		$("#resultados #UploadCopiasCantidad").attr('value',nueva_cant);
 	});
 }
 
     $(".miniatura").bind("click",function(event){
-            var url=$(this).attr('src');
-            link=url.replace('/thumbs/','/pedidos/');
-            linkpedido=link.replace('thumb_','');
-            var nombre=$(this).attr('alt');
+      var url=$(this).attr('src');
+      link=url.replace('/thumbs/','/pedidos/');
+      linkpedido=link.replace('thumb_','');
+      var nombre=$(this).attr('alt');
 
-            asignarImagen(linkpedido,nombre);
-            $('#imgModal').modal('show');
+      asignarImagen(linkpedido,nombre);
+      $('#imgModal').modal('show');
     });
 
     if ( $('#buscador').val() ){

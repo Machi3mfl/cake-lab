@@ -22,10 +22,10 @@ class PedidosController extends AppController {
             'Pedido.id' => 'desc'
         )
     );
-    
+
     public function index() {
-      $this->Paginator->settings = $this->paginate; 
-        
+      $this->Paginator->settings = $this->paginate;
+
       $this->Pedido->recursive = 0;
       $this->set('pedidos', $this->Paginator->paginate());
     }
