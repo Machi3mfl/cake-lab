@@ -344,7 +344,7 @@ $(document).ready(function() {
 </script>
 <script>
 $(document).ready(function(){
-	$(".table-responsive .copiar").bind("click",function(event){
+	$(".table-responsive .copiar").on("click",function(event){
 		var id=$(this).attr('id');
 		var cantidad=$("#resultados #UploadCopiasCantidad").val();
 		var posicion = this.id.replace('copiarUpload','');
@@ -397,7 +397,7 @@ function guardarDuplicados(posicion){
 }
 </script>
 <script>
-	$(".table-responsive .borrar").bind("click",function(event){
+	$(".table-responsive").on("click",".borrar",function(event){
 		var id=$(this).attr('id');
 		var res= confirm("¿Está seguro que desea eliminar esta copia?");
 		if (res) borrar(id,id.replace('eliminarUpload',''));
