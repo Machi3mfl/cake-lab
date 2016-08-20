@@ -21,6 +21,8 @@
           $cant=0;
           $copias_total=0;
           $importe=0;
+          debug($precios);
+          debug($data);
           foreach($precios as $precio) :  ?>
           <tr>
             <td id='<?php echo 'nombre'.$cant; ?>'><?php echo $data['Upload'][$cant]['photo']; ?></td>

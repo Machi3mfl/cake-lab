@@ -124,7 +124,10 @@ class PreciosController extends AppController {
 			$precios[]=$this->Precio->find('first',array('conditions'=>$conditions));
 			$cont++;
 		}
+		$this->request->data['Copias']=array_values($this->request->data['Copias']);
+		$this->request->data['Upload']=array_values($this->request->data['Upload']);
 		$this->set("precios", $precios);
+		//$this->set("data", array_values($this->request->data));
 		$this->set("data", $this->request->data);
 		$this->set("productos", $productos);
   }

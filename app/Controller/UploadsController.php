@@ -145,7 +145,6 @@ class UploadsController extends AppController {
 			array_values($uploads);
 			$this->Session->write('imagenes',$uploads);
 		}
-		debug($uploads);
 		return true;
 	}
 

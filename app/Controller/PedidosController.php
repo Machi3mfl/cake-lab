@@ -80,10 +80,10 @@ class PedidosController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
           if ($this->Pedido->save($this->request->data)) {
-                  $this->Session->setFlash(__('The pedido has been saved'));
-                  $this->redirect(array('action' => 'index'));
+              $this->Session->setFlash('Pedido guardado correctamente','success');
+              $this->redirect(array('action' => 'index'));
           } else {
-                  $this->Session->setFlash(__('The pedido could not be saved. Please, try again.'));
+              $this->Session->setFlash('El pedido no ha sido borrado. Por favor, intente de nuevo.','error');
           }
         } else {
           $this->request->data = $this->Pedido->read(null, $id);
@@ -109,10 +109,10 @@ class PedidosController extends AppController {
           throw new NotFoundException(__('Invalid pedido'));
         }
         if ($this->Pedido->delete()) {
-          $this->Session->setFlash(__('Pedido deleted'));
+          $this->Session->setFlash('Pedido borrado correctamente','success');
           $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Pedido was not deleted'));
+        $this->Session->setFlash('El Pedido no ha sido borrado. Por favor, intentelo de nuevo','error');
         $this->redirect(array('action' => 'index'));
     }
 
@@ -280,16 +280,14 @@ class PedidosController extends AppController {
           $this->Pedido->save($pedido);
         }
         $Copias->guardarCopias($copias,$pedido_id);
-        $this->Session->setFlash("Pedido guardado");
+        $this->Session->setFlash("Pedido guardado correctamente",'success');
         $this->Session->delete('imagenes');
         $this->Session->delete('pedido_id');
         $this->Session->delete('cliente_id');
       }else{
-        $this->Session->setFlash("No se ha podido guardar el pedido");
+        $this->Session->setFlash("No se ha podido guardar el pedido. Por favor, intentelo de nuevo",'error');
       }
     }
-
-
 
     public function guardar(){
     $this->loadModel("Upload");
@@ -309,9 +307,5 @@ class PedidosController extends AppController {
       }else{
         $this->Session->setFlash("Session vacio.");
       }
-
-
     }
-
-
 }

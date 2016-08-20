@@ -42,17 +42,17 @@
 		<td>
 			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $pedido['Pedido']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-success')
+                            'class'=>'btn btn-success btn-xs')
                                 );
                         ?>
 			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $pedido['Pedido']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-warning')
+                            'class'=>'btn btn-warning btn-xs')
                             );
                         ?>
 			<?php echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $pedido['Pedido']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-danger'),
+                            'class'=>'btn btn-danger btn-xs'),
                             __('Are you sure you want to delete # %s?', $pedido['Pedido']['id'])
                                 );
                         ?>

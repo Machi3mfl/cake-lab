@@ -69,7 +69,7 @@
 	    	<?php
 		      $cantidad = count($this->Session->read('imagenes'));
 			      if(isset($cantidad)) :
-			        echo $this->Form->input('cantidad',array('value'=>$cantidad,'hidden'=> true,'label'=>false));
+			        echo $this->Form->input('cantidad',array('name' => 'data[Pedido][cantidad]' , 'value'=>$cantidad,'hidden'=> true,'label'=>false));
 		          $disabled_button = "disabled";
 		        endif;
 
@@ -150,14 +150,18 @@
 								?>
 			      	</div>
 					  </td>
-					  <td>
-					  	<?php
+					  <td id="acciones">
+					    <button id="eliminarUpload<?php echo $cant ?>" type="button" class="btn btn-danger borrar btn-xs pull-right"  data-toggle="tooltip" data-placement="bottom" title="Eliminar imagen">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+							<?php
 								if($img['Upload']['duplicado']!='false') : { ?>
-					    <button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-					  	<?php }
-					    	endif;
+							<button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar btn-xs pull-right"  data-toggle="tooltip" data-placement="bottom" title="Duplicar imagen">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							</button>
+							<?php }
+								endif;
 							?>
-					    <button id="eliminarUpload<?php echo $cant ?>" type="button" class="btn btn-danger borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 					  </td>
 					</tr>
 				  <?php
@@ -237,6 +241,9 @@
 			else
 				$("#addFiles").show();
 		});
+
+    $('[data-toggle="tooltip"]').tooltip();
+
 	});
 </script>
 <script type="text/javascript">
@@ -264,14 +271,14 @@ $(document).ready(function(){
       });
     },
     focus: function (event,ui){
-      if (ui.item.value!=null)
+      if (ui.item.value != null && ui.item.value != 'No hay resultados')
         $("#buscador").val(ui.item.label);
       return false;
     },
     select: function(event,ui){
       $valor = ui.item.value;
       $buscador= $("#buscador");
-      if($valor!=null && $valor!='No hay resultados'){
+      if($valor != null && $valor != 'No hay resultados'){
         $buscador.val(ui.item.label);
         $buscador.prop('disabled',true);
         buscarCliente(ui.item.value);

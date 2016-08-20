@@ -140,4 +140,12 @@ body {
   hyphens: auto;
 
 }
-/******************* BUTTON FILE ************************/
+/******************* ADD PEDIDOS ************************/
+
+#acciones {
+  padding: 1% 0% !important;
+}
+
+#acciones button {
+  margin-right: 9% !important;
+}
