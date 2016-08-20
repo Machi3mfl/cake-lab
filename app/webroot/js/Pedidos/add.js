@@ -26,7 +26,6 @@ function cargar_change(modelo_padre, modelo_hijo, path, other_field) {
 
 			$.get(url, function(data) {
 
-
 				for (key in data) {
 					option = $('<option>', {
 						value: key,
@@ -45,5 +44,3 @@ cargar_change('Categoria', 'Papel', '/Productos/superficies_by_category/');
 cargar_change('Papel', 'Tamano', '/Productos/tamano_by_superficie/', 'Categoria');
 
 });
-
-/******************** AUTOCOMPLETE *******************/

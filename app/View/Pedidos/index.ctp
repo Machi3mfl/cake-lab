@@ -1,13 +1,10 @@
 <div class="col-sm-3 col-md-2 sidebar">
     <legend><h3><?php echo __('Acciones'); ?></h3></legend>
     <ul class="nav nav-colapse">
-            <li><?php echo $this->Html->link(__('Nuevo Pedido'), array('action' => 'add')); ?></li>
-            <li><hr></li>
-            <li><?php echo $this->Html->link(__('Listar Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
-            <li><?php echo $this->Html->link(__('Nuevo Cliente'), array('controller' => 'clientes', 'action' => 'add')); ?> </li>
-            <li><hr></li>
-            <li><?php echo $this->Html->link(__('Listar Copias'), array('controller' => 'copias', 'action' => 'index')); ?> </li>
-            <li><?php echo $this->Html->link(__('Nueva Copia'), array('controller' => 'copias', 'action' => 'add')); ?> </li>
+      <li><?php echo $this->Html->link(__('Nuevo Pedido'), array('action' => 'add')); ?></li>
+      <li><hr></li>
+      <li><?php echo $this->Html->link(__('Listar Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
+      <li><?php echo $this->Html->link(__('Nuevo Cliente'), array('controller' => 'clientes', 'action' => 'add')); ?> </li>
     </ul>
 </div>
 <div class="col-md-10">
@@ -15,21 +12,21 @@
         <h3>Pedidos <small> > Administración</small></h3>
     </leyend>
     <div class="table-responsive">
-        <table class="table table-hover">
-        <tr>
-            <th><?php echo $this->Paginator->sort('id'); ?></th>
-            <th><?php echo $this->Paginator->sort('fecha'); ?></th>
-            <th><?php echo $this->Paginator->sort('importe'); ?></th>
-            <th><?php echo $this->Paginator->sort('cantidad'); ?></th>
-            <th><?php echo $this->Paginator->sort('cliente_id'); ?></th>
-            <th><?php echo $this->Paginator->sort('sucursal'); ?></th>
-            <th><?php echo $this->Paginator->sort('forma_pago'); ?></th>
-            <th><?php echo $this->Paginator->sort('observaciones'); ?></th>
-            <th><?php echo $this->Paginator->sort('estado'); ?></th>
-            <th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-        <?php
-	foreach ($pedidos as $pedido): ?>
+      <table class="table table-hover">
+      <tr>
+        <th><?php echo $this->Paginator->sort('id'); ?></th>
+        <th><?php echo $this->Paginator->sort('fecha'); ?></th>
+        <th><?php echo $this->Paginator->sort('importe'); ?></th>
+        <th><?php echo $this->Paginator->sort('cantidad'); ?></th>
+        <th><?php echo $this->Paginator->sort('cliente_id'); ?></th>
+        <th><?php echo $this->Paginator->sort('sucursal'); ?></th>
+        <th><?php echo $this->Paginator->sort('forma_pago'); ?></th>
+        <th><?php echo $this->Paginator->sort('observaciones'); ?></th>
+        <th><?php echo $this->Paginator->sort('estado'); ?></th>
+        <th class="actions"><?php echo __('Acciones'); ?></th>
+      </tr>
+  <?php
+	 foreach ($pedidos as $pedido): ?>
 	<tr>
 		<td><?php echo h($pedido['Pedido']['id']); ?>&nbsp;</td>
 		<td><?php echo h($pedido['Pedido']['fecha']); ?>&nbsp;</td>

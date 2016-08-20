@@ -7,19 +7,23 @@
 ));
 
 ?>
-<div class="span7">
-    <div class="">
-        <button class="btn btn-success" data-loading-text="loading..." >Generate</button>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="">
+          <button class="btn btn-success" data-loading-text="loading..." >Generar</button>
+      </div>
+      <div id="acos">
+          <?php echo $this->Tree->generate($results, array('alias' => 'alias', 'plugin' => 'acl_management', 'model' => 'Aco', 'id' => 'acos-ul', 'element' => '/permission-node')); ?>
+      </div>
     </div>
-    <div id="acos">
-        <?php echo $this->Tree->generate($results, array('alias' => 'alias', 'plugin' => 'acl_management', 'model' => 'Aco', 'id' => 'acos-ul', 'element' => '/permission-node')); ?>
+    <div class="col-md-8">
+        <div id="aco-edit"></div>
     </div>
-</div>
-<div class="span7">
-    <div id="aco-edit"></div>
+  </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function() { 
+$(document).ready(function() {
     $("#acos").treeview({collapsed: true});
 });
 $(function() {
@@ -30,7 +34,7 @@ $(function() {
                 btn.button('reset');
                 $("#acos").html(data);
             }
-        );        
+        );
     })
 });
 </script>

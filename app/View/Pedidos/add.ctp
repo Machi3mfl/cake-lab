@@ -49,11 +49,11 @@
         <div class="divider"></div>
         	<?php   echo $this->Form->create('Upload',array('type' => 'file','class'=>'form-inline','url' => array('controller' => 'pedidos', 'action' => $this->action))); ?>
         <div class="form-group">
-          <?php   echo $this->Form->input('Upload.photo.', array('type' => 'file', 'multiple'=>true)); ?>
+          <?php   echo $this->Form->input('Upload.photo.', array('type' => 'file', 'multiple'=>true,'class'=>'filestyle', 'data-buttonBefore' => 'true', 'data-placeholder' => "No se seleccionaron archivos" , 'data-buttonName' => "btn-primary")); ?>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-success" action="">
-              <span class="glyphicon glyphicon-plus"></span> Agregar fotos
+          <button id="addFiles" type="submit" class="btn btn-success" action="">
+              <span class="glyphicon glyphicon-cloud-upload"></span> Subir fotos
           </button>
         </div>
           <?php echo $this->Form->end(); ?>
@@ -66,13 +66,13 @@
                       $cantidad = count($this->Session->read('imagenes'));
 		      if(isset($cantidad)) :
 		        echo $this->Form->input('cantidad',array('value'=>$cantidad,'hidden'=> true,'label'=>false));
-                          $disabled_button = "disabled";
-                      endif;
-                      if ($cantidad > 0):
-                        $disabled_button = '';
-                      else:
-                        $disabled_button = 'disabled';
-                      endif;
+              $disabled_button = "disabled";
+          endif;
+          if ($cantidad > 0):
+            $disabled_button = '';
+          else:
+            $disabled_button = 'disabled';
+          endif;
 		      ?>
 		      <div>
 		        <legend><h3>Imagenes Agregadas</h3></legend>
@@ -102,61 +102,61 @@
 		      </td>
 		      <td class="pre" style="width:180px"><div class="form-group">
 		  <?php echo $this->Form->input('Upload.'.$cant.'.photo',array('name' => 'data[Upload]['.$cant.'][photo]',
-		                                              'value'=>$img['Upload']['photo'],'hidden'=> true,'label'=>false,'div'=> false));
+		        'value'=>$img['Upload']['photo'],'hidden'=> true,'label'=>false,'div'=> false));
 		      echo $img['Upload']['photo'];	?>
 
 		      </td>
-		            <td><div class="form-group">
-		              <?php echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array(
-		                  'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control', 'required'=>true));	?>
-		           </div> </td>
-		            <td><div class="form-group">
-		              <?php echo $this->Form->select('Upload.Copias.'.$cant.'.papel', $superficies ,array(
-		                  'name' => 'data[Copias]['.$cant.'][papel]','class'=>'form-control', 'required'));	?>
-		                             </div> </td>
-		            <td><div class="form-group">
-		              <?php echo $this->Form->select('Upload.Copias.'.$cant.'.tamano', $tamanos ,array(
-		                  'name' => 'data[Copias]['.$cant.'][tamano]','class'=>'form-control', 'required')); ?>
-		                            </div>  </td>
-		            <td><div class="form-group">
-		            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.borde', array("Sí","No") ,array(
-		                	'name' => 'data[Copias]['.$cant.'][borde]','class'=>'form-control', 'required'));	?>
-		                              </div></td>
-		            <td>
-		                <div class="form-group">
-		                <?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array(
-		                    'name' => 'data[Copias]['.$cant.'][cantidad]','type'=>'number','value'=>'0','class'=>'form-control','div' => false,'label'=> false, 'required'=>true));	?>
-		              </div>
-		                </td>
-		            <td>
-		          <?php if($img['Upload']['duplicado']!='false') : { ?>
-		              <button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-		          <?php }
-		                      endif; ?>
-		              <button id="eliminarUpload<?php echo $cant ?>" type="button" class="btn btn-danger borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-		            </td>
-		          </tr>
-              <?php
-              	$cant++;
-                endforeach;
-              ?>
-		              <script>
-		                  jQuery(document).ready(function(){
-		                      $('#UploadCopiasAddForm').submit(false);
-		                  });
-		              </script>
-		              <?php
-		                else:
-		              ?>
-				    	<!-- Drop Zone -->
-				      <div class="upload-drop-zone" id="drop-zone">
-				        No se han subido fotos todavia. Seleccione las imagenes que desea subir a traves del botón examinar.
-				      </div>
-				      <?php
-				        endif;
-				      ?>
-			      	</tbody>
-			    	</table> <!-- div tabla imagenes -->
+          <td><div class="form-group">
+            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array(
+                'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control', 'required'=>true));	?>
+         </div> </td>
+          <td><div class="form-group">
+            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.papel', $superficies ,array(
+                'name' => 'data[Copias]['.$cant.'][papel]','class'=>'form-control', 'required'));	?>
+                           </div> </td>
+          <td><div class="form-group">
+            <?php echo $this->Form->select('Upload.Copias.'.$cant.'.tamano', $tamanos ,array(
+                'name' => 'data[Copias]['.$cant.'][tamano]','class'=>'form-control', 'required')); ?>
+                          </div>  </td>
+          <td><div class="form-group">
+          <?php echo $this->Form->select('Upload.Copias.'.$cant.'.borde', array("Sí","No") ,array(
+              	'name' => 'data[Copias]['.$cant.'][borde]','class'=>'form-control', 'required'));	?>
+                            </div></td>
+          <td>
+              <div class="form-group">
+              <?php echo $this->Form->input('Upload.Copias.'.$cant.'.cantidad',array(
+                  'name' => 'data[Copias]['.$cant.'][cantidad]','type'=>'number','value'=>'0', 'min'=> '1', 'class'=>'form-control','div' => false,'label'=> false, 'required'=>true));	?>
+            </div>
+              </td>
+          <td>
+        <?php if($img['Upload']['duplicado']!='false') : { ?>
+            <button id="copiarUpload<?php echo $cant ?>" type="button" class="btn btn-info copiar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+        <?php }
+                    endif; ?>
+            <button id="eliminarUpload<?php echo $cant ?>" type="button" class="btn btn-danger borrar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+          </td>
+        </tr>
+        <?php
+        	$cant++;
+          endforeach;
+        ?>
+            <script>
+                jQuery(document).ready(function(){
+                    $('#UploadCopiasAddForm').submit(false);
+                });
+            </script>
+            <?php
+              else:
+            ?>
+	    	<!-- Drop Zone -->
+	      <div class="upload-drop-zone" id="drop-zone">
+	        No se han subido fotos todavia. Seleccione las imagenes que desea subir a traves del botón examinar.
+	      </div>
+	      <?php
+	        endif;
+	      ?>
+      	</tbody>
+	    	</table> <!-- div tabla imagenes -->
 		  		</div> <!--- TABLA PARA IMAGENES SUBIDAS - ----->
           <button id="activate-step-2" type="submit" class="<?php echo $disabled_button; ?> btn btn-primary btn-lg pull-right">Siguiente</button>
  				<?php $this->Form->end(); ?>
@@ -203,6 +203,22 @@
   </div>
 </div>
 </div> <!--    FIN CONTAINER GENERAL ---->
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		if ($("#UploadPhoto").get(0).files.length == 0)
+			$("#addFiles").hide();
+
+		$("#UploadPhoto").change(function(){
+			if ($("#UploadPhoto").get(0).files.length == 0)
+				$("#addFiles").hide();
+			else
+				$("#addFiles").show();
+		});
+
+	});
+</script>
+
 <script type="text/javascript">
 	$("#submit").bind('click', function(){
     $.ajax({
@@ -370,7 +386,6 @@ $(document).ready(function(){
 	$("#copia"+cantidad+" td .photoDir").attr('id','Upload'+cantidad+'PhotoDir');
 	$("#copia"+cantidad+" td .borrar").attr('id','eliminarUpload'+cantidad);
 	$("#copia"+cantidad+" .copiar").remove();
-
 	});
 });
 
