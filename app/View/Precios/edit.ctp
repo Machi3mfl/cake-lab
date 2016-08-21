@@ -1,4 +1,8 @@
 <div class="precios form">
+<?php
+	debug($listas);
+ 	debug($productos);
+?>
 <?php echo $this->Form->create('Precio'); ?>
 	<fieldset>
 		<legend><?php echo __('Edit Precio'); ?></legend>

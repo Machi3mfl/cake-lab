@@ -44,10 +44,8 @@ class ListasController extends AppController {
 			$this->Lista->create();
 			if ($this->Lista->save($this->request->data)) {
 				$this->Session->setFlash('The lista has been saved','success');
-                                $id=$this->Lista->getLastInsertID();
-				$this->redirect(
-                                        array('controller' => 'precios', 'action' => 'add',$id)
-                                        );
+        $id=$this->Lista->getLastInsertID();
+				$this->redirect(array('controller' => 'precios', 'action' => 'add',$id));
 			} else {
 				$this->Session->setFlash('The lista could not be saved. Please, try again.','error');
 			}
@@ -62,19 +60,22 @@ class ListasController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		$this->loadModel('Precio');
+		$this->Lista->recursive=3;
 		$this->Lista->id = $id;
 		if (!$this->Lista->exists()) {
-			throw new NotFoundException('Invalid lista','error');
+			throw new NotFoundException('Lista incorrecta');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Lista->save($this->request->data)) {
-				$this->Session->setFlash('The lista has been saved','success');
+			if ($this->Precio->saveAll($this->request->data)){
+				$this->Session->setFlash('La lista ha sido guardada correctamente','success');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('The lista could not be saved. Please, try again.','error');
+				$this->Session->setFlash('La lista no ha sido guardada. Por favor, intente nuevamente.','error');
 			}
 		} else {
 			$this->request->data = $this->Lista->read(null, $id);
+			$this->set('lista',$this->Lista->read(null, $id));
 		}
 	}
 

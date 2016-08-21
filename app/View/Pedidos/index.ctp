@@ -12,19 +12,20 @@
         <h3>Pedidos <small> > Administración</small></h3>
     </leyend>
     <div class="table-responsive">
-      <table class="table table-hover">
-      <tr>
-        <th><?php echo $this->Paginator->sort('id'); ?></th>
-        <th><?php echo $this->Paginator->sort('fecha'); ?></th>
-        <th><?php echo $this->Paginator->sort('importe'); ?></th>
-        <th><?php echo $this->Paginator->sort('cantidad'); ?></th>
-        <th><?php echo $this->Paginator->sort('cliente_id'); ?></th>
-        <th><?php echo $this->Paginator->sort('sucursal'); ?></th>
-        <th><?php echo $this->Paginator->sort('forma_pago'); ?></th>
-        <th><?php echo $this->Paginator->sort('observaciones'); ?></th>
-        <th><?php echo $this->Paginator->sort('estado'); ?></th>
-        <th class="actions"><?php echo __('Acciones'); ?></th>
-      </tr>
+      <table id="pedidos" class="table table-hover">
+      <thead>
+        <tr>
+          <th><?php echo $this->Paginator->sort('id'); ?></th>
+          <th><?php echo $this->Paginator->sort('fecha'); ?></th>
+          <th><?php echo $this->Paginator->sort('importe'); ?></th>
+          <th><?php echo $this->Paginator->sort('cantidad'); ?></th>
+          <th><?php echo $this->Paginator->sort('cliente_id'); ?></th>
+          <th><?php echo $this->Paginator->sort('observaciones'); ?></th>
+          <th><?php echo $this->Paginator->sort('estado'); ?></th>
+          <th class="actions"><?php echo __('Acciones'); ?></th>
+        </tr>
+      </thead>
+      <tbody>
   <?php
 	 foreach ($pedidos as $pedido): ?>
 	<tr>
@@ -35,8 +36,6 @@
 		<td>
 			<?php echo $this->Html->link($pedido['Cliente']["apellido"]." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>
 		</td>
-		<td><?php echo h($pedido['Pedido']['sucursal']); ?>&nbsp;</td>
-		<td><?php echo h($pedido['Pedido']['forma_pago']); ?>&nbsp;</td>
 		<td><?php echo h($pedido['Pedido']['observaciones']); ?>&nbsp;</td>
     <td><?php echo h($pedido['Pedido']['estado']); ?>&nbsp;</td>
 		<td>
@@ -60,30 +59,64 @@
 
 	</tr>
 <?php endforeach; ?>
+  </tbody>
 	</table>
-    </div> <!-- table responsive -->
-	<p>
-            <?php
-            echo $this->Paginator->counter(array(
-            'format' => __('Página {:page} de {:pages}, mostrando {:current} registros de un total de {:count} , comienza en el registro {:start}, finaliza en el registro {:end}')
-            ));
-            ?>
-        </p>
-	<nav>
-            <div>
-                <ul class="pager">
-                    <li>
-                        <?php echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));?>
-                    </li>
-                    <li>
-                        <?php echo $this->Paginator->numbers(array('separator' => '')); ?>
-                    </li>
-                    <li>
-                        <?php echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));?>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+  </div> <!-- table responsive -->
+    <p>
+      <?php
+      echo $this->Paginator->counter(array(
+      'format' => __('Página {:page} de {:pages}, mostrando {:current} registros de un total de {:count} , comienza en el registro {:start}, finaliza en el registro {:end}')
+      ));
+      ?>
+    </p>
+	   <nav>
+        <div class="col-md-12 text-center">
+          <ul class="pagination">
+              <li><?php echo $this->Paginator->prev('«', array(), null, array('class' => 'prev disabled'));?></li>
+              <li><?php echo $this->Paginator->numbers(array('separator' => '')); ?></li>
+              <li><?php echo $this->Paginator->next('»', array(), null, array('class' => 'next disabled'));?></li>
+          </ul>
         </div>
+      </nav>
+
     </div>
+  </div>
 </div>
+<script>
+/*
+$(document).ready(function() {
+    $('#pedidos').DataTable({
+      "language": {
+          "sProcessing":     "Procesando...",
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+          "sZeroRecords":    "No se encontraron resultados",
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+          "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+          "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+          "sInfoPostFix":    "",
+          "sSearch":         "Buscar:",
+          "sUrl":            "",
+          "sInfoThousands":  ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+          "sFirst":    "Primero",
+          "sLast":     "Último",
+          "sNext":     "Siguiente",
+          "sPrevious": "Anterior"
+          },
+          "oAria": {
+            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+          }
+        },
+      //"order": [[ 1, "desc" ]],
+      //"iDisplayLength" : 50,
+      "order": [],
+      "bPaginate": false,
+      "bLengthChange": false,
+      "bInfo": false,
+      "bSort": false
+    });
+});*/
+</script>

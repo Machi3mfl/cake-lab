@@ -66,19 +66,19 @@ class PreciosController extends AppController {
 	public function edit($id = null) {
 		$this->Precio->id = $id;
 		if (!$this->Precio->exists()) {
-			throw new NotFoundException('Invalid precio','error');
+			throw new NotFoundException('Precio incorrecto','error');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Precio->save($this->request->data)) {
-				$this->Session->setFlash('The precio has been saved','success');
+				$this->Session->setFlash('El precio ha sido guardado correctamente','success');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('The precio could not be saved. Please, try again.','error');
+				$this->Session->setFlash('El precio no ha sido guardado. Por favor, intentelo de nuevo.','error');
 			}
 		} else {
 			$this->request->data = $this->Precio->read(null, $id);
 		}
-		$listas = $this->Precio->Lista->find('list');
+		$listas = $this->Precio->find('all');
 		$productos = $this->Precio->Producto->find('list');
 		$this->set(compact('listas', 'productos'));
 	}

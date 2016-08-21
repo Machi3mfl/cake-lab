@@ -25,7 +25,6 @@ class PedidosController extends AppController {
 
     public function index() {
       $this->Paginator->settings = $this->paginate;
-
       $this->Pedido->recursive = 0;
       $this->set('pedidos', $this->Paginator->paginate());
     }
@@ -39,6 +38,7 @@ class PedidosController extends AppController {
  */
     public function view($id = null) {
       $this->loadModel("Upload");
+          $this->Pedido->recursive=3;
       $this->Pedido->id = $id;
       $uploads=array();
       if (!$this->Pedido->exists()) {
@@ -49,7 +49,7 @@ class PedidosController extends AppController {
         $upload=$this->Upload->read(null,$copia['upload_id']);
         array_push($uploads,$upload);
       }
-      $this->set('pedido', $this->Pedido->read(null, $id));
+      $this->set('pedido', $pedido);
       $this->set('uploads',$uploads);
     }
 
@@ -74,23 +74,33 @@ class PedidosController extends AppController {
  * @return void
  */
     public function edit($id = null) {
-        $this->Pedido->id = $id;
-        if (!$this->Pedido->exists()) {
-          throw new NotFoundException(__('Invalid pedido'));
-        }
-        if ($this->request->is('post') || $this->request->is('put')) {
-          if ($this->Pedido->save($this->request->data)) {
-              $this->Session->setFlash('Pedido guardado correctamente','success');
-              $this->redirect(array('action' => 'index'));
-          } else {
-              $this->Session->setFlash('El pedido no ha sido borrado. Por favor, intente de nuevo.','error');
-          }
+      $this->loadModel("Upload");
+      $this->Pedido->recursive=3;
+      $this->Pedido->id = $id;
+      $uploads=array();
+
+      if (!$this->Pedido->exists()) {
+        throw new NotFoundException(__('Pedido incorrecto'));
+      }
+      if ($this->request->is('post') || $this->request->is('put')) {
+        if ($this->Pedido->save($this->request->data)) {
+            $this->Session->setFlash('Pedido guardado correctamente','success');
+            $this->redirect(array('action' => 'index'));
         } else {
-          $this->request->data = $this->Pedido->read(null, $id);
+            $this->Session->setFlash('El pedido no ha sido borrado. Por favor, intente de nuevo.','error');
         }
-        $clientes = $this->Pedido->Cliente->find('list');
-        $this->set(compact('clientes'));
-    }
+      } else {
+        $pedido = $this->Pedido->read(null, $id);
+        foreach($pedido['Copia'] as $copia){
+          $upload=$this->Upload->read(null,$copia['upload_id']);
+          array_push($uploads,$upload);
+        }
+      }
+      $clientes = $this->Pedido->Cliente->find('all');
+      $this->set('pedido', $pedido);
+      $this->set('uploads',$uploads);
+      $this->set(compact('clientes'));
+  }
 
 /**
 * delete method

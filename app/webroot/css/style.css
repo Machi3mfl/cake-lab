@@ -149,3 +149,14 @@ body {
 #acciones button {
   margin-right: 9% !important;
 }
+
+/********************** DATATABLE JS ***********************/
+
+.table-responsive label {
+  font-weight: 100 !important;
+}
+
+.pagination .current {
+  background-color: #337ab7;
+  color: white;
+}
