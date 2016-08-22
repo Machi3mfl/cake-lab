@@ -10,16 +10,16 @@
     </ul>
 </div>
 <div class="col-md-9">
-<?php echo $this->Form->create('Tamano'); ?>
-    
+<?php echo $this->Form->create('Tamano' , array('data-toggle' => 'validator' , 'role' => 'form')); ?>
+
         <legend><?php echo __('Agregar Nuevo Tamaño'); ?></legend>
         <div class="col-md-5">
             <div class="form-group">
                 <?php
-                        echo $this->Form->input('tamano',array('class'=>'form-control'));
+                   echo $this->Form->input('tamano',array(
+                     'class'=>'form-control' , 'required' => true , 'div' => false, 'type' => 'text' ,  'after' => '<div class="help-block with-errors"></div>'));
                 ?>
             </div>
             <?php echo $this->Form->end(array('label' => 'Agregar','class'=>'btn btn-primary','div' => array('class'=>'form-group') ));?>
         </div>
 </div>
-

@@ -11,18 +11,16 @@
 </div>
 <div class="col-md-9">
     <legend><?php echo __('Añadir nueva Categoria'); ?></legend>
-        <?php echo $this->Form->create('Categoria'); ?>
+        <?php echo $this->Form->create('Categoria', array('data-toggle' => 'validator' , 'role' => 'form')); ?>
         <div class="col-md-5">
         <div class="form-group">
             <?php
-                echo $this->Form->input('nombre',array('class'=>'form-control'));
+                echo $this->Form->input('nombre',array(
+                  'div' => false , 'class' => 'form-control' , 'required' => true , 'type' => 'text' , 'after' => '<div class="help-block with-errors"></div>'));
             ?>
         </div>
-        
         <div class="form-group clear"></div>
-        
         <?php echo $this->Form->submit(__('Agregar'), array('class' => 'btn btn-primary')); ?>
         <?php echo $this->Form->end();?>
         </div>
 </div>
-

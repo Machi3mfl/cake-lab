@@ -7,19 +7,18 @@
         <li><hr></li>
         <li><?php echo $this->Html->link(__('Listar Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
         <li><?php echo $this->Html->link(__('Nuevo Productos'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
-    </ul>    
+    </ul>
 </div>
 <div class="col-md-9">
     <legend><?php echo __('Añadir nueva Superficie'); ?></legend>
-        <?php echo $this->Form->create('Superficie'); ?>
+        <?php echo $this->Form->create('Superficie' , array('data-toggle' => 'validator' , 'role' => 'form')); ?>
         <div class="col-md-5">
         <div class="form-group">
             <?php
-                echo $this->Form->input('tipo',array('class'=>'form-control'));
+                echo $this->Form->input('tipo',array('class'=>'form-control' , 'required' => true , 'type' => 'text' , 'div' => false , 'after' => '<div class="help-block with-errors"></div>'));
             ?>
         </div>
         <div class="form-group clear"></div>
-        
         <?php echo $this->Form->submit(__('Agregar'), array('class' => 'btn btn-primary')); ?>
         <?php echo $this->Form->end();?>
         </div>
