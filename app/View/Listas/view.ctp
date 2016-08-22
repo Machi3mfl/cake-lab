@@ -43,19 +43,17 @@
             </thead>
             <tbody>
             <?php
-              $i = 0;
               foreach ($lista['precios'] as $precios): ?>
               <tr>
                 <td>
                     <?php echo $this->Form->input('precio_id',array('value'=>$precios['id'],'type'=>'hidden'));  ?>
                 </td>
                 <?php echo $this->Form->input('producto_id',array('value'=>$precios['producto_id'],'type'=>'hidden'));  ?>
-                <td><?php echo $productos[$i]['Categoria']['nombre']; ?></td>
-                <td><?php echo $productos[$i]['Superficie']['tipo']; ?></td>
-                <td><?php echo $productos[$i]['Tamano']['tamano']; ?></td>
+                <td><?php echo $precios['productos']['Categoria']['nombre']; ?></td>
+                <td><?php echo $precios['productos']['Superficie']['tipo']; ?></td>
+                <td><?php echo $precios['productos']['Tamano']['tamano']; ?></td>
                 <td><?php echo $precios['precio']; ?></td>
               </tr>
-            <?php $i++; ?>
             <?php endforeach; ?>
             </tbody>
           </table>

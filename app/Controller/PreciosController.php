@@ -39,21 +39,22 @@ class PreciosController extends AppController {
  * @return void
  */
 	public function add($id=null) {
+		$this->loadModel('Lista');
 	  if ($this->request->is('post')) {
-      $precios=$this->request->data['Precio'];
-      foreach($precios as $data){
-          $this->Precio->create();
-              if ($this->Precio->save($data)) {
-                      $this->Session->setFlash('Los precios han sido guardados correctamente','success');
-                      $this->redirect(array('controller'=>'listas','action' => 'index'));
-              } else {
-                      $this->Session->setFlash('The precio could not be saved. Please, try again.','error');
-              }
-          }
-	  }
-	  $productos=$this->Precio->productos->find('all');
-	  $lista = $this->Precio->lista->find('first', array('conditions' => array('Lista.id' => $id)));
-	  $this->set(compact('lista','productos'));
+      if ($this->Precio->saveAll($this->request->data['Precio'])) {
+        $this->Session->setFlash('Los precios han sido guardados correctamente','success');
+        $this->redirect(array('controller'=>'listas','action' => 'index'));
+      } else {
+        $this->Session->setFlash('The precio could not be saved. Please, try again.','error');
+      }
+    }
+
+		if ($id != null){
+			$productos=$this->Precio->productos->find('all');
+			$this->set('productos',$productos);
+	  	$lista = $this->Lista->find('first', array('conditions' => array ('Lista.id' => $id)));
+			$this->set('lista',$lista);
+		}
 	}
 
 /**

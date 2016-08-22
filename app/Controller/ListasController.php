@@ -25,15 +25,14 @@ class ListasController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-            $this->Lista->id = $id;
-            if (!$this->Lista->exists()) {
-                    throw new NotFoundException('Invalid lista','error');
-            }
-            $this->set('lista', $this->Lista->read(null, $id));
-            $precios=$this->Lista->precios->find('all',array('conditions'=> array('Precios.lista_id'=> $id)));
-            $productos=$this->Lista->precios->productos->find('all');
-            $this->set('productos',$productos);
-        }
+			$this->Lista->recursive=3;
+      $this->Lista->id = $id;
+      if (!$this->Lista->exists()) {
+              throw new NotFoundException('Invalid lista','error');
+      }else{
+        $this->set('lista', $this->Lista->read(null, $id));
+			}
+  }
 /**
  * add method
  *
@@ -67,7 +66,7 @@ class ListasController extends AppController {
 			throw new NotFoundException('Lista incorrecta');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Precio->saveAll($this->request->data)){
+			if ($this->Precio->saveAll($this->request->data['Precio'])){
 				$this->Session->setFlash('La lista ha sido guardada correctamente','success');
 				$this->redirect(array('action' => 'index'));
 			} else {

@@ -60,10 +60,10 @@ class Upload extends AppModel {
 	);
 
 	    public function beforeSave($options = array()) {
-		$pedido = $this->data["Upload"]["pedido_id"];
-		$this->Behaviors->Upload->settings["Upload"]["photo"]["path"] = APP."webroot/files/pedidos/".$pedido."/";
-		$this->Behaviors->Upload->settings["Upload"]["photo"]["thumbnailPath"] = APP."webroot/files/thumbs/".$pedido."/";
-		return true;
+				$pedido = $this->data["Upload"]["pedido_id"];
+				$this->Behaviors->Upload->settings["Upload"]["photo"]["path"] = APP."webroot/files/pedidos/".$pedido."/";
+				$this->Behaviors->Upload->settings["Upload"]["photo"]["thumbnailPath"] = APP."webroot/files/thumbs/".$pedido."/";
+			return true;
 	    }
 
 }

@@ -11,13 +11,14 @@
     </ul>
 </div>
 <div class="col-md-8">
-        
+
         <legend>
-            <?php if(isset($lista)){ ?>
-            <h3><?php echo 'Lista de precios '.$lista["lista"]["nombre"];
-            
+            <?php
+            if(isset($lista)){ ?>
+            <h3><?php echo 'Lista de precios '.$lista["Lista"]["nombre"];
+
                 echo '<small>';
-                echo ' > Añadir Precios'; 
+                echo ' > Añadir Precios';
                 echo '</small>';
             }
             ?>
@@ -46,48 +47,48 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php  if(isset($productos)):{
+                <?php
+                if(isset($productos)):{
                     $cont =0;
                     foreach ($productos as $producto):{
                 ?>
                 <tr>
-                    
-                    <th>
+
+                    <td>
                         <?php echo $this->Form->input('Precio.'.$cont.'.producto_id',array(
                             'type'=>'hidden',
-                            'value'=>$producto["productos"]["id"]));  
+                            'value'=>$producto["productos"]["id"]));
                         ?>
                         <?php echo $this->Form->input('Precio.'.$cont.'.lista_id',array(
                             'type'=>'hidden',
-                            'value'=>$lista["lista"]["id"]));  
+                            'value'=>$lista["Lista"]["id"]));
                         ?>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                        <?php echo $producto["Categoria"]["nombre"]; ?>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                        <?php echo $producto["Superficie"]["tipo"]; ?>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                        <?php echo $producto["Tamano"]["tamano"]; ?>
-                    </th>
-                    
-                    <th>
+                    </td>
+
+                    <td>
                     <div class="form-group">
-                       <?php echo $this->Form->input('Precio.'.$cont.'.precio',array('class'=>'form-control')); ?>
+                       <?php echo $this->Form->input('Precio.'.$cont.'.precio',array('class'=>'form-control', 'label' => false)); ?>
                     </div>
-                    </th>
+                    </td>
                 </tr>
-                <?php 
+                <?php
                     $cont++;
                     }endforeach;
                 }endif;
                 ?>
                 </tbody>
             </table>
-        
+
         <?php echo $this->Form->submit('Aceptar',array('class'=>'btn btn-success')); ?>
         <?php echo $this->Form->end(); ?>
         </div>
 </div>
-
