@@ -168,6 +168,7 @@ class PedidosController extends AppController {
     public function nuevo(){
       $this->layout='front';
       $this->loadModel('Upload');
+      $this->loadModel('Cliente');
       $usuario=$this->Auth->user();
       $guardados=array();
       $files=array(); // PARA DESPUES : GUARDAR FILES TEMPORALES Y LUEGO GUARDAR EN BD - USAR TMP EN FORMULARIO
@@ -203,6 +204,11 @@ class PedidosController extends AppController {
         $this->set('cantidad',count($this->Session->read('imagenes')));
         $this->setearModelos();
       }
+      $cliente = $this->Cliente->find('first', array('conditions' => array(
+          'Cliente.user_id' => $usuario['id']
+      )));
+      $this->set('cliente',$cliente);
+      debug($cliente);
     }
 
     public function inicializarPedido (){
