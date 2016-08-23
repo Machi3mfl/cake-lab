@@ -6,6 +6,8 @@
             <file>file:/var/www/html/laboratorio/app/View/Pedidos/add.ctp</file>
             <file>file:/var/www/html/laboratorio/app/Controller/PedidosController.php</file>
             <file>file:/var/www/html/laboratorio/app/Controller/ClientesController.php</file>
+            <file>file:/var/www/html/laboratorio/app/View/Pedidos/index.ctp</file>
+            <file>file:/var/www/html/laboratorio/app/View/Layouts/default.ctp</file>
             <file>file:/var/www/html/laboratorio/app/webroot/css/style.css</file>
         </group>
     </open-files>

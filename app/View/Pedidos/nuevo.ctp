@@ -163,9 +163,9 @@ body{
 				  ?>
           <?php $this->Form->end(); ?>
 	      <script>
-          jQuery(document).ready(function(){
-              $('#UploadCopiasNuevoForm').submit(false);
-          });
+                jQuery(document).ready(function(){
+                    $('#UploadCopiasNuevoForm').submit(false);
+                });
 	      </script>
 	      <?php
 	        else:
@@ -195,9 +195,9 @@ body{
     	<div class="col-md-6">
         <blockquote>Datos del Cliente
           <ul type="none" id="datosCliente" class="datosCliente">
-					  <li><?php
+            <li><?php
             $id = $cliente['Cliente']['id'];
-            echo $this->Form->input('cliente_id', array('value' => $id , 'name' => 'data[Pedido][cliente_id]' , 'label' => false)); ?></li>
+            echo $this->Form->input('cliente_id', array('value' => $id , 'name' => 'data[Pedido][cliente_id]' , 'label' => false, 'type'=>'hidden')); ?></li>
             <li id="clienteNombre"><?php echo $cliente['Cliente']['apellido'].' '.$cliente['Cliente']['nombre']; ?></li>
 						<li><small>Cliente - Apellido Nombre</small></li>
             <li id="clienteDir"><?php echo $cliente['Cliente']['calle'].' '.$cliente['Cliente']['numero'].' / '.$cliente['Cliente']['provincia'].' - '.$cliente['Cliente']['localidad']; ?></li>

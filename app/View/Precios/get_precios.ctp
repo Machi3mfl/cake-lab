@@ -47,7 +47,7 @@
             </td>
             <td id='<?php echo 'precio'.$cant; ?>'>
               <?php echo $this->Form->input('Copias.'.$cant.'.precio',array('type'=> 'hidden','value'=>$precio['Precio']['precio'])); ?>
-              $ <?php echo $precio['Precio']['precio']; ?></td>;
+              $ <?php echo $precio['Precio']['precio']; ?></td>
           </tr>
           <?php
           $copias_total= $copias_total+$data['Copias'][$cant]['cantidad'];
