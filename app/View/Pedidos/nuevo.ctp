@@ -197,7 +197,8 @@ body{
           <ul type="none" id="datosCliente" class="datosCliente">
             <li><?php
             $id = $cliente['Cliente']['id'];
-            echo $this->Form->input('cliente_id', array('value' => $id , 'name' => 'data[Pedido][cliente_id]' , 'label' => false, 'type'=>'hidden')); ?></li>
+            echo $this->Form->input('cliente_id', array(
+                'value' => $id , 'name' => 'data[Pedido][cliente_id]' , 'label' => false, 'type'=>'hidden', 'name' => 'data[Pedido][cliente_id]')); ?></li>
             <li id="clienteNombre"><?php echo $cliente['Cliente']['apellido'].' '.$cliente['Cliente']['nombre']; ?></li>
 						<li><small>Cliente - Apellido Nombre</small></li>
             <li id="clienteDir"><?php echo $cliente['Cliente']['calle'].' '.$cliente['Cliente']['numero'].' / '.$cliente['Cliente']['provincia'].' - '.$cliente['Cliente']['localidad']; ?></li>

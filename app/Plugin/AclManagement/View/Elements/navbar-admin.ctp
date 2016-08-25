@@ -18,6 +18,7 @@
                         <li><a href="<?php echo $this->Html->url('/pedidos');?>">Ver Pedidos</a></li>
                         <li><a href="<?php echo $this->Html->url('/pedidos/add');?>">Nuevo Pedido</a></li>
                         <li class="divider"></li>
+                        <li><a href="<?php echo $this->Html->url('/estados');?>">Estados</a></li>
                         <li><a href="<?php echo $this->Html->url('/copias');?>">Copias</a></li>
                         <li><a href="<?php echo $this->Html->url('/uploads');?>">Uploads</a></li>
 
@@ -81,4 +82,3 @@
         </div>
         <!-- /.navbar-collapse -->
     </nav>
-

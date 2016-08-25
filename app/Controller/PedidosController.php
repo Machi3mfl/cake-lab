@@ -204,11 +204,12 @@ class PedidosController extends AppController {
         $this->set('cantidad',count($this->Session->read('imagenes')));
         $this->setearModelos();
       }
+
       $cliente = $this->Cliente->find('first', array('conditions' => array(
           'Cliente.user_id' => $usuario['id']
       )));
+      $this->Session->write('cliente_id',$cliente['Cliente']['id']);
       $this->set('cliente',$cliente);
-      debug($cliente);
     }
 
     public function inicializarPedido (){
@@ -284,14 +285,17 @@ class PedidosController extends AppController {
     public function confirmar(){
       $pedido=$this->request->data["Pedido"];
       $copias=$this->request->data["Copias"];
+      debug($this->request->data);
+      debug($this->Session->read);
       $uploads=$this->Session->read('imagenes');
       $pedido_id=$this->Session->read('pedido_id');
+      $cliente_id=$this->Session->read('cliente_id');
       $Copias= new CopiasController;
       if(!empty($pedido)){
         $pedido["fecha"]=date("Y-m-d H:i:s");//fecha del pedido
         if($this->Session->check('cliente_id')){
           $this->Pedido->set(array(
-            "id"=> $pedido_id, "fecha"=>date("Y-m-d H:i:s"),"estado" => "Cargado", "cliente_id"=> $this->Session->read('cliente_id')
+            "id"=> $pedido_id, "fecha"=>date("Y-m-d H:i:s"),"estado" => "Cargado", "cliente_id"=> $cliente_id
           ));
           $this->Pedido->save($pedido);
         }
@@ -306,19 +310,20 @@ class PedidosController extends AppController {
     }
 
     public function guardar(){
-    $this->loadModel("Upload");
-    $files=array();
-    if($this->Session->check("files")){
-      $files=$this->Session->read("files");
-      foreach($files as $file){
-        $this->Upload->set(array("photo" => $file["Upload"]["photo"]));
-        $arch=$this->Upload->data;
-        $this->Upload->create();
-        if($this->Upload->save($arch["Upload"])){
-          $this->Session->setFlash("Archivo guardado.");
-        }else{
-          $this->Session->setFlash("Archivo falló.");
-        }
+      $this->loadModel("Upload");
+      $files=array();
+
+      if($this->Session->check("files")){
+        $files=$this->Session->read("files");
+        foreach($files as $file){
+          $this->Upload->set(array("photo" => $file["Upload"]["photo"]));
+          $arch=$this->Upload->data;
+          $this->Upload->create();
+          if($this->Upload->save($arch["Upload"])){
+            $this->Session->setFlash("Archivo guardado.");
+          }else{
+            $this->Session->setFlash("Archivo falló.");
+          }
         }
       }else{
         $this->Session->setFlash("Session vacio.");
