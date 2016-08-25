@@ -36,7 +36,7 @@ class ClientesController extends AppController {
 	public function view($id = null) {
 		$this->Cliente->id = $id;
 		if (!$this->Cliente->exists()) {
-			throw new NotFoundException(__('Invalid cliente','error'));
+			throw new NotFoundException(__('Cliente incorrecto','error'));
 		}
 		$this->set('cliente', $this->Cliente->read(null, $id));
 	}
@@ -56,7 +56,6 @@ class ClientesController extends AppController {
             if ($controller->agregar($this->request->data['User'])) {
                 $this->Cliente->create();
                 $user_id= $this->Cliente->User->getLastInsertId();
-                debug($user_id);
                 $this->request->data('Cliente.user_id', $user_id);
                 //debug($this->request->data);
                 if ( $this->Cliente->save($this->request->data['Cliente']) ){
@@ -66,16 +65,17 @@ class ClientesController extends AppController {
                     $this->Session->setFlash('Existe un problema con alguno/s de los campos. Revise e intente nuevamente.','error');
                 }
             } else {
-                        $this->Session->setFlash('The cliente could not be saved. Please, try again.','error');
+                        $this->Session->setFlash('El cliente no ha sido guardado. Por favor, intente de nuevo.','error');
                 }
             }
 
 
         $group = ClassRegistry::init('Group');
         $groups = $group->find('list', array('conditions' => array('Group.name' => 'cliente')));
+        $listas = $this->Cliente->Lista->find('list');
         $this->cargar_provincia();
         $this->cargar_localidad();
-        $this->set(compact('users','groups'));
+        $this->set(compact('users','groups','listas'));
 
     }
 
@@ -89,24 +89,25 @@ class ClientesController extends AppController {
 	public function edit($id = null) {
 		$this->Cliente->id = $id;
 		if (!$this->Cliente->exists()) {
-			throw new NotFoundException('Invalid cliente','error');
+			throw new NotFoundException('Cliente incorrecto','error');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Cliente->save($this->request->data)) {
-				$this->Session->setFlash('The cliente has been saved','success');
+				$this->Session->setFlash('El cliente ha sido guardado correctamente','success');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('The cliente could not be saved. Please, try again.','error');
+				$this->Session->setFlash('El cliente no ha sido guardado. Por favor, intente de nuevo..','error');
 			}
 		} else {
 			$this->request->data = $this->Cliente->read(null, $id);
 		}
 		$users = $this->Cliente->User->find('list');
 		$group = ClassRegistry::init('Group');
-                $groups = $group->find('list', array('conditions' => array('Group.name' => 'cliente')));
-                $this->cargar_provincia();
-                $this->cargar_localidad();
-                $this->set(compact('users','groups'));
+    $listas= $this->Cliente->Lista->find('list');
+    $groups = $group->find('list', array('conditions' => array('Group.name' => 'cliente')));
+    $this->cargar_provincia();
+    $this->cargar_localidad();
+    $this->set(compact('users','groups','listas'));
 	}
 
 /**
@@ -123,9 +124,9 @@ class ClientesController extends AppController {
 		}
 		$this->Cliente->id = $id;
 		if (!$this->Cliente->exists()) {
-			throw new NotFoundException('Invalid cliente','error');
+			throw new NotFoundException('Cliente incorrecto','error');
 		}
-                
+
                 $cl = $this->Cliente->findById($id);
 		if ($this->Cliente->delete()) {
                         // Controlador de Users
@@ -136,12 +137,12 @@ class ClientesController extends AppController {
                         else{
                             die("asdf");
                         }
-                        
+
                         //$uController->agregar($this->request->data['User']);
-			$this->Session->setFlash('Cliente deleted','success');
+			$this->Session->setFlash('Cliente borrado','success');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash('Cliente was not deleted','error');
+		$this->Session->setFlash('El cliente no ha sido borrado','error');
 		$this->redirect(array('action' => 'index'));
 	}
 /**

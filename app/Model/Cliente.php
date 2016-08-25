@@ -128,6 +128,13 @@ class Cliente extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Lista' => array(
+			'className' => 'Lista',
+			'foreignKey' => 'lista_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 /*
@@ -142,6 +149,6 @@ class Cliente extends AppModel {
 		            )
 
         );
- * 
+ *
  */
 }

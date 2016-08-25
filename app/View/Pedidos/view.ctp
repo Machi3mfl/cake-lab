@@ -41,7 +41,7 @@ img{
 				<td><?php echo $this->Html->link($pedido['Cliente']['apellido']." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>	&nbsp;</td>
 				<td style="display:none;"><?php echo h($pedido['Pedido']['sucursal']); ?>&nbsp;</td>
 				<td style="display:none;"><?php echo h($pedido['Pedido']['forma_pago']); ?>&nbsp;</td>
-				<td><?php echo h($pedido['Pedido']['estado']); ?>&nbsp;</td>
+				<td><?php echo h($pedido['Estado']['nombre']); ?>&nbsp;</td>
 				<td><?php echo h($pedido['Pedido']['observaciones']); ?>&nbsp;</td>
 			</tr>
 			</tbody>

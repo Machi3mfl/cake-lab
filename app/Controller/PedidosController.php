@@ -215,7 +215,7 @@ class PedidosController extends AppController {
     public function inicializarPedido (){
       if (!$this->Session->check('pedido_id')){ /***********  Crear pedido id para guardar uploads en carpeta con id ********************/
         $this->Pedido->create();
-        $this->Pedido->set(array("fecha"=>date("Y-m-d H:i:s"),"estado" => "Incompleto"));
+        $this->Pedido->set(array("fecha"=>date("Y-m-d H:i:s"),"estado_id" => 1));
         $this->Pedido->save();
         $this->Session->write('pedido_id',$this->Pedido->getLastInsertId());
       }
@@ -295,7 +295,7 @@ class PedidosController extends AppController {
         $pedido["fecha"]=date("Y-m-d H:i:s");//fecha del pedido
         if($this->Session->check('cliente_id')){
           $this->Pedido->set(array(
-            "id"=> $pedido_id, "fecha"=>date("Y-m-d H:i:s"),"estado" => "Cargado", "cliente_id"=> $cliente_id
+            "id"=> $pedido_id, "fecha"=>date("Y-m-d H:i:s"),"estado_id" => 2, "cliente_id"=> $cliente_id
           ));
           $this->Pedido->save($pedido);
         }

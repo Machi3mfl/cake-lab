@@ -18,7 +18,7 @@
             <blockquote>
               <p>Para dar de alta un nuevo cliente debera crear primero un usuario. Dicho usuario le servira para poder ingresar al sistema y generar pedidos</p>
             </blockquote>
-        
+
         <div class='col-md-6'>
             <legend>
                 <h3>Cliente: <small> Dar de alta al cliente </small></h3>
@@ -36,10 +36,10 @@
                 </label>
             </div>
             <label class='control-label'>Domicilio</label>
-            <div class='form-group'> 
+            <div class='form-group'>
                 <?php   echo $this->Form->input('calle',array('class'=>'form-control','placeHolder'=>'Ingrese Calle','label'=>false,'required'=>true)); ?>
             </div>
-            <div class='form-group'>  
+            <div class='form-group'>
                 <?php   echo $this->Form->input('numero',array('class'=>'form-control','placeHolder'=>'Ingrese Altura','label'=>false, 'type'=>'number')); ?>
             </div>
             <label class='control-label'>Departamento/Piso</label>
@@ -48,7 +48,7 @@
             </div>
             <div class='form-group'>
                 <?php   echo $this->Form->input('telefono',array('class'=>'form-control','placeHolder'=>'Ingrese número de telefono','required'=>true)); ?>
-            </div>            
+            </div>
             <div class='form-group'>
                 <label class='control-label' for='ClienteProvincia'>Provincia
                 <?php   echo $this->Form->select('provincia',$provincias,array('class'=>'form-control','required'=>true, 'default'=>$this->data['Cliente']['provincia'])); ?>
@@ -65,36 +65,34 @@
             <div class='form-group'>
                 <?php  echo $this->Form->input('User.email',array('class'=>'form-control','placeHolder'=>'Ingrese correo electronico','type'=>'email', 'required'=>true)); ?>
             </div>
-            <div class='form-group'>
-                <?php   echo $this->Form->input('User.password',array('class'=>'form-control','placeHolder'=>'Ingrese contraseña','required'=>true  )); ?>
-            </div>
-            <div class='form-group'>
-                <?php   echo $this->Form->input('User.password2',array('class'=>'form-control','placeHolder'=>'Ingrese contraseña','type'=>'password','required'=>true,'data-match'=>"#UserPassword")); ?>
-            </div>
             <div class="form-group">
                 <?php    echo $this->Form->input('User.group_id',array('class'=>'form-control'), array('div'=>'clearfix',
                 'after'=>'</div>','label'=>false, 'class'=>'xlarge','required'=>true)); ?>
             </div>
+            <div class="form-group">
+                <?php    echo $this->Form->input('lista_id',array('class'=>'form-control'), array('div'=>'clearfix',
+                'after'=>'</div>','label'=>false, 'class'=>'xlarge','required'=>true)); ?>
+            </div>
             <div class='form-group'>
-                <?php   echo $this->Form->input('User.status',array('class'=>'form-control','checked'=>true), array('div'=>'clearfix', 
+                <?php   echo $this->Form->input('User.status',array('class'=>'form-control','checked'=>true), array('div'=>'clearfix',
                     'before'=>'<div class="form-group"><label>'.__('Activado').'</label><div class="input"></div>',
                     'after'=>'</div>','label'=>false, 'class'=>''));
                 ?>
-            </div>                
+            </div>
             <?php echo $this->Form->end(array('label' => 'Agregar Cliente','class'=>'btn btn-primary','div' => array('class'=>'form-group') ));?>
         </div>
-        
+
 </div>
 <!--script type="text/javascript">
 $( document ).ready(function() {
     $.ajax({
-        async:true, 
-        type:'post', 
+        async:true,
+        type:'post',
         complete:function(request, json) {
-            $('#ClienteLocalidades').html(request.responseText); 
-        }, 
-        url:'/Clientes/updateSelect', 
+            $('#ClienteLocalidades').html(request.responseText);
+        },
+        url:'/Clientes/updateSelect',
         data:$('#ClienteProvincias').serialize()
-    }); 
-});     
+    });
+});
 </script-->

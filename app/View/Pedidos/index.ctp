@@ -37,7 +37,7 @@
 			<?php echo $this->Html->link($pedido['Cliente']["apellido"]." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>
 		</td>
 		<td><?php echo h($pedido['Pedido']['observaciones']); ?>&nbsp;</td>
-    <td><?php echo h($pedido['Pedido']['estado']); ?>&nbsp;</td>
+    <td><?php echo h($pedido['Estado']['nombre']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $pedido['Pedido']['id']),array(
                             'type'=>'button',

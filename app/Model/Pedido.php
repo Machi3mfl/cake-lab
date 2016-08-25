@@ -31,6 +31,14 @@ class Pedido extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Estado' => array(
+			'className' => 'Estado',
+			'foreignKey' => 'estado_id',
+			'dependent'=> false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 
@@ -54,5 +62,7 @@ class Pedido extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+
 
 }

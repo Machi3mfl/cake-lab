@@ -17,11 +17,6 @@
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo $this->Html->url('/pedidos');?>">Ver Pedidos</a></li>
                         <li><a href="<?php echo $this->Html->url('/pedidos/add');?>">Nuevo Pedido</a></li>
-                        <li class="divider"></li>
-                        <li><a href="<?php echo $this->Html->url('/estados');?>">Estados</a></li>
-                        <li><a href="<?php echo $this->Html->url('/copias');?>">Copias</a></li>
-                        <li><a href="<?php echo $this->Html->url('/uploads');?>">Uploads</a></li>
-
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
@@ -57,6 +52,8 @@
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo $this->Html->url('/admin/users');?>">Administrar Usuarios</a></li>
                         <li><a href="<?php echo $this->Html->url('/admin/users/add');?>">Nuevo Usuario</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?php echo $this->Html->url('/estados');?>">Administrador Estados</a></li>
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span

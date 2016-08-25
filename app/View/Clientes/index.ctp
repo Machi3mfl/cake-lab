@@ -26,6 +26,7 @@
           <th><?php echo $this->Paginator->sort('localidad'); ?></th>
           <th><?php echo $this->Paginator->sort('codigo_postal','C.P'); ?></th>
           <th><?php echo $this->Paginator->sort('email'); ?></th>
+          <th><?php echo $this->Paginator->sort('lista'); ?></th>
           <th class="actions"><?php echo __('Actions'); ?></th>
 	       </tr>
         </thead>
@@ -44,18 +45,19 @@
 		<td><?php echo h($cliente['Cliente']['localidad']); ?>&nbsp;</td>
 		<td><?php echo h($cliente['Cliente']['codigo_postal']); ?>&nbsp;</td>
 		<td><?php echo h($cliente['User']['email']); ?>&nbsp;</td>
+    <td><?php echo h($cliente['Lista']['nombre']); ?>&nbsp;</td>
 		<td>
-                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $cliente['Cliente']['id']),array(
+                    <?php echo $this->Html->link(__('Ver'), array('action' => 'view', $cliente['Cliente']['id']),array(
                         'type'=>'button',
                         'class'=>'btn btn-success btn-xs')
                             );
                     ?>
-                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $cliente['Cliente']['id']),array(
+                    <?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $cliente['Cliente']['id']),array(
                         'type'=>'button',
                         'class'=>'btn btn-warning btn-xs')
                         );
                     ?>
-                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $cliente['Cliente']['id']),array(
+                    <?php echo $this->Form->postLink(__('Borrar'), array('action' => 'delete', $cliente['Cliente']['id']),array(
                         'type'=>'button',
                         'class'=>'btn btn-danger btn-xs'),
                         __('Are you sure you want to delete # %s?', $cliente['Cliente']['id'])

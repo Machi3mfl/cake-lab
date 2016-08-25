@@ -3,8 +3,8 @@
     <ul class="nav nav-sidebar">
             <li><?php echo $this->Html->link(__('Agregar Nuevo Tamaño'), array('action' => 'add')); ?></li>
             <li><hr></li>
-            <li><?php echo $this->Html->link(__('List Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
-            <li><?php echo $this->Html->link(__('New Producto'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
+            <li><?php echo $this->Html->link(__('Listar Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
+            <li><?php echo $this->Html->link(__('Nuevo Producto'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
     </ul>
 </div>
 <div class="col-md-8">
@@ -15,7 +15,7 @@
   	<tr>
   			<th><?php echo $this->Paginator->sort('id'); ?></th>
   			<th><?php echo $this->Paginator->sort('tamano'); ?></th>
-  			<th class="actions"><?php echo __('Actions'); ?></th>
+  			<th class="actions"><?php echo __('Acciones'); ?></th>
   	</tr>
   </thead>
   <tbody>
@@ -25,12 +25,12 @@
 		<td><?php echo h($tamano['Tamano']['id']); ?>&nbsp;</td>
 		<td><?php echo h($tamano['Tamano']['tamano']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $tamano['Tamano']['id']),array(
+			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $tamano['Tamano']['id']),array(
                             'type'=>'button',
                             'class'=>'btn btn-warning')
                             );
                         ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $tamano['Tamano']['id']),array(
+			<?php echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $tamano['Tamano']['id']),array(
                             'type'=>'button',
                             'class'=>'btn btn-danger'),
                             __('Are you sure you want to delete # %s?', $tamano['Tamano']['id'])

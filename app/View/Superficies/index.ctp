@@ -25,12 +25,12 @@
 		<td><?php echo h($superficie['Superficie']['id']); ?>&nbsp;</td>
 		<td><?php echo h($superficie['Superficie']['tipo']); ?>&nbsp;</td>
                 <td>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $superficie['Superficie']['id']),array(
+			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $superficie['Superficie']['id']),array(
                             'type'=>'button',
                             'class'=>'btn btn-warning')
                             );
                         ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $superficie['Superficie']['id']),array(
+			<?php echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $superficie['Superficie']['id']),array(
                             'type'=>'button',
                             'class'=>'btn btn-danger'),
                             __('Are you sure you want to delete # %s?', $superficie['Superficie']['id'])

@@ -73,6 +73,11 @@
                 <?php    echo $this->Form->input('User.group_id',array('class'=>'form-control'), array('div'=>'clearfix',
                 'after'=>'</div>','label'=>false, 'class'=>'xlarge','required'=>true)); ?>
             </div>
+            <div class="form-group">
+                <?php    echo $this->Form->input('lista_id',array('class'=>'form-control'), array('div'=>'clearfix',
+                'after'=>'</div>','label'=>false, 'class'=>'xlarge','required'=>true)); ?>
+            </div>
+
             <div class='form-group'>
                 <?php   echo $this->Form->input('User.status',array('class'=>'form-control','checked'=>true), array('div'=>'clearfix',
                     'before'=>'<div class="form-group"><label>'.__('Activado').'</label><div class="input"></div>',

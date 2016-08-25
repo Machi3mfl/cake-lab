@@ -28,7 +28,7 @@ class EstadosController extends AppController {
 			$this->Estado->recursive=3;
       $this->Estado->id = $id;
       if (!$this->Estado->exists()) {
-              throw new NotFoundException('Invalid estado','error');
+              throw new NotFoundException('Estado incorrecto','error');
       }else{
         $this->set('estados', $this->Estado->read(null, $id));
 			}
@@ -42,10 +42,10 @@ class EstadosController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Estado->create();
 			if ($this->Estado->save($this->request->data)) {
-				$this->Session->setFlash('The lista has been saved','success');
+				$this->Session->setFlash('El estado ha sido guardado correctamente','success');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('The estado could not be saved. Please, try again.','error');
+				$this->Session->setFlash('El estado no se ha guardado. Por favor, intente nuevamente.','error');
 			}
 		}
 	}
@@ -65,10 +65,10 @@ class EstadosController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Estado->save($this->request->data)){
-				$this->Session->setFlash('La lista ha sido guardada correctamente','success');
+				$this->Session->setFlash('El estado ha sido editado correctamente','success');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('La estado no ha sido guardado. Por favor, intente nuevamente.','error');
+				$this->Session->setFlash('La estado no ha sido editado. Por favor, intente nuevamente.','error');
 			}
 		} else {
 			$this->request->data = $this->Estado->read(null, $id);
@@ -90,13 +90,13 @@ class EstadosController extends AppController {
 		}
 		$this->Estado->id = $id;
 		if (!$this->Estado->exists()) {
-			throw new NotFoundException('Invalid lista','error');
+			throw new NotFoundException('Estado incorrecto','error');
 		}
 		if ($this->Estado->delete()) {
-			$this->Session->setFlash('Estado deleted','success');
+			$this->Session->setFlash('Estado borrado','success');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash('Lista was not deleted','error');
+		$this->Session->setFlash('El estado no ha sido borrado','error');
 		$this->redirect(array('action' => 'index'));
 	}
 }

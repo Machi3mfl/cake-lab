@@ -71,6 +71,12 @@ class UsersController extends AclManagementAppController {
      */
     function logout() {
 
+        // borrar pedido creado e incompleto. Luego agregar msj de que se borrar si cierra sesion
+        $this->loadModel('Pedido');
+        $pedido=$this->Session->read('pedido_id');
+        $this->Pedido->delete($pedido);
+
+
         $this->Session->setFlash('Se ha cerrado sesión correctamente', 'success');
         $this->Session->destroy();
         $this->redirect($this->Auth->logout());
@@ -219,7 +225,7 @@ class UsersController extends AclManagementAppController {
 //        $this->redirect(array('action' => 'index'));
         return false;
     }
-    
+
     public function redirigir($group){
         if($group == 1){
             $this->redirect($this->Auth->redirect('/pedidos/'));

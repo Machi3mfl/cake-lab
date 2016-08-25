@@ -17,7 +17,7 @@
 	<tr>
             <th><?php echo $this->Paginator->sort('id'); ?></th>
             <th><?php echo $this->Paginator->sort('nombre'); ?></th>
-            <th class="actions"><?php echo __('Actions'); ?></th>
+            <th class="actions"><?php echo __('Acciones'); ?></th>
 	</tr>
 	</thead>
 	<tbody>
