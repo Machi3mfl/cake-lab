@@ -33,18 +33,11 @@ class CategoriasController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		if (!$this->Categoria->exists($id)) {
-			throw new NotFoundException('Invalid categoria','error');
+		$this->Categoria->id = $id;
+		if (!$this->Categoria->exists()) {
+			throw new NotFoundException(__('Categoria incorrecta'));
 		}
-		$this->request->data = $this->Categoria->find('first', 
-			array(
-				'conditions' => array(
-					'Categoria.' . $this->Categoria->primaryKey => $id
-				),
-				'recursive' => 2
-			)
-		);
-		$this->_setearModelos();
+		$this->set('categoria', $this->Categoria->read(null, $id));
 	}
 
 /**
