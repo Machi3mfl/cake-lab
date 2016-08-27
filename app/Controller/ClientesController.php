@@ -127,7 +127,7 @@ class ClientesController extends AppController {
 			throw new NotFoundException('Cliente incorrecto','error');
 		}
 
-                $cl = $this->Cliente->findById($id);
+    $cl = $this->Cliente->findById($id);
 		if ($this->Cliente->delete()) {
                         // Controlador de Users
                         $uController = new UsersController();
@@ -241,6 +241,21 @@ class ClientesController extends AppController {
         $cliente['User']= $user['User'];
         $this->Session->write('cliente_id',$cliente['Cliente']['id']); //guarda id del cliente en Session
         return json_encode($cliente);
+      }
+
+      public function asignar_lista(){
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+          if ($this->Cliente->saveAll($this->request->data['Cliente'])){
+            $this->Session->setFlash('El cliente ha sido editado correctamente','success');
+          }else{
+            $this->Session->setFlash('El cliente no ha sido editado','error');
+          }
+        }
+        $clientes=$this->Cliente->find('all');
+        $listas=$this->Cliente->Lista->find('list');
+        $this->set('clientes',$clientes);
+        $this->set('listas',$listas);
       }
 
 }

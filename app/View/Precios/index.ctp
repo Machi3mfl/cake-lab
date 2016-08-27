@@ -1,3 +1,6 @@
+<?php
+  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
+?>
 <div class="col-md-2">
     <legend>
         <h3><?php echo __('Acciones'); ?></h3>
@@ -12,7 +15,7 @@
             <li><?php echo $this->Html->link(__('Nuevo Productos'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
     </ul>
 </div>
-<div class="col-md-8">
+<div class="col-md-10">
 	<h3><?php echo __('Precios'); ?></h3>
         <div class="table-responsive">
 	<table cellpadding="0" cellspacing="0" class="table table-hover">
@@ -58,4 +61,3 @@
 	?>
 	</div>
 </div>
-

@@ -12,7 +12,7 @@
  * @author Maximiliano
  */
 class Localidad extends AppModel {
-    
+
     var $primaryKey='cod_loc';
     var $useTable='localidades';
     var $displayField='nom_loc';

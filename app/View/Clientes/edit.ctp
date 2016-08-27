@@ -1,4 +1,7 @@
-<?php // debug(); ?>
+<?php
+  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
+  $this->Html->addCrumb( 'Editar '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
+?>
 <div class="col-md-2">
     <h3><?php echo __('Acciones'); ?></h3>
     <ul class="nav nav-sidebar">
@@ -13,12 +16,11 @@
     })
 </script>
 
-<div class="col-md-8">
+<div class="col-md-10">
         <legend><?php echo __('Editando Cliente'); ?></legend>
             <blockquote>
               <p>Para dar de alta un nuevo cliente debera crear primero un usuario. Dicho usuario le servira para poder ingresar al sistema y generar pedidos</p>
             </blockquote>
-
         <div class='col-md-6'>
             <legend>
                 <h3>Cliente: <small> Dar de alta al cliente </small></h3>
@@ -79,7 +81,10 @@
                     'after'=>'</div>','label'=>false, 'class'=>''));
                 ?>
             </div>
-            <?php echo $this->Form->end(array('label' => 'Agregar Cliente','class'=>'btn btn-primary','div' => array('class'=>'form-group') ));?>
+            <?php
+                echo $this->Form->submit(__('Editar Cliente'), array('class' => 'btn btn-primary'));
+                echo $this->Form->end();
+            ?>
         </div>
 
 </div>

@@ -1,3 +1,7 @@
+<?php
+  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
+  $this->Html->addCrumb( 'Editar '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
+?>
 <div class="col-md-2">
     <legend>
         <h3><?php echo __('Acciones'); ?></h3>
@@ -10,8 +14,8 @@
     </ul>
 </div>
 <div class="col-md-9">
-<?php echo $this->Form->create('Tamano'); ?>
-    
+<?php echo $this->Form->create('Tamaño'); ?>
+
         <legend><?php echo __('Editar Tamaño'); ?></legend>
         <div class="col-md-5">
             <div class="form-group">
@@ -22,4 +26,3 @@
             <?php echo $this->Form->end(array('label' => 'Editar','class'=>'btn btn-primary','div' => array('class'=>'form-group') ));?>
         </div>
 </div>
-

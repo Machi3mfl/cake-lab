@@ -1,3 +1,7 @@
+<?php
+  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
+  $this->Html->addCrumb( 'Agregar '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
+?>
 <div class="col-md-2">
     <legend>
     <h3><?php echo __('Acciones'); ?></h3>
@@ -31,7 +35,7 @@
         <div class='form-group'>
 	<?php	echo $this->Form->input('tamano_id',array('class'=>'form-control','empty'=>true,'required'=>true)); ?>
         </div>
-        
+
         <div class='checkbox form-group'>
         <?php   echo $this->Form->input('activo',array('class'=>'form-control')); ?>
 	</div>
@@ -39,4 +43,3 @@
         <?php echo $this->Form->end(array('label' => 'Agregar Producto','class'=>'btn btn-primary','div' => array('class'=>'form-group') ));?>
     </div>
 </div>
-

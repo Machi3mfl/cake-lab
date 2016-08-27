@@ -10,11 +10,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <?php echo $this->Html->script('bootstrap-filestyle'); ?>
-    <!--?php echo $this->Html->script('jquery.dataTables.min'); ?-->
+    <?php echo $this->Html->script('jquery.dataTables.min'); ?>
+    <?php echo $this->Html->script('dataTables.bootstrap.min'); ?>
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <!--?php echo $this->Html->css('jquery.dataTables.min'); ?-->
+    <?php echo $this->Html->css('dataTables.bootstrap.min'); ?>
     <?php echo $this->Html->css('style'); ?>
 
     <script type="text/javascript">
@@ -28,6 +29,7 @@
 <body>
     <?php echo $this->element('navbar-admin', array(), array('plugin' => 'AclManagement'));?>
 <div class="container-fluid">
+
                 <?php if(isset($title)){?>
                 <div class="page-header">
                     <h1><?php echo $title; ?> <small><?php if(isset($description)) echo $description;?></small></h1>
@@ -36,9 +38,18 @@
                     <?php echo $this->Session->flash(); ?>
                     <?php echo $this->Session->flash('auth'); ?>
                 <div class="row">
+                    <div class="col-md-offset-2 btn-group btn-breadcrumb">
+                    <?php echo $this->Html->getCrumbs('  ', array(
+                        'text' => '<i class="glyphicon glyphicon-home"></i>',
+                        'url' => array('controller' => 'pedidos', 'action' => 'index'),
+                        'escape' => false,
+                        'class' => 'btn btn-default'
+
+                    )); ?>
+                    </div>
+                </div>
+                <div class="row">
                     <?php echo $content_for_layout; ?>
-
-
                 </div>
 </div> <!-- /container -->
 <footer class="footer">
@@ -55,7 +66,6 @@
         });
     });
     </script>
-
 </body>
 
 

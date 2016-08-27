@@ -1,3 +1,6 @@
+<?php
+  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
+?>
 <div class="col-sm-3 col-md-2 sidebar">
     <legend><h3><?php echo __('Acciones'); ?></h3></legend>
     <ul class="nav nav-colapse">

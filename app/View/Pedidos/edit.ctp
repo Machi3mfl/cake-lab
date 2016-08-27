@@ -3,6 +3,10 @@ img{
 	cursor:pointer !important;
 }
 </style>
+<?php
+  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
+  $this->Html->addCrumb( 'Editar '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
+?>
 <div class="col-md-2 sidebar">
 <?php
 	echo $this->Form->create('Pedido');

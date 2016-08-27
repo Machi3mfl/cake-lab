@@ -1,3 +1,7 @@
+<?php
+  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
+  $this->Html->addCrumb( 'Editar '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
+?>
 <div class="col-md-2">
     <legend>
         <h3><?php echo __('Acciones'); ?></h3>
@@ -7,7 +11,7 @@
         <li><hr></li>
         <li><?php echo $this->Html->link(__('Listar Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
         <li><?php echo $this->Html->link(__('Nuevo Productos'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
-    </ul>    
+    </ul>
 </div>
 <div class="col-md-9">
     <legend><?php echo __('Editar Superficie'); ?></legend>
@@ -19,7 +23,7 @@
             ?>
         </div>
         <div class="form-group clear"></div>
-        
+
         <?php echo $this->Form->submit(__('Editar'), array('class' => 'btn btn-primary')); ?>
         <?php echo $this->Form->end();?>
         </div>
