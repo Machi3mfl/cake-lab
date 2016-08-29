@@ -22,8 +22,10 @@ class ClientesController extends AppController {
  */
 	public function index() {
 		$this->Cliente->recursive = 0;
-                $this->paginate();
-		$this->set('clientes', $this->paginate());
+    //$this->paginate();
+		//$this->set('clientes', $this->paginate());
+
+    $this->set( 'clientes' , $this->Cliente->find('all'));
 	}
 
 /**
@@ -178,6 +180,7 @@ class ClientesController extends AppController {
             $loc = ClassRegistry::init('Localidad');
             $datos=$loc->find('list',array('order'=>'nom_loc ASC'));
             //$datos=$loc->find('list',array('order'=>'nom_loc ASC', 'conditions'=>"(substring(Localidad.cod_loc from 1 for 2))::integer=($cod_prov)"));
+
             $this->set("localidades",$datos);
         }
 
@@ -256,6 +259,15 @@ class ClientesController extends AppController {
         $listas=$this->Cliente->Lista->find('list');
         $this->set('clientes',$clientes);
         $this->set('listas',$listas);
+      }
+
+      public function updateLocalidad(){
+       $this->layout = false;
+       $this->loadModel('Localidad');
+       $prov_id = $this->request->data['prov'];
+
+       $datos = $this->Localidad->getLocalidades( $prov_id );
+       debug($datos);
       }
 
 }

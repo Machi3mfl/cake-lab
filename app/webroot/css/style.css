@@ -197,6 +197,11 @@ table.dataTable thead th.sorting_desc:after {
     content: "\f0dd";
 }
 
+div.dataTables_wrapper div.dataTables_info,
+div.dataTables_wrapper div.dataTables_paginate{
+  margin-top:50px !important;
+}
+
 /********** BREADCRUMBS ****************/
 
 .btn-breadcrumb .btn:not(:last-child):after {

@@ -15,12 +15,11 @@
 </div>
 <div class="col-md-9">
 <?php echo $this->Form->create('Tamaño'); ?>
-
         <legend><?php echo __('Editar Tamaño'); ?></legend>
         <div class="col-md-5">
             <div class="form-group">
                 <?php
-                        echo $this->Form->input('tamano',array('class'=>'form-control'));
+                    echo $this->Form->input('tamano',array('class'=>'form-control'));
                 ?>
             </div>
             <?php echo $this->Form->end(array('label' => 'Editar','class'=>'btn btn-primary','div' => array('class'=>'form-group') ));?>

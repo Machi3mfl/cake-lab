@@ -1,3 +1,7 @@
+<?php
+  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
+  $this->Html->addCrumb( 'Asignar Lista ', '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
+?>
 <div class="col-md-2">
     <legend>
         <h3><?php echo __('Acciones'); ?></h3>

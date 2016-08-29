@@ -11,7 +11,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo $this->Html->url("/");?>"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                <li class="active"><a href="<?php echo $this->Html->url("/pedidos");?>"><span class="glyphicon glyphicon-home"></span></a></li>
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
                     class="fa fa-pencil"></span> Pedidos <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -24,6 +24,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo $this->Html->url('/clientes');?>">Ver Clientes</a></li>
                         <li><a href="<?php echo $this->Html->url('/clientes/add');?>">Nuevo Cliente</a></li>
+                        <li class="divider"></li>
                         <li><a href="<?php echo $this->Html->url('/clientes/asignar_lista');?>">Asignar Lista de precios</a></li>
                     </ul>
                 </li>

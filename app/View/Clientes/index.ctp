@@ -18,16 +18,16 @@
         <table id="clientes" cellpadding="0" cellspacing="0"  class="table table-hover">
         <thead>
 	      <tr>
-          <th><?php echo $this->Paginator->sort('id'); ?></th>
-          <th><?php echo $this->Paginator->sort('nombre'); ?></th>
-          <th><?php echo $this->Paginator->sort('calle'); ?></th>
-          <th><?php echo $this->Paginator->sort('numero'); ?></th>
-          <th><?php echo $this->Paginator->sort('telefono'); ?></th>
-          <th><?php echo $this->Paginator->sort('provincia'); ?></th>
-          <th><?php echo $this->Paginator->sort('localidad'); ?></th>
-          <th><?php echo $this->Paginator->sort('email'); ?></th>
-          <th><?php echo $this->Paginator->sort('lista'); ?></th>
-          <th class="actions"><?php echo __('Actions'); ?></th>
+          <th><?php echo 'Id'; ?></th>
+          <th><?php echo 'Nombre'; ?></th>
+          <th><?php echo 'Calle'; ?></th>
+          <th><?php echo 'Numero'; ?></th>
+          <th><?php echo 'Telefono'; ?></th>
+          <th><?php echo 'Provincia'; ?></th>
+          <th><?php echo 'Localidad'; ?></th>
+          <th><?php echo 'Email'; ?></th>
+          <th><?php echo 'Lista'; ?></th>
+          <th class="actions"><?php echo __('Acciones'); ?></th>
 	       </tr>
         </thead>
         <tbody>

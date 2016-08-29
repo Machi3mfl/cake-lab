@@ -1,4 +1,5 @@
 <?php
+App::uses('AppModel', 'Model');
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,7 +14,13 @@
  */
 class Localidad extends AppModel {
 
+    public $name = 'Localidad';
     var $primaryKey='cod_loc';
     var $useTable='localidades';
     var $displayField='nom_loc';
+
+
+    public function getLocalidades( $prov ){
+      return $this->query('SELECT * FROM localidades;');
+    }
 }
