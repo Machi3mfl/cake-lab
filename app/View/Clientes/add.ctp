@@ -40,7 +40,7 @@
               <label>Sexo</label>
             </div>
             <div class='form-group col-md-7'>
-                <?php   echo $this->Form->select('sexo',array('Masculino','Femenino'),array('class'=>'form-control','required'=>true) ); ?>
+                <?php   echo $this->Form->select('sexo',array('Masculino' => 'Masculino','Femenino' => 'Femenino'),array('class'=>'form-control','required'=>true) ); ?>
             </div>
             <div class="form-group col-md-12">
               <label>Domicilio</label>
@@ -147,7 +147,7 @@ $( document ).ready(function() {
   		url: '<?php echo $this->Html->url(array('action' => 'updateLocalidad')); ?>',
   		data: {prov:  prov}
   	}).done(function(respuesta){
-      $('#ClienteLocalidades').html(respuesta.responseText);
+      $('#ClienteLocalidad').html(respuesta);
   	});
   });
 });

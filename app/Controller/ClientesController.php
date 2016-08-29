@@ -9,6 +9,8 @@ App::uses('UsersController', 'AclManagement.Controller');
  */
 class ClientesController extends AppController {
 
+    var $uses = array("Cliente", "Localidad", "Provincia");
+
     function beforeFilter() {
         parent::beforeFilter();
 
@@ -22,10 +24,9 @@ class ClientesController extends AppController {
  */
 	public function index() {
 		$this->Cliente->recursive = 0;
-    //$this->paginate();
-		//$this->set('clientes', $this->paginate());
-
     $this->set( 'clientes' , $this->Cliente->find('all'));
+    $this->set('localidades', $this->Localidad->find('list'));
+    $this->set('provincias', $this->Provincia->find('list'));
 	}
 
 /**
@@ -41,6 +42,8 @@ class ClientesController extends AppController {
 			throw new NotFoundException(__('Cliente incorrecto','error'));
 		}
 		$this->set('cliente', $this->Cliente->read(null, $id));
+    $this->set('localidades', $this->Localidad->find('list'));
+    $this->set('provincias', $this->Provincia->find('list'));
 	}
 
 /**
@@ -62,6 +65,7 @@ class ClientesController extends AppController {
                 //debug($this->request->data);
                 if ( $this->Cliente->save($this->request->data['Cliente']) ){
                     $this->Session->setFlash('Nuevo Cliente guardado.','success');
+                    $this->redirect(array('action' => 'index'));
                 }
                 else{
                     $this->Session->setFlash('Existe un problema con alguno/s de los campos. Revise e intente nuevamente.','error');
@@ -76,7 +80,6 @@ class ClientesController extends AppController {
         $groups = $group->find('list', array('conditions' => array('Group.name' => 'cliente')));
         $listas = $this->Cliente->Lista->find('list');
         $this->cargar_provincia();
-        $this->cargar_localidad();
         $this->set(compact('users','groups','listas'));
 
     }
@@ -108,7 +111,6 @@ class ClientesController extends AppController {
     $listas= $this->Cliente->Lista->find('list');
     $groups = $group->find('list', array('conditions' => array('Group.name' => 'cliente')));
     $this->cargar_provincia();
-    $this->cargar_localidad();
     $this->set(compact('users','groups','listas'));
 	}
 
@@ -174,14 +176,6 @@ class ClientesController extends AppController {
             $prov = ClassRegistry::init('Provincia');
             $datos=$prov->find('list',array('order'=>'nom_prov ASC'));
             $this->set('provincias',$datos);
-        }
-
-        function cargar_localidad(){
-            $loc = ClassRegistry::init('Localidad');
-            $datos=$loc->find('list',array('order'=>'nom_loc ASC'));
-            //$datos=$loc->find('list',array('order'=>'nom_loc ASC', 'conditions'=>"(substring(Localidad.cod_loc from 1 for 2))::integer=($cod_prov)"));
-
-            $this->set("localidades",$datos);
         }
 
         public function buscarPorUsuario($usuario_id){
@@ -263,11 +257,14 @@ class ClientesController extends AppController {
 
       public function updateLocalidad(){
        $this->layout = false;
-       $this->loadModel('Localidad');
        $prov_id = $this->request->data['prov'];
 
-       $datos = $this->Localidad->getLocalidades( $prov_id );
-       debug($datos);
+       $datos = $this->Localidad->find("all", array(
+         'conditions' => array(
+           'Localidad.cod_prov' => $prov_id
+         )));
+
+      $this->set('datos' , $datos);
       }
 
 }

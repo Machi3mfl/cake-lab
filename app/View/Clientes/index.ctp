@@ -39,27 +39,27 @@
 		<td><?php echo h($cliente['Cliente']['calle']); ?>&nbsp;</td>
 		<td><?php echo h($cliente['Cliente']['numero']); ?>&nbsp;</td>
 		<td><?php echo h($cliente['Cliente']['telefono']); ?>&nbsp;</td>
-		<td><?php echo h($cliente['Cliente']['provincia']); ?>&nbsp;</td>
-		<td><?php echo h($cliente['Cliente']['localidad']); ?>&nbsp;</td>
+		<td><?php echo h($provincias[$cliente['Cliente']['provincia']]); ?>&nbsp;</td>
+		<td><?php echo h($localidades[$cliente['Cliente']['localidad']]); ?>&nbsp;</td>
 		<td><?php echo h($cliente['User']['email']); ?>&nbsp;</td>
     <td><?php echo h($cliente['Lista']['nombre']); ?>&nbsp;</td>
 		<td>
-                    <?php echo $this->Html->link(__('Ver'), array('action' => 'view', $cliente['Cliente']['id']),array(
-                        'type'=>'button',
-                        'class'=>'btn btn-success btn-xs')
-                            );
-                    ?>
-                    <?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $cliente['Cliente']['id']),array(
-                        'type'=>'button',
-                        'class'=>'btn btn-warning btn-xs')
-                        );
-                    ?>
-                    <?php echo $this->Form->postLink(__('Borrar'), array('action' => 'delete', $cliente['Cliente']['id']),array(
-                        'type'=>'button',
-                        'class'=>'btn btn-danger btn-xs'),
-                        __('Are you sure you want to delete # %s?', $cliente['Cliente']['id'])
-                            );
-                    ?>
+      <?php echo $this->Html->link(__('Ver'), array('action' => 'view', $cliente['Cliente']['id']),array(
+          'type'=>'button',
+          'class'=>'btn btn-success btn-xs')
+              );
+      ?>
+      <?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $cliente['Cliente']['id']),array(
+          'type'=>'button',
+          'class'=>'btn btn-warning btn-xs')
+          );
+      ?>
+      <?php echo $this->Form->postLink(__('Borrar'), array('action' => 'delete', $cliente['Cliente']['id']),array(
+          'type'=>'button',
+          'class'=>'btn btn-danger btn-xs'),
+          __('Are you sure you want to delete # %s?', $cliente['Cliente']['id'])
+              );
+      ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

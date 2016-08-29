@@ -14,13 +14,8 @@ App::uses('AppModel', 'Model');
  */
 class Localidad extends AppModel {
 
-    public $name = 'Localidad';
     var $primaryKey='cod_loc';
     var $useTable='localidades';
     var $displayField='nom_loc';
 
-
-    public function getLocalidades( $prov ){
-      return $this->query('SELECT * FROM localidades;');
-    }
 }

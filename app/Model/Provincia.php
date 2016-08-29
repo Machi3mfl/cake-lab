@@ -11,9 +11,9 @@
  *
  * @author Maximiliano
  */
-class provincia extends appModel {
-    
-    var $primaryKey='cod_prov'; 
+class Provincia extends appModel {
+
+    var $primaryKey='cod_prov';
     var $useTable='provincias';
     var $displayField='nom_prov';
 }
