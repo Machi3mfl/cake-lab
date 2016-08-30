@@ -105,6 +105,11 @@ class ClientesController extends AppController {
 			}
 		} else {
 			$this->request->data = $this->Cliente->read(null, $id);
+      //$this->set('cliente', $this->request->data);
+      $this->set('localidades', $this->Localidad->find('list', array(
+        'conditions' => array(
+          'Localidad.cod_prov' => $this->request->data['Cliente']['provincia']),
+      )));
 		}
 		$users = $this->Cliente->User->find('list');
 		$group = ClassRegistry::init('Group');

@@ -21,83 +21,123 @@
             <blockquote>
               <p>Para dar de alta un nuevo cliente debera crear primero un usuario. Dicho usuario le servira para poder ingresar al sistema y generar pedidos</p>
             </blockquote>
-        <div class='col-md-6'>
+        <div class='col-md-9s'>
             <legend>
                 <h3>Cliente: <small> Dar de alta al cliente </small></h3>
             </legend>
             <?php echo $this->Form->create('Cliente',["data-toggle"=>"validator","role"=>"form"]); ?>
-            <div class='form-group'>
-                <?php  echo $this->Form->input('nombre',array('class'=>'form-control','placeHolder'=>'Ingrese Nombre','required'=>true)); ?>
+            <div class="form-group col-md-12">
+              <label>Nombre</label>
             </div>
-            <div class='form-group'>
-                <?php   echo $this->Form->input('apellido',array('class'=>'form-control','placeHolder'=>'Ingrese Apellido','required'=>true)); ?>
+            <div class='col-md-6 form-group'>
+                <?php   echo $this->Form->input('apellido',array(
+                  'class'=>'form-control col-md-12','placeHolder'=>'Ingrese Apellido','required'=>true, 'label' => false, 'div' => false)); ?>
             </div>
-            <div class='form-group'>
-                <label class='control-label' for='ClienteSexo'>Sexo
-                <?php   echo $this->Form->select('sexo',array('Masculino','Femenino'),array('class'=>'form-control','required'=>true) ); ?>
-                </label>
+            <div class='col-md-6 form-group'>
+                <?php  echo $this->Form->input('nombre',array(
+                  'class'=>'form-control col-md-12','placeHolder'=>'Ingrese Nombre','required'=>true, 'label' => false , 'div' => false)); ?>
             </div>
-            <label class='control-label'>Domicilio</label>
-            <div class='form-group'>
+
+            <div class="form-group col-md-12">
+              <label>Sexo</label>
+            </div>
+            <div class='form-group col-md-7'>
+                <?php   echo $this->Form->select('sexo',array('Masculino' => 'Masculino','Femenino' => 'Femenino'),array('class'=>'form-control','required'=>true) ); ?>
+            </div>
+            <div class="form-group col-md-12">
+              <label>Domicilio</label>
+            </div>
+            <div class='form-group col-md-5'>
                 <?php   echo $this->Form->input('calle',array('class'=>'form-control','placeHolder'=>'Ingrese Calle','label'=>false,'required'=>true)); ?>
             </div>
-            <div class='form-group'>
-                <?php   echo $this->Form->input('numero',array('class'=>'form-control','placeHolder'=>'Ingrese Altura','label'=>false, 'type'=>'number')); ?>
+            <div class='form-group col-md-4'>
+                <?php   echo $this->Form->input('numero',array('class'=>'form-control','placeHolder'=>'Ingrese Altura','label'=>false, 'required'=>true , 'type'=>'number')); ?>
             </div>
-            <label class='control-label'>Departamento/Piso</label>
-            <div class='form-group'>
-                <?php   echo $this->Form->input('piso',array('class'=>'form-control','placeHolder'=>'Ingrese Departamento o piso','label'=>false, 'type'=>'number')); ?>
+            <div class='form-group col-md-3'>
+                <?php   echo $this->Form->input('piso',array('class'=>'form-control','placeHolder'=>'Departamento / Piso','label'=>false, 'required'=>true, 'type'=>'text')); ?>
             </div>
-            <div class='form-group'>
-                <?php   echo $this->Form->input('telefono',array('class'=>'form-control','placeHolder'=>'Ingrese número de telefono','required'=>true)); ?>
+            <div class="form-group col-md-12">
+              <label>Código Postal</label>
             </div>
-            <div class='form-group'>
-                <label class='control-label' for='ClienteProvincia'>Provincia
-                <?php   echo $this->Form->select('provincia',$provincias,array('class'=>'form-control','required'=>true, 'default'=>$this->data['Cliente']['provincia'])); ?>
-                </label>
+            <div class='form-group col-md-8'>
+                <?php  echo $this->Form->input('codigo_postal',array('class'=>
+                  'form-control','placeHolder'=>'Ingrese codigo postal','required'=>true, 'label' => false , 'div' => false )); ?>
             </div>
-            <div class='form-group'>
-                <label class='control-label' for='ClienteLocalidad'>Localidad
-                <?php   echo $this->Form->select('localidad',$localidades,array('class'=>'form-control','required'=>true,'default'=>$this->data['Cliente']['localidad'])); ?>
-                </label>
+            <div class="form-group col-md-12">
+              <label>Teléfono</label>
             </div>
-            <div class='form-group'>
-                <?php   echo $this->Form->input('codigo_postal',array('class'=>'form-control','placeHolder'=>'Ingrese codigo postal','required'=>true)); ?>
+            <div class='form-group col-md-8'>
+                <?php echo $this->Form->input('telefono',array(
+                  'class'=>'form-control','placeHolder'=>'Ingrese número de telefono','required'=>true , 'div' => false, 'label' => false)); ?>
             </div>
-            <div class='form-group'>
-                <?php  echo $this->Form->input('User.email',array('class'=>'form-control','placeHolder'=>'Ingrese correo electronico','type'=>'email', 'required'=>true)); ?>
+            <div class="form-group col-md-12">
+              <label>Provincia</label>
             </div>
-            <div class="form-group">
-                <?php    echo $this->Form->input('User.group_id',array('class'=>'form-control'), array('div'=>'clearfix',
-                'after'=>'</div>','label'=>false, 'class'=>'xlarge','required'=>true)); ?>
+            <div class='form-group col-md-8'>
+                <?php   echo $this->Form->select('provincia',$provincias,array(
+                  'class'=>'form-control','required'=>true, 'div' => false , 'label' => false )); ?>
             </div>
-            <div class="form-group">
-                <?php    echo $this->Form->input('lista_id',array('class'=>'form-control'), array('div'=>'clearfix',
-                'after'=>'</div>','label'=>false, 'class'=>'xlarge','required'=>true)); ?>
+            <div class="form-group col-md-12">
+              <label>Localidad</label>
             </div>
-            <div class='form-group'>
+            <div class='form-group col-md-8'>
+              <?php   echo $this->Form->select('localidad', $localidades, array(
+                'class'=>'form-control','required'=>true, 'div' => false , 'label' => false )); ?>
+              </select>
+            </div>
+            <div class="form-group col-md-12">
+              <label>Email</label>
+            </div>
+            <div class='form-group col-md-8'>
+                <?php  echo $this->Form->input('User.email',array(
+                  'class'=>'form-control','placeHolder'=>'Ingrese correo electronico','type'=>'email', 'required'=>true, 'div' => false , 'label' => false )); ?>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label>Grupo</label>
+            </div>
+            <div class="form-group col-md-8">
+                <?php  echo $this->Form->input('User.group_id',array(
+                  'class'=>'form-control' , 'div' => false, 'label' => false), array(
+                    'div'=>'clearfix',
+                    'after'=>'</div>','label'=>false, 'class'=>'xlarge','required'=>true)); ?>
+            </div>
+            <div class="form-group col-md-12">
+              <label>Lista de precios</label>
+            </div>
+            <div class="form-group col-md-8">
+                <?php    echo $this->Form->input('lista_id',array(
+                  'class'=>'form-control', 'div' => false , 'label' => false), array(
+                    'div'=>'clearfix',
+                    'after'=>'</div>','label'=>false, 'class'=>'xlarge','required'=>true )); ?>
+            </div>
+            <div class='form-group col-md-8'>
                 <?php   echo $this->Form->input('User.status',array('class'=>'form-control','checked'=>true), array('div'=>'clearfix',
                     'before'=>'<div class="form-group"><label>'.__('Activado').'</label><div class="input"></div>',
-                    'after'=>'</div>','label'=>false, 'class'=>''));
+                    'after'=>'</div>','label'=>false));
                 ?>
             </div>
-            <?php
-                echo $this->Form->submit(__('Editar Cliente'), array('class' => 'btn btn-primary'));
-                echo $this->Form->end();
-            ?>
+            <div class="row col-md-12">
+              <?php echo $this->Html->link(__('Cancelar'), array('controller' => 'clientes', 'action' => 'index'),array(
+                'class' => 'btn btn-danger pull-left'
+              )); ?>
+              <?php echo $this->Form->submit(__('Editar Cliente'), array('class' => 'form-group btn btn-success pull-right')); ?>
+            </div>
+            <?php echo $this->Form->end(); ?>
         </div>
-
 </div>
-<!--script type="text/javascript">
+<script type="text/javascript">
 $( document ).ready(function() {
+  $("#ClienteProvincia").change(function(){
+    var prov = $(this).val();
     $.ajax({
-        async:true,
-        type:'post',
-        complete:function(request, json) {
-            $('#ClienteLocalidades').html(request.responseText);
-        },
-        url:'/Clientes/updateSelect',
-        data:$('#ClienteProvincias').serialize()
-    });
+  		async: true,
+  		method: "post",
+  		url: '<?php echo $this->Html->url(array('action' => 'updateLocalidad')); ?>',
+  		data: {prov:  prov}
+  	}).done(function(respuesta){
+      $('#ClienteLocalidad').html(respuesta);
+  	});
+  });
 });
-</script-->
+</script>

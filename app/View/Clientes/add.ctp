@@ -82,7 +82,6 @@
               <select id="ClienteLocalidad" required="1" class="form-control" name="data[Cliente][localidad]">
                 <option value=""></option>
               </select>
-              <div class="help-block with-errors"></div>
             </div>
             <div class="form-group col-md-12">
               <label>Email</label>
@@ -130,9 +129,11 @@
                     'after'=>'</div>','label'=>false));
                 ?>
             </div>
-            <div class="row">
-              <?php echo $this->Form->end(array('label' => 'Agregar Cliente','class'=>'btn btn-primary pull-right','div' => array(
-                'class'=>'form-group col-md-12') ));?>
+            <div class="row col-md-12">
+              <?php echo $this->Html->link(__('Cancelar'), array('controller' => 'clientes', 'action' => 'index'),array(
+                'class' => 'btn btn-danger pull-left'
+              )); ?>
+              <?php echo $this->Form->end(array('label' => 'Agregar Cliente','class'=>'btn btn-success pull-right','div' => false));?>
             </div>
         </div>
 
