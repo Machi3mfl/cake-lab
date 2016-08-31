@@ -74,7 +74,10 @@ class PedidosController extends AppController {
  * @return void
  */
     public function edit($id = null) {
-      $this->loadModel("Upload");
+      $this->loadModel('Upload');
+      $this->loadModel('Cliente');
+      $this->loadModel('Estado');
+
       $this->Pedido->recursive=3;
       $this->Pedido->id = $id;
       $uploads=array();
@@ -95,11 +98,15 @@ class PedidosController extends AppController {
           $upload=$this->Upload->read(null,$copia['upload_id']);
           array_push($uploads,$upload);
         }
+
       }
-      $clientes = $this->Pedido->Cliente->find('all');
+      $clientes = $this->Cliente->find('all',array(
+        'fields' => array('Cliente.id','Cliente.nombre_completo')));
+      //debug($this->Cliente->find('list'));
+      $this->set('estados',$this->Estado->find('list'));
+      $this->set('clientes',$clientes);
       $this->set('pedido', $pedido);
       $this->set('uploads',$uploads);
-      $this->set(compact('clientes'));
   }
 
 /**

@@ -23,6 +23,7 @@ img{
 		</ul>
 	</div>
 <div class="col-md-10">
+	<?php debug($pedido);?>
 		<h3><?php  echo __('Pedido'); ?></h3>
 		<div class="table-responsive">
 			<table class="table table-hover">
@@ -39,12 +40,22 @@ img{
 			</thead>
 			<tbody>
 				<tr>
-					<td><?php echo h($pedido['Pedido']['id']); ?>&nbsp;</td>
-					<td><?php echo h($pedido['Pedido']['fecha']); ?>&nbsp;</td>
-					<td><?php echo h($pedido['Pedido']['importe']); ?>&nbsp;</td>
-					<td><?php echo h($pedido['Pedido']['cantidad']); ?>&nbsp;</td>
-					<td><?php echo $this->Html->link($pedido['Cliente']['apellido']." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>	&nbsp;</td>
-					<td><?php echo h($pedido['Estado']['nombre']); ?>&nbsp;</td>
+					<td><?php echo h($pedido['Pedido']['id']); ?></td>
+					<td><?php echo h($pedido['Pedido']['fecha']); ?></td>
+					<td><?php echo h($pedido['Pedido']['importe']); ?></td>
+					<td><?php echo h($pedido['Pedido']['cantidad']); ?></td>
+					<td>
+						<select class="form-control" name='data[Pedido][cliente_id]'>
+						<?php
+							if(isset($clientes)){
+								foreach ($clientes as $c){
+									echo '<option value="'.$c['Cliente']['id'].'">'.$c['Cliente']['nombre_completo'].'</option>';
+								}
+							}
+						?>
+						</select>
+					</td>
+					<td><?php echo $this->Form->select('estado_id',$estados, array('class' => 'form-control')); ?></td>
 					<td><?php echo $this->Form->input('observaciones', array(
 									'label' => false , 'class' => 'form-control' , 'value' => $pedido['Pedido']['observaciones'], 'type' => 'textarea' , 'rows' => '3'));
 							?>

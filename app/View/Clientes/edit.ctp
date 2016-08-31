@@ -15,7 +15,6 @@
         $('.form-group').append('<div class="help-block with-errors"></div>');
     })
 </script>
-
 <div class="col-md-10">
         <legend><?php echo __('Editando Cliente'); ?></legend>
             <blockquote>

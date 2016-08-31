@@ -12,6 +12,11 @@ class Cliente extends AppModel {
  *
  * @var array
  */
+
+ 	public $virtualFields = array(
+     'nombre_completo' => 'CONCAT(Cliente.nombre, " ", Cliente.apellido)'
+ 	);
+
 	public $validate = array(
 		'nombre' => array(
 			'notEmpty' => array(
