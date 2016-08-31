@@ -103,7 +103,7 @@ class PedidosController extends AppController {
       $clientes = $this->Cliente->find('all',array(
         'fields' => array('Cliente.id','Cliente.nombre_completo')));
       //debug($this->Cliente->find('list'));
-      $this->set('estados',$this->Estado->find('list'));
+      $this->set('estados',$this->Estado->find('all'));
       $this->set('clientes',$clientes);
       $this->set('pedido', $pedido);
       $this->set('uploads',$uploads);

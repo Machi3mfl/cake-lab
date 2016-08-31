@@ -23,7 +23,6 @@ img{
 		</ul>
 	</div>
 <div class="col-md-10">
-	<?php debug($pedido);?>
 		<h3><?php  echo __('Pedido'); ?></h3>
 		<div class="table-responsive">
 			<table class="table table-hover">
@@ -45,17 +44,32 @@ img{
 					<td><?php echo h($pedido['Pedido']['importe']); ?></td>
 					<td><?php echo h($pedido['Pedido']['cantidad']); ?></td>
 					<td>
-						<select class="form-control" name='data[Pedido][cliente_id]'>
+						<select id="cliente_id" class="form-control" name='data[Pedido][cliente_id]'>
 						<?php
 							if(isset($clientes)){
 								foreach ($clientes as $c){
-									echo '<option value="'.$c['Cliente']['id'].'">'.$c['Cliente']['nombre_completo'].'</option>';
+										if($pedido['Pedido']['cliente_id'] == $c['Cliente']['id'])
+												$select='selected="selected"';
+										else $select=' ';
+										echo '<option '.$select.' value="'.$c['Cliente']['id'].'">'.$c['Cliente']['nombre_completo'].'</option>';
 								}
 							}
 						?>
 						</select>
 					</td>
-					<td><?php echo $this->Form->select('estado_id',$estados, array('class' => 'form-control')); ?></td>
+					<td>
+						<select id="estado_id" class="form-control" name='data[Pedido][estado_id]'>
+					<?php
+						if(isset($estados)){
+							foreach ($estados as $e){
+									if($pedido['Pedido']['estado_id'] == $e['Estado']['id'])
+											$select='selected="selected"';
+									else $select=' ';
+									echo '<option '.$select.' value="'.$e['Estado']['id'].'">'.$e['Estado']['nombre'].'</option>';
+							}
+						}
+					?>
+					</select></td>
 					<td><?php echo $this->Form->input('observaciones', array(
 									'label' => false , 'class' => 'form-control' , 'value' => $pedido['Pedido']['observaciones'], 'type' => 'textarea' , 'rows' => '3'));
 							?>
