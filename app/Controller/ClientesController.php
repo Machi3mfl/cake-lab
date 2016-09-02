@@ -42,8 +42,15 @@ class ClientesController extends AppController {
 			throw new NotFoundException(__('Cliente incorrecto','error'));
 		}
 		$this->set('cliente', $this->Cliente->read(null, $id));
-    $this->set('localidades', $this->Localidad->find('list'));
-    $this->set('provincias', $this->Provincia->find('list'));
+    $this->set('localidad', $this->Localidad->find('list',array(
+      'conditions'=> array('Localidad.cod_loc' => $this->Cliente->data['Cliente']['localidad'])
+      )
+    ));
+    $this->set('provincia', $this->Provincia->find('list',array(
+      'conditions'=> array(
+        'Provincia.cod_prov' => $this->Cliente->data['Cliente']['provincia'])
+      )
+    ));
 	}
 
 /**

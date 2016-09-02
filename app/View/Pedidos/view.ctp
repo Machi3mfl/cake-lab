@@ -3,6 +3,10 @@ img{
 	cursor:pointer !important;
 }
 </style>
+<?php
+  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
+  $this->Html->addCrumb( 'Ver '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
+?>
 <div class="col-md-2 sidebar">
 	<legend><h3><?php echo __('Acciones'); ?></h3></legend>
 		<ul class="nav nav-colapse">

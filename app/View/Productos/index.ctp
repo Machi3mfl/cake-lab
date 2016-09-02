@@ -48,11 +48,6 @@
 			<?php echo $this->Html->link($producto['Tamano']['tamano'], array('controller' => 'tamanos', 'action' => 'view', $producto['Tamano']['id'])); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $producto['Producto']['id']),array(
-                            'type'=>'button',
-                            'class'=>'btn btn-success  btn-xs')
-                                );
-                        ?>
 			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $producto['Producto']['id']),array(
                             'type'=>'button',
                             'class'=>'btn btn-warning  btn-xs')
