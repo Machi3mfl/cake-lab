@@ -17,6 +17,10 @@ class Producto extends AppModel {
 	public $displayField = 'id';
 
         public $validate = array(
+												'activo' => array(
+															'rule' => array('checkExistencia'),
+															'message' => 'Ya existe un producto con estas caracteristicas. No pueden existir productos iguales.'
+												),
                         'categoria_id' => array(
                                 'notEmpty' => array(
                                         'rule' => array('notEmpty')
@@ -63,7 +67,7 @@ class Producto extends AppModel {
 			'order' => ''
 		)
 	);
-        
+
     public $hasMany = array(
 		'precios' => array(
 			'className' => 'Precio',
@@ -81,4 +85,18 @@ class Producto extends AppModel {
 	);
 
 	public $actsAs = array('Containable');
+
+	public function checkExistencia($data){
+		$prod = $this->find('first', array(
+			'conditions' => array(
+				'Producto.categoria_id' => $this->data['Producto']['categoria_id'] ,
+				'Producto.superficie_id' => $this->data['Producto']['superficie_id'] ,
+				'Producto.tamano_id' => $this->data['Producto']['tamano_id']
+			)
+		));
+
+		if (!$prod) return true;
+		else return false;
+	}
+
 }

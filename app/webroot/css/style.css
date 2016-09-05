@@ -331,3 +331,11 @@ div.dataTables_wrapper div.dataTables_paginate{
 .btn-breadcrumb .btn.btn-info:hover:not(:last-child):before {
   border-left: 10px solid #269abc;
 }
+
+/* BOOTSTRAP TABLE JS
+-------------------------------------------------- */
+
+.table-responsive {
+  height: auto !important;
+  min-height: 370px;
+}

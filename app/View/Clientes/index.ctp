@@ -70,8 +70,9 @@
 <script>
 $(document).ready(function(){
 });
+
 $.extend($.fn.bootstrapTable.columnDefaults, {
-  	sortable: true,
+  	sortable: true
 });
 
 $(function() {

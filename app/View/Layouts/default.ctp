@@ -20,6 +20,9 @@
     <!--?php echo $this->Html->css('dataTables.bootstrap.min'); ?-->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+    <!-- Latest compiled and minified Locales -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-es-AR.js"></script>
+
     <?php echo $this->Html->css('style'); ?>
 
     <script type="text/javascript">

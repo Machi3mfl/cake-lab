@@ -8,14 +8,25 @@ App::uses('AppController', 'Controller');
  */
 class ProductosController extends AppController {
 
+	public $components = array('Paginator');
+	public $paginate = array(
+			'order' => array(
+					'Producto.categoria_id' => 'asc',
+					'Producto.superficie_id' => 'asc',
+					'Producto.tamano_id' => 'asc',
+			)
+	);
+
+
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
+		$this->Paginator->settings = $this->paginate;
 		$this->Producto->recursive = 0;
-		$this->set('productos', $this->paginate());
+		$this->set('productos', $this->Paginator->paginate());
 	}
 
 /**
@@ -28,7 +39,7 @@ class ProductosController extends AppController {
 	public function view($id = null) {
 		$this->Producto->id = $id;
 		if (!$this->Producto->exists()) {
-			throw new NotFoundException('Invalid producto','error');
+			throw new NotFoundException('Producto inválido','error');
 		}
 		$this->set('producto', $this->Producto->read(null, $id));
 	}
@@ -41,12 +52,19 @@ class ProductosController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Producto->create();
-			if ($this->Producto->save($this->request->data)) {
-				$this->Session->setFlash('The producto has been saved','success');
-				$this->redirect(array('action' => 'index'));
+			$this->Producto->set($this->request->data);
+			if($this->Producto->validates()){
+				if ($this->Producto->save()) {
+					$this->Session->setFlash('El producto ha sigo creado correctamente','success');
+					$this->redirect(array('action' => 'index'));
+				} else {
+					$this->Session->setFlash('El producto no ha sido guardado. Por favor, intentelo de nuevo.','error');
+				}
 			} else {
-				$this->Session->setFlash('The producto could not be saved. Please, try again.','error');
+				$errors = $this->Producto->validationErrors;
+				$this->Session->setFlash($errors['activo'][0],'error');
 			}
+
 		}
 		$categorias = $this->Producto->Categoria->find('list');
 		$superficies = $this->Producto->Superficie->find('list');
@@ -64,15 +82,23 @@ class ProductosController extends AppController {
 	public function edit($id = null) {
 		$this->Producto->id = $id;
 		if (!$this->Producto->exists()) {
-			throw new NotFoundException('Invalid producto','error');
+			throw new NotFoundException('Producto inválido','error');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Producto->save($this->request->data)) {
-				$this->Session->setFlash('The producto has been saved','success');
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash('The producto could not be saved. Please, try again.','error');
+
+			$this->Producto->set($this->request->data);
+			if($this->Producto->validates()){
+				if ($this->Producto->save()) {
+					$this->Session->setFlash('El producto ha sido editado correctamente','success');
+					$this->redirect(array('action' => 'index'));
+				} else {
+					$this->Session->setFlash('El producto no ha sido editado. Por favor, Intentelo de nuevo.','error');
+				}
+			}else{
+				$errors = $this->Producto->validationErrors;
+				$this->Session->setFlash($errors['activo'][0],'error');
 			}
+
 		} else {
 			$this->request->data = $this->Producto->read(null, $id);
 		}
@@ -96,36 +122,28 @@ class ProductosController extends AppController {
 		}
 		$this->Producto->id = $id;
 		if (!$this->Producto->exists()) {
-			throw new NotFoundException('Invalid producto','error');
+			throw new NotFoundException('Producto inválido','error');
 		}
 		if ($this->Producto->delete()) {
-			$this->Session->setFlash('Producto deleted','succes');
+			$this->Session->setFlash('Producto borrado','success');
 		$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash('Producto was not deleted','error');
+		$this->Session->setFlash('El producto no ha sido borrado','error');
 		$this->redirect(array('action' => 'index'));
 	}
 
     public function buscar(){
-    $superficies= $this->Producto->Superficie->find('list');
-    $tamanos = $this->Producto->Tamano->find('list');
-    $categorias = $this->Producto->Categoria->find('list');
-    $selected_value=null;
-    $this->set(compact('superficies','tamanos','categorias'));
+	    $superficies= $this->Producto->Superficie->find('list');
+	    $tamanos = $this->Producto->Tamano->find('list');
+	    $categorias = $this->Producto->Categoria->find('list');
+	    $selected_value=null;
+	    $this->set(compact('superficies','tamanos','categorias'));
 
-        if($this->request->is('post'))
-            {
-
-               debug($selected_value);
-
-               $this->Session->setFlash('Producto Encontrado','success');
-
-            }
-        else {
-            $this->Session->setFlash('El producto no existe','error');
-
+        if($this->request->is('post')){
+           $this->Session->setFlash('Producto Encontrado','success');
+        }else {
+          $this->Session->setFlash('El producto no existe','error');
         }
-
         $conditions= array('Producto.superficie_id'=>'1','Producto.tamano_id'=>'1','Producto.categoria_id'=>'1');
     }
 
@@ -137,7 +155,7 @@ class ProductosController extends AppController {
                         array('tamano_id' => $tamano_id),
                     ));
         $prod= $this->Producto->find('first',
-                    array('conditions'=> $conditions,'contain' => true)										
+                    array('conditions'=> $conditions,'contain' => true)
                 );
         return $prod;
     }
