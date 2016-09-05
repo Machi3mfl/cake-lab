@@ -11,7 +11,7 @@ img{
 	<legend><h3><?php echo __('Acciones'); ?></h3></legend>
 		<ul class="nav nav-colapse">
 			<li><?php echo $this->Html->link(__('Editar Pedido'), array('action' => 'edit', $pedido['Pedido']['id'])); ?> </li>
-			<li><?php echo $this->Form->postLink(__('Borrar Pedido'), array('action' => 'delete', $pedido['Pedido']['id']), null, __('Are you sure you want to delete # %s?', $pedido['Pedido']['id'])); ?> </li>
+			<li><?php echo $this->Form->postLink(__('Borrar Pedido'), array('action' => 'delete', $pedido['Pedido']['id']), null, __('¿Está seguro que desea borrar el pedido # %s?', $pedido['Pedido']['id'])); ?> </li>
 			<li><?php echo $this->Html->link(__('Listar Pedidos'), array('action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('Crear nuevo Pedido'), array('action' => 'add')); ?> </li>
 			<li><hr></li>
@@ -75,7 +75,7 @@ img{
 		$i = 0;
 		foreach ($pedido['Copia'] as $index => $copia): ?>
 		<tr>
-			<td><?php echo $copia['id']; ?></td>
+			<td><?php echo $index+1; ?></td>
 			<td>
 			<?php if(isset($uploads)): ?>
 				<?php echo $this->Html->image('../files/thumbs/'.$uploads[$index]['Upload']['photo_dir'].'/thumb_'.$uploads[$index]['Upload']['photo'],

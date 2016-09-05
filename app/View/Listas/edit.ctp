@@ -1,18 +1,15 @@
 <?php
   $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
-  $this->Html->addCrumb( 'Editar '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
+  $this->Html->addCrumb( 'Editar Lista' , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
 ?>
 <div class="col-md-2">
     <legend>
         <h3><?php echo __('Acciones'); ?></h3>
     </legend>
     <ul class="nav nav-sidebar">
-      <li><?php echo $this->Html->link(__('Edit Lista'), array('action' => 'edit', $lista['Lista']['id'])); ?> </li>
-      <li><?php echo $this->Form->postLink(__('Delete Lista'), array('action' => 'delete', $lista['Lista']['id']), null, __('Are you sure you want to delete # %s?', $lista['Lista']['id'])); ?> </li>
-      <li><?php echo $this->Html->link(__('List Listas'), array('action' => 'index')); ?> </li>
-      <li><?php echo $this->Html->link(__('New Lista'), array('action' => 'add')); ?> </li>
-      <li><?php echo $this->Html->link(__('List Precios'), array('controller' => 'precios', 'action' => 'index')); ?> </li>
-      <li><?php echo $this->Html->link(__('New Precios'), array('controller' => 'precios', 'action' => 'add')); ?> </li>
+      <li><?php echo $this->Form->postLink(__('Borrar Lista'), array('action' => 'delete', $lista['Lista']['id']), null, __('Are you sure you want to delete # %s?', $lista['Lista']['id'])); ?> </li>
+      <li><?php echo $this->Html->link(__('Ver Listas'), array('action' => 'index')); ?> </li>
+      <li><?php echo $this->Html->link(__('Crear Lista'), array('action' => 'add')); ?> </li>
     </ul>
 </div>
 <?php echo $this->Form->create('Precios', array('data-toggle' => 'validator' , 'role' => 'form')); ?>
@@ -21,7 +18,6 @@
     <legend>
         <h3><?php  echo __('Lista de Precios'); ?></h3>
     </legend>
-		<!--?php echo $this->Form->input('id',array('value'=>$lista['Lista']['id'],'type'=>'hidden')); ?-->
         <blockquote>
             <h3><small><?php echo $lista['Lista']['nombre']; ?></small></h3>
         </blockquote>

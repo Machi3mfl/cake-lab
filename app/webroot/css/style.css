@@ -153,6 +153,9 @@ body {
   margin-right: 9% !important;
 }
 
+#precio , #subtotal{
+  text-align: right !important;
+}
 /********************** DATATABLE JS ***********************/
 
 .table-responsive label {

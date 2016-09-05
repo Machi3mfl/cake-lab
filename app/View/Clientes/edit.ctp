@@ -6,8 +6,6 @@
     <h3><?php echo __('Acciones'); ?></h3>
     <ul class="nav nav-sidebar">
             <li><?php echo $this->Html->link(__('Listar Clientes'), array('action' => 'index')); ?></li>
-            <li><?php echo $this->Html->link(__('Listar Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-            <li><?php echo $this->Html->link(__('Nuevo User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
     </ul>
 </div>
 <script>
@@ -16,7 +14,7 @@
     })
 </script>
 <div class="col-md-10">
-        <legend><?php echo __('Editando Cliente'); ?></legend>
+        <legend><h3><?php echo __('Editando Cliente'); ?></h3></legend>
             <blockquote>
               <p>Para dar de alta un nuevo cliente debera crear primero un usuario. Dicho usuario le servira para poder ingresar al sistema y generar pedidos</p>
             </blockquote>

@@ -13,7 +13,7 @@
   <div class="table-responsive" id="tablaPrecios">
     <table class="table table-hover" cellspacing="0" cellpadding="0">
     <thead>
-      <tr><th>Archivo</th><th>Cantidad</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Precio Unitario</th></tr>
+      <tr><th>Archivo</th><th>Cantidad</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th id='precio'>Precio Unitario</th><th id='subtotal'>Subtotal</th></tr>
     </thead>
       <tbody>
         <?php
@@ -45,9 +45,16 @@
                 }
               ?>
             </td>
-            <td id='<?php echo 'precio'.$cant; ?>'>
+            <td id='precio'>
               <?php echo $this->Form->input('Copias.'.$cant.'.precio',array('type'=> 'hidden','value'=>$precio['Precio']['precio'])); ?>
-              $ <?php echo $precio['Precio']['precio']; ?></td>
+              $ <?php echo $precio['Precio']['precio']; ?>
+            </td>
+            <td id='subtotal'>
+              <?php
+                $subtotal= $precio['Precio']['precio']*$data['Copias'][$cant]['cantidad'];
+                echo '$ '.$subtotal;
+                ?>
+            </td>
           </tr>
           <?php
           $copias_total= $copias_total+$data['Copias'][$cant]['cantidad'];
@@ -62,7 +69,8 @@
           <td class="thick-line"></td>
           <td class="thick-line"></td>
           <td class="thick-line"></td>
-          <td class="thick-line text-center"><h4>Importe Total</h4></td>
+          <td class="thick-line"></td>
+          <td class="thick-line text-right"><h4>Importe Total</h4></td>
           <td class="thick-line text-right">
             <?php echo $this->Form->input('cantidad',array('type'=> 'hidden','value'=>$copias_total)); ?>
             <?php echo $this->Form->input('importe',array('type'=> 'hidden','value'=>$importe)); ?>

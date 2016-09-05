@@ -15,18 +15,19 @@
 <div class="col-md-10">
     <h3><?php echo __('Clientes '); ?><small> > Listado de clientes</small></h3>
     <div class="table-responsive">
-        <table id="clientes" cellpadding="0" cellspacing="0"  class="table table-hover">
+        <table id="bootstrap-table" data-toggle="table" data-sort-name="id" data-sort-orde="desc"  data-search="true"
+       data-show-toggle="true" data-show-columns="true" class="table table-no-bordered">
         <thead>
 	      <tr>
-          <th><?php echo 'Id'; ?></th>
-          <th><?php echo 'Nombre'; ?></th>
-          <th><?php echo 'Calle'; ?></th>
-          <th><?php echo 'Numero'; ?></th>
-          <th><?php echo 'Telefono'; ?></th>
-          <th><?php echo 'Provincia'; ?></th>
-          <th><?php echo 'Localidad'; ?></th>
-          <th><?php echo 'Email'; ?></th>
-          <th><?php echo 'Lista'; ?></th>
+          <th data-field="id"><?php echo 'Id'; ?></th>
+          <th data-field="nombre"><?php echo 'Nombre'; ?></th>
+          <th data-field="calle"><?php echo 'Calle'; ?></th>
+          <th data-field="numero"><?php echo 'Numero'; ?></th>
+          <th data-field="telefono"><?php echo 'Telefono'; ?></th>
+          <th data-field="provincia"><?php echo 'Provincia'; ?></th>
+          <th data-field="localidad"><?php echo 'Localidad'; ?></th>
+          <th data-field="email"><?php echo 'Email'; ?></th>
+          <th data-field="lista"><?php echo 'Lista'; ?></th>
           <th class="actions"><?php echo __('Acciones'); ?></th>
 	       </tr>
         </thead>
@@ -67,12 +68,14 @@
   </div>
 </div>
 <script>
-  $(document).ready(function(){
-    var table = $('#clientes').DataTable( {
-      "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json"
-      },
-      "bLengthChange": false
-    });
-  });
+$(document).ready(function(){
+});
+$.extend($.fn.bootstrapTable.columnDefaults, {
+  	sortable: true,
+});
+
+$(function() {
+  $table = $('#bootstrap-table').bootstrapTable();
+});
+
 </script>

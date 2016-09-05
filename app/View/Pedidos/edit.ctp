@@ -8,21 +8,19 @@ img{
   $this->Html->addCrumb( 'Editar '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
 ?>
 <div class="col-md-2 sidebar">
-<?php
-	echo $this->Form->create('Pedido');
-?>
 	<legend><h3><?php echo __('Acciones'); ?></h3></legend>
 		<ul class="nav nav-colapse">
-			<li><?php echo $this->Form->postLink(__('Delete Pedido'), array('action' => 'delete', $pedido['Pedido']['id']), null, __('Are you sure you want to delete # %s?', $pedido['Pedido']['id'])); ?> </li>
-			<li><?php echo $this->Html->link(__('List Pedidos'), array('action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New Pedido'), array('action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New Cliente'), array('controller' => 'clientes', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List Copias'), array('controller' => 'copias', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New Copia'), array('controller' => 'copias', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Form->postLink(__('Borrar Pedido'), array('action' => 'delete', $pedido['Pedido']['id']), null, __('¿Está seguro que desea borrar el pedido # %s?', $pedido['Pedido']['id'])); ?> </li>
+			<li><?php echo $this->Html->link(__('Ver Pedidos'), array('action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('Agregar Pedido'), array('action' => 'add')); ?> </li>
+			<li><hr></li>
+			<li><?php echo $this->Html->link(__('Listar Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
 		</ul>
 	</div>
 <div class="col-md-10">
+	<?php
+		echo $this->Form->create('Pedido');
+	?>
 		<h3><?php  echo __('Pedido'); ?></h3>
 		<div class="table-responsive">
 			<table class="table table-hover">
@@ -43,20 +41,7 @@ img{
 					<td><?php echo h($pedido['Pedido']['fecha']); ?></td>
 					<td><?php echo h($pedido['Pedido']['importe']); ?></td>
 					<td><?php echo h($pedido['Pedido']['cantidad']); ?></td>
-					<td>
-						<select id="cliente_id" class="form-control" name='data[Pedido][cliente_id]'>
-						<?php
-							if(isset($clientes)){
-								foreach ($clientes as $c){
-										if($pedido['Pedido']['cliente_id'] == $c['Cliente']['id'])
-												$select='selected="selected"';
-										else $select=' ';
-										echo '<option '.$select.' value="'.$c['Cliente']['id'].'">'.$c['Cliente']['nombre_completo'].'</option>';
-								}
-							}
-						?>
-						</select>
-					</td>
+					<td><?php echo $this->Html->link($pedido['Cliente']['apellido']." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>	&nbsp;</td>
 					<td>
 						<select id="estado_id" class="form-control" name='data[Pedido][estado_id]'>
 					<?php
@@ -102,7 +87,7 @@ img{
 		$i = 0;
 		foreach ($pedido['Copia'] as $index => $copia): ?>
 		<tr>
-			<td><?php echo $copia['id']; ?></td>
+			<td><?php echo $index+1; ?></td>
 			<td>
 			<?php if(isset($uploads)): ?>
 				<?php echo $this->Html->image('../files/thumbs/'.$uploads[$index]['Upload']['photo_dir'].'/thumb_'.$uploads[$index]['Upload']['photo'],
@@ -122,7 +107,12 @@ img{
 				<?php echo $copia['Producto']['Tamano']['tamano']; ?>
 			</td>
 			<td><?php echo $copia['cantidad']; ?></td>
-			<td><?php echo $copia['borde']; ?></td>
+			<td><?php
+				if( $copia['borde'] == '0')
+					echo 'No';
+				else
+					echo 'No';
+			?></td>
 			<td><?php echo $copia['precio']; ?></td>
 			<td style="display:none;"><?php echo $copia['pedido_id']; ?></td>
 			<td style="display:none;"><?php echo $copia['upload_id']; ?></td>

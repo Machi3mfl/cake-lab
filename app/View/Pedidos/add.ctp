@@ -46,7 +46,7 @@
       <h3> Seleccion de imagenes <small>: A continuacion seleccione los imágenes que desea enviar.
           A traves del botón examinar puede seleccionar una o muchas fotos. Aprentando el atajo CTRL + E puede seleccionar todas las imagenes de una carpeta.</small></h3>
       <div class="divider"></div>
-      	<?php   echo $this->Form->create('Upload',array('type' => 'file','class'=>'form-inline','url' => array(
+      	<?php   echo $this->Form->create('Upload',array('type' => 'file','class'=>'form-inline', 'autocomplete' => 'on', 'url' => array(
 						'controller' => 'pedidos', 'action' => $this->action)));
 				?>
       <div class="form-group">
@@ -410,6 +410,9 @@ $(document).ready(function(){
 	$("#copia"+cantidad+" td .photoDir").attr('name','data[Upload]['+cantidad+'][photo_dir]');
 	$("#copia"+cantidad+" td .photoDir").attr('id','Upload'+cantidad+'PhotoDir');
 	$("#copia"+cantidad+" td .borrar").attr('id','eliminarUpload'+cantidad);
+	$("#UploadCopias"+cantidad+"Papel").empty();
+	$("#UploadCopias"+cantidad+"Tamano").empty();
+	$("#UploadCopias"+cantidad+"Cantidad").val(1);
 	$("#copia"+cantidad+" .copiar").remove();
 	});
 });
@@ -493,6 +496,6 @@ function borrar(id,posicion){
         z-index: 50;
     }
 		.btn-breadcrumb{
-		  display:none;	
+		  display:none;
 		}
 </style>

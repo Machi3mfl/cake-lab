@@ -101,4 +101,14 @@ class ListasController extends AppController {
 		$this->Session->setFlash('Lista was not deleted','error');
 		$this->redirect(array('action' => 'index'));
 	}
+
+	public function editar_nombre($id = null){
+		if (!$this->Lista->exists()) {
+			throw new NotFoundException('Lista incorrecta');
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
+			debug($this->request->data);
+		}
+
+	}
 }
