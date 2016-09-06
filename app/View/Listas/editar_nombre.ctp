@@ -15,16 +15,19 @@
 </div>
 <div class="col-md-9">
     <legend><?php echo __('Editar Superficie'); ?></legend>
-        <?php echo $this->Form->create('Lista'); ?>
+        <?php echo $this->Form->create('Lista', array('data-toggle' => 'validator' , 'role' => 'form')); ?>
         <div class="col-md-5">
         <div class="form-group">
             <?php
-                echo $this->Form->input('nombre',array('class'=>'form-control'));
+                echo $this->Form->input('nombre',array('class'=>'form-control', 'value' => $lista['Lista']['nombre'], 'required' => true , 'div' => 'form-group',
+                'after' => '<div class="help-block with-errors"></div>'));
             ?>
         </div>
         <div class="form-group clear"></div>
-
-        <?php echo $this->Form->submit(__('Editar'), array('class' => 'btn btn-primary')); ?>
+        <?php echo $this->Html->link(__('Cancelar'), array('controller' => 'listas', 'action' => 'index'),array(
+          'class' => 'btn btn-danger pull-left'
+        )); ?>
+        <?php echo $this->Form->submit(__('Editar'), array('class' => 'btn btn-primary pull-right')); ?>
         <?php echo $this->Form->end();?>
         </div>
 </div>

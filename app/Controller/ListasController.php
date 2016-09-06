@@ -67,10 +67,10 @@ class ListasController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Precio->saveAll($this->request->data['Precio'])){
-				$this->Session->setFlash('La lista ha sido guardada correctamente','success');
+				$this->Session->setFlash('La lista ha sido editada correctamente','success');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('La lista no ha sido guardada. Por favor, intente nuevamente.','error');
+				$this->Session->setFlash('La lista no ha sido editada. Por favor, intente nuevamente.','error');
 			}
 		} else {
 			$this->request->data = $this->Lista->read(null, $id);
@@ -102,13 +102,20 @@ class ListasController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 
-	public function editar_nombre($id = null){
+	public function editarNombre($id = null){
+		$this->Lista->id = $id;
 		if (!$this->Lista->exists()) {
 			throw new NotFoundException('Lista incorrecta');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			debug($this->request->data);
+			$this->Lista->set($this->request->data);
+			if($this->Lista->save()){
+				$this->Session->setFlash('La lista ha sido editada correctamente','success');
+				$this->redirect(array('action' => 'index'));
+			}else {
+				$this->Session->setFlash('La lista no ha sido editada. Por favor, intente nuevamente.','error');
+			}
 		}
-
+		$this->set('lista',$this->Lista->read(null, $id));
 	}
 }

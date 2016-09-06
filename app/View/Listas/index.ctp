@@ -46,7 +46,7 @@
                     __('Are you sure you want to delete # %s?', $lista['Lista']['id'])
                         );
                 ?>
-                <?php echo $this->Html->link(__('Editar Nombre'), array('action' => 'editar_nombre', $lista['Lista']['id']),array(
+                <?php echo $this->Html->link(__('Editar Nombre'), array('action' => 'editarNombre', $lista['Lista']['id']),array(
                     'type'=>'button',
                     'class'=>'btn btn-primary')
                     );

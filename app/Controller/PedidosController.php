@@ -336,4 +336,18 @@ class PedidosController extends AppController {
         $this->Session->setFlash("Session vacio.");
       }
     }
+
+    public function ticket($id = null){
+      $this->loadModel("Provincia");
+      $this->loadModel("Localidad");
+      $this->Pedido->id=$id;
+      if (!$this->Pedido->exists()) {
+        throw new NotFoundException(__('Pedido incorrecto'));
+      }else{
+        $this->set('pedido',$this->Pedido->read(null, $id));
+        $this->set('localidad',$this->Localidad->find('list'));
+        $this->set('provincia',$this->Provincia->find('list'));
+      }
+
+    }
 }
