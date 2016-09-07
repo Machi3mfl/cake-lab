@@ -2,6 +2,7 @@
   $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
   $this->Html->addCrumb( 'Editar '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
 ?>
+<?php setlocale(LC_MONETARY, 'ar_AR'); ?>
 <div class="col-md-2 sidebar">
 	<legend><h3><?php echo __('Acciones'); ?></h3></legend>
 		<ul class="nav nav-colapse">
@@ -11,14 +12,17 @@
 			<li><hr></li>
 			<li><?php echo $this->Html->link(__('Listar Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
 		</ul>
-	</div>
+</div>
+
 <div class="col-md-10">
-  <?php //debug($copias); ?>
   <div class="row col-md-10" style="margin: 2% 0%;">
-    <?php echo $this->Html->link(__('Volver'), array('controller' => 'pedidos', 'action' => 'index'),array(
-      'class' => 'btn btn-danger pull-left'
-    )); ?>
-    <?php echo $this->Form->link('Imprimir', array('class' => 'form-group btn btn-primary pull-right')); ?>
+    <?php echo $this->Html->link(__('Volver'), array(
+      'controller' => 'pedidos', 'action' => 'index'),array(
+      'class' => 'btn btn-danger pull-left'));
+    ?>
+    <a class="btn btn-primary pull-right" href=<?php echo '""/laboratorio/pedidos/ticket_pdf/'.$pedido['Pedido']['id'].'"' ?>>
+      <span aria-hidden="true" class="glyphicon glyphicon-save-file"></span>Descargar
+    </a>
   </div>
   <div class=" col-md-offset-1 col-md-8">
     <legend><h3>Número de pedido #<?php echo $pedido['Pedido']['id']; ?></h3></legend>
@@ -48,10 +52,10 @@
           <tr>
             <td><?php echo $data['Copia']['cantidad']?></td>
             <td><?php echo $categorias[$data['Producto']['categoria_id']].' - '.$superficies[$data['Producto']['superficie_id']].' - '.$tamanos[$data['Producto']['tamano_id']]?></td>
-            <td><small><?php echo '$ '.$data['Copia']['precio']?></small></td>
-            <td><?php
+            <td><small>$ <?php echo money_format('%(#10n', $data['Copia']['precio']) ?></small></td>
+            <td>$ <?php
               $subtotal=$data['Copia']['precio']*$data['Copia']['cantidad'];
-              echo '$ '.$subtotal;
+              echo money_format('%(#10n',$subtotal);
               ?>
           </tr>
           <?php $total=$total+$subtotal; ?>
@@ -62,7 +66,7 @@
             <td></td>
             <td></td>
             <td><strong>Total</strong></td>
-            <td><?php echo '$ '.$total ?></td>
+            <td>$ <?php echo money_format('%(#10n',$total); ?></td>
           </tr>
         </tfoot>
       </table>

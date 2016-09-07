@@ -18,7 +18,7 @@
             <blockquote>
               <p>Para dar de alta un nuevo cliente debera crear primero un usuario. Dicho usuario le servira para poder ingresar al sistema y generar pedidos</p>
             </blockquote>
-        <div class='col-md-9s'>
+        <div class='col-md-9'>
             <legend>
                 <h3>Cliente: <small> Dar de alta al cliente </small></h3>
             </legend>

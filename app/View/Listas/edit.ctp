@@ -47,12 +47,13 @@
 		      <td><?php echo $precios['productos']['Superficie']['tipo']; ?></td>
 		      <td><?php echo $precios['productos']['Tamano']['tamano']; ?></td>
 		      <td>
-							<?php
-								echo $this->Form->input( 'Precio.'.$i.'.precio' , array(
-									'value' => $precios['precio'] , 'type' => 'number' , 'label' => false ,
-									'class' => 'form-control' , 'required' => true, 'div' => 'form-group',
-									'after' => '<div class="help-block with-errors"></div>'));
-							?>
+						<?php
+              $precio_formateado=money_format('%(#10n',$precios['precio']);
+							echo $this->Form->input('Precio.'.$i.'.precio' , array(
+								'value' => $precios['precio'] , 'type' => 'number' , 'label' => false ,
+								'class' => 'form-control' , 'required' => true, 'div' => 'form-group',
+								'after' => '<div class="help-block with-errors"></div>'));
+						?>
 					</td>
 		    </tr>
       <?php $i++; ?>

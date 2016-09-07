@@ -39,7 +39,7 @@ img{
 				<tr>
 					<td><?php echo h($pedido['Pedido']['id']); ?></td>
 					<td><?php echo h($pedido['Pedido']['fecha']); ?></td>
-					<td><?php echo h($pedido['Pedido']['importe']); ?></td>
+					<td>$ <?php echo money_format('%(#10n',$pedido['Pedido']['importe']); ?></td>
 					<td><?php echo h($pedido['Pedido']['cantidad']); ?></td>
 					<td><?php echo $this->Html->link($pedido['Cliente']['apellido']." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>	&nbsp;</td>
 					<td>
@@ -113,7 +113,7 @@ img{
 				else
 					echo 'No';
 			?></td>
-			<td><?php echo $copia['precio']; ?></td>
+			<td>$ <?php echo money_format('%(#10n',$copia['precio']); ?></td>
 			<td style="display:none;"><?php echo $copia['pedido_id']; ?></td>
 			<td style="display:none;"><?php echo $copia['upload_id']; ?></td>
 			<td style="display:none;">

@@ -4,10 +4,10 @@
 <div class="col-md-2">
     <h3><?php echo __('Actions'); ?></h3>
     <ul class="nav nav-sidebar">
-            <li><?php echo $this->Html->link(__('New Superficie'), array('action' => 'add')); ?></li>
+            <li><?php echo $this->Html->link(__('Crear Superficie'), array('action' => 'add')); ?></li>
             <li><hr></li>
-            <li><?php echo $this->Html->link(__('List Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
-            <li><?php echo $this->Html->link(__('New Productos'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
+            <li><?php echo $this->Html->link(__('Listar Productos'), array('controller' => 'productos', 'action' => 'index')); ?> </li>
+            <li><?php echo $this->Html->link(__('Crear Productos'), array('controller' => 'productos', 'action' => 'add')); ?> </li>
     </ul>
 </div>
 <div class="col-md-8">

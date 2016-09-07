@@ -40,7 +40,7 @@ img{
 			<tr>
 				<td><?php echo h($pedido['Pedido']['id']); ?>&nbsp;</td>
 				<td><?php echo h($pedido['Pedido']['fecha']); ?>&nbsp;</td>
-				<td><?php echo h($pedido['Pedido']['importe']); ?>&nbsp;</td>
+				<td>$ <?php echo money_format('%(#10n',$pedido['Pedido']['importe']); ?></td>
 				<td><?php echo h($pedido['Pedido']['cantidad']); ?>&nbsp;</td>
 				<td><?php echo $this->Html->link($pedido['Cliente']['apellido']." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>	&nbsp;</td>
 				<td style="display:none;"><?php echo h($pedido['Pedido']['sucursal']); ?>&nbsp;</td>
@@ -103,7 +103,7 @@ img{
 						echo 'No';
 				?>
 			</td>
-			<td><?php echo $copia['precio']; ?></td>
+			<td>$ <?php echo money_format('%(#10n',$copia['precio']); ?></td>
 			<td style="display:none;"><?php echo $copia['pedido_id']; ?></td>
 			<td style="display:none;">
 				<?php echo $this->Html->link($copia['producto_id'], array('controller' => 'productos', 'action' => 'view', $copia['producto_id'])); ?>	&nbsp;

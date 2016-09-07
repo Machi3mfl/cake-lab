@@ -335,11 +335,6 @@ div.dataTables_wrapper div.dataTables_paginate{
 /* BOOTSTRAP TABLE JS
 -------------------------------------------------- */
 
-.table-responsive {
-  height: auto !important;
-  min-height: 370px;
-}
-
 /* TICKET
 -------------------------------------------------- */
 #ticket-prod {

@@ -54,7 +54,7 @@
                 <td><?php echo $precios['productos']['Categoria']['nombre']; ?></td>
                 <td><?php echo $precios['productos']['Superficie']['tipo']; ?></td>
                 <td><?php echo $precios['productos']['Tamano']['tamano']; ?></td>
-                <td><?php echo $precios['precio']; ?></td>
+                <td>$ <?php echo money_format('%(#10n',$precios['precio']); ?></td>
               </tr>
             <?php endforeach; ?>
             </tbody>

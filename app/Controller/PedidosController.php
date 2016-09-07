@@ -15,7 +15,7 @@ class PedidosController extends AppController {
  *
  * @return void
  */
-    public $components = array('Paginator');
+    public $components = array('Paginator','RequestHandler');
 
     public $paginate = array(
         'order' => array(
@@ -311,6 +311,7 @@ class PedidosController extends AppController {
         $this->Session->delete('imagenes');
         $this->Session->delete('pedido_id');
         $this->Session->delete('cliente_id');
+        $this->redirect(array('action' => 'ticket' , $pedido_id));
       }else{
         $this->Session->setFlash("No se ha podido guardar el pedido. Por favor, intentelo de nuevo",'error');
       }
@@ -360,6 +361,34 @@ class PedidosController extends AppController {
         $this->set('superficies',$this->Producto->Superficie->find('list'));
         $this->set('categorias',$this->Producto->Categoria->find('list'));
         $this->set('tamanos',$this->Producto->Tamano->find('list'));
+      }
+    }
+
+      public function ticket_pdf($id = null){
+        //$this->Pedido->recursive=3
+        $this->loadModel("Provincia");
+        $this->loadModel("Localidad");
+        $this->loadModel("Producto");
+        $this->Producto->recursive = 2;
+
+        ini_set('memory_limit', '512M');
+
+        $this->Pedido->id=$id;
+        if (!$this->Pedido->exists()) {
+          throw new NotFoundException(__('Pedido incorrecto'));
+        }else{
+          $this->set('pedido',$this->Pedido->read(null, $id));
+          $this->set('copias', $this->Pedido->Copia->find('all', array(
+            'conditions' => array(
+              'Copia.pedido_id' => $id),
+            'order' => array('Producto.categoria_id', 'Producto.superficie_id', 'Producto.tamano_id',)
+            )
+          ));
+          $this->set('localidad',$this->Localidad->find('list'));
+          $this->set('provincia',$this->Provincia->find('list'));
+          $this->set('superficies',$this->Producto->Superficie->find('list'));
+          $this->set('categorias',$this->Producto->Categoria->find('list'));
+          $this->set('tamanos',$this->Producto->Tamano->find('list'));
       }
 
     }

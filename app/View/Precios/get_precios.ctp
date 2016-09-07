@@ -1,3 +1,4 @@
+<?php setlocale(LC_MONETARY, 'ar_AR'); ?>
 <?php echo $this->Form->create('Pedido', array("action"=>"confirmar"));?>
 <div class="col-md-5">
   <blockquote><h4> Observaciones </h4>
@@ -47,12 +48,12 @@
             </td>
             <td id='precio'>
               <?php echo $this->Form->input('Copias.'.$cant.'.precio',array('type'=> 'hidden','value'=>$precio['Precio']['precio'])); ?>
-              $ <?php echo $precio['Precio']['precio']; ?>
+              $ <?php echo money_format('%(#10n',$precio['Precio']['precio']); ?>
             </td>
             <td id='subtotal'>
               <?php
                 $subtotal= $precio['Precio']['precio']*$data['Copias'][$cant]['cantidad'];
-                echo '$ '.$subtotal;
+                echo '$ '.money_format('%(#10n',$subtotal);
                 ?>
             </td>
           </tr>
@@ -74,7 +75,7 @@
           <td class="thick-line text-right">
             <?php echo $this->Form->input('cantidad',array('type'=> 'hidden','value'=>$copias_total)); ?>
             <?php echo $this->Form->input('importe',array('type'=> 'hidden','value'=>$importe)); ?>
-            <h4 id="importe-total"> $ <?php echo $importe ?></h4>
+            <h4 id="importe-total"> $ <?php echo money_format('%(#10n',$importe) ?></h4>
           </td>
         </tr>
       </tbody>
