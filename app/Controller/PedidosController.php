@@ -338,15 +338,28 @@ class PedidosController extends AppController {
     }
 
     public function ticket($id = null){
+      //$this->Pedido->recursive=3
       $this->loadModel("Provincia");
       $this->loadModel("Localidad");
+      $this->loadModel("Producto");
+      $this->Producto->recursive = 2;
+
       $this->Pedido->id=$id;
       if (!$this->Pedido->exists()) {
         throw new NotFoundException(__('Pedido incorrecto'));
       }else{
         $this->set('pedido',$this->Pedido->read(null, $id));
+        $this->set('copias', $this->Pedido->Copia->find('all', array(
+          'conditions' => array(
+            'Copia.pedido_id' => $id),
+          'order' => array('Producto.categoria_id', 'Producto.superficie_id', 'Producto.tamano_id',)
+          )
+        ));
         $this->set('localidad',$this->Localidad->find('list'));
         $this->set('provincia',$this->Provincia->find('list'));
+        $this->set('superficies',$this->Producto->Superficie->find('list'));
+        $this->set('categorias',$this->Producto->Categoria->find('list'));
+        $this->set('tamanos',$this->Producto->Tamano->find('list'));
       }
 
     }

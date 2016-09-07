@@ -339,3 +339,9 @@ div.dataTables_wrapper div.dataTables_paginate{
   height: auto !important;
   min-height: 370px;
 }
+
+/* TICKET
+-------------------------------------------------- */
+#ticket-prod {
+  border: 1px solid #cccccc !important;
+}
