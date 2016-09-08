@@ -292,8 +292,6 @@ class PedidosController extends AppController {
     public function confirmar(){
       $pedido=$this->request->data["Pedido"];
       $copias=$this->request->data["Copias"];
-      debug($this->request->data);
-      debug($this->Session->read);
       $uploads=$this->Session->read('imagenes');
       $pedido_id=$this->Session->read('pedido_id');
       $cliente_id=$this->Session->read('cliente_id');
@@ -311,7 +309,7 @@ class PedidosController extends AppController {
         $this->Session->delete('imagenes');
         $this->Session->delete('pedido_id');
         $this->Session->delete('cliente_id');
-        $this->redirect(array('action' => 'ticket' , $pedido_id));
+        $this->redirect(array('action' => 'recibo' , $pedido_id));
       }else{
         $this->Session->setFlash("No se ha podido guardar el pedido. Por favor, intentelo de nuevo",'error');
       }
@@ -338,7 +336,7 @@ class PedidosController extends AppController {
       }
     }
 
-    public function ticket($id = null){
+    public function recibo($id = null){
       //$this->Pedido->recursive=3
       $this->loadModel("Provincia");
       $this->loadModel("Localidad");
@@ -364,7 +362,7 @@ class PedidosController extends AppController {
       }
     }
 
-      public function ticket_pdf($id = null){
+      public function recibo_pdf($id = null){
         //$this->Pedido->recursive=3
         $this->loadModel("Provincia");
         $this->loadModel("Localidad");

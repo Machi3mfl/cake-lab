@@ -1,17 +1,17 @@
 <style>
-body { 
-    padding-top:40px; 
+body {
+    padding-top:40px;
 
 }
-.panel-body .btn:not(.btn-block) { 
-   
+.panel-body .btn:not(.btn-block) {
+
    width: 41%;
 }
 .btn {
     margin:4%;
     font-size:20px;
     height: 130px;
-    
+
 }
 
 #cliente-buttons{
@@ -33,11 +33,11 @@ body {
 }
 #site > .glyphicon {
     font-size: 2em;
-    
+
 }
 
 .glyphicon, .fa{
-    color: #ffffff; 
+    color: #ffffff;
     font-size: 2em;
      top: 7%;
 }
@@ -112,15 +112,15 @@ background-image: linear-gradient(45deg, rgba(235, 235, 235, 0.15) 25%, rgba(0, 
                 </div>
                 <div class="panel-body">
                     <div class="row col-xs-12">
-                          <a href="<?php echo Router::url('/').'pedidos/nuevo'; ?>" class="btn btn-success btn-lg loading" role="button"><span class="glyphicon glyphicon-plus "></span> <br/>Nuevo Pedido</a>
-                          <a href="#" class="btn btn-primary btn-lg loading" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Pedidos</a>
-                    </div>
-                    <div class="row col-xs-12">                          
-                          <a href="#" class="btn btn-warning btn-lg loading" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Perfil</a>
-                          <a href="<?php echo Router::url('/').'users/logout'; ?>" class="btn btn-danger btn-lg loading" role="button"><span class="fa fa-power-off"></span> <br/>Cerrar sesión</a>
+                          <a href="<?php echo Router::url('/').'pedidos/nuevo'; ?>" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-plus "></span> <br/>Nuevo Pedido</a>
+                          <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Pedidos</a>
                     </div>
                     <div class="row col-xs-12">
-                    <a href="http://www.jquery2dotnet.com/" id="site" class="btn btn-success btn-lg loading" role="button"><span class="glyphicon glyphicon-globe"></span> Volver al Sitio</a>
+                          <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Perfil</a>
+                          <a href="<?php echo Router::url('/').'users/logout'; ?>" class="btn btn-danger btn-lg" role="button"><span class="fa fa-power-off"></span> <br/>Cerrar sesión</a>
+                    </div>
+                    <div class="row col-xs-12">
+                    <a href="http://www.google.com/" id="site" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-globe"></span> Volver al Sitio</a>
                     </div>
                 </div>
             </div>

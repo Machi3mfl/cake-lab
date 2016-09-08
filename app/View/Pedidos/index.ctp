@@ -58,7 +58,7 @@
                             __('Are you sure you want to delete # %s?', $pedido['Pedido']['id'])
                                 );
                         ?>
-      <?php echo $this->Html->link(__('Ticket'), array('action' => 'ticket', $pedido['Pedido']['id']),array(
+      <?php echo $this->Html->link(__('Recibo'), array('action' => 'recibo', $pedido['Pedido']['id']),array(
                             'type'=>'button',
                             'class'=>'btn btn-primary btn-xs')
                             );
