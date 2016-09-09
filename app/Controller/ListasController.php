@@ -25,11 +25,20 @@ class ListasController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+			$this->loadModel('Producto');
 			$this->Lista->recursive=3;
       $this->Lista->id = $id;
       if (!$this->Lista->exists()) {
               throw new NotFoundException('Invalid lista','error');
       }else{
+				$prod_lista=$this->contarProductos($id);
+				$total= $this->Producto->find('count');
+				if($prod_lista < $total){
+					$this->Session->setFlash('La lista contiene menos productos que los existentes en stock. Por favor edite la lista para actualizar la cantidad de productos.','error');
+				}
+				if($prod_lista > $total){
+					$this->Session->setFlash('La lista contiene más productos que los existentes en stock. Por favor edite la lista para actualizar la cantidad de productos.','error');
+				}
         $this->set('lista', $this->Lista->read(null, $id));
 			}
   }
@@ -60,6 +69,7 @@ class ListasController extends AppController {
  */
 	public function edit($id = null) {
 		$this->loadModel('Precio');
+		$this->loadModel('Producto');
 		$this->Lista->recursive=3;
 		$this->Lista->id = $id;
 		if (!$this->Lista->exists()) {
@@ -68,14 +78,28 @@ class ListasController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Precio->saveAll($this->request->data['Precio'])){
 				$this->Session->setFlash('La lista ha sido editada correctamente','success');
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'view',$id));
 			} else {
 				$this->Session->setFlash('La lista no ha sido editada. Por favor, intente nuevamente.','error');
 			}
 		} else {
+			$prod_lista=$this->contarProductos($id);
+			$total= $this->Producto->find('count');
+			if($prod_lista < $total){
+				$this->Session->setFlash('La lista contiene menos productos que los existentes en stock. Por favor actualice la lista.','error');
+			}
+			if($prod_lista > $total){
+				$this->Session->setFlash('La lista contiene más productos que los existentes en stock. Por favor actualice la lista.','error');
+			}
+
 			$this->request->data = $this->Lista->read(null, $id);
 			$this->set('lista',$this->Lista->read(null, $id));
 		}
+	}
+
+	public function contarProductos($id_lista = null){
+		$this->loadModel('Precio');
+		return $this->Precio->find('count', array('conditions' => array('Precio.lista_id' => $id_lista)));
 	}
 
 /**
@@ -118,4 +142,5 @@ class ListasController extends AppController {
 		}
 		$this->set('lista',$this->Lista->read(null, $id));
 	}
+
 }

@@ -20,9 +20,14 @@
     </legend>
         <blockquote>
             <h3><small><?php echo $lista['Lista']['nombre']; ?></small></h3>
+            <?php echo $this->Form->button('Actualizar Lista', array(
+              'class'=>'btn btn-success pull-right',
+              'id' => 'actualizarProds',
+              'type' => 'button'));
+            ?>
         </blockquote>
     </div>
-    <div class="row">
+    <div id="lista-precios" class="row">
       <h3><?php echo __('Precios'); ?></h3>
       <?php if (!empty($lista['precios'])): ?>
       <div class="table-responsive">
@@ -40,6 +45,7 @@
 				?>
 		    <tr>
 		      <td>
+              <?php echo $this->Form->input( 'Precio.'.$i.'.lista_id',array('value'=>$lista['Lista']['id'],'type'=>'hidden'));  ?>
 		          <?php echo $this->Form->input( 'Precio.'.$i.'.id',array('value'=>$precios['id'],'type'=>'hidden'));  ?>
 		      </td>
 		      <?php echo $this->Form->input( 'Precio.'.$i.'.producto_id',array('value'=>$precios['producto_id'],'type'=>'hidden'));  ?>
@@ -60,10 +66,24 @@
       <?php endforeach; ?>
       </table>
     </div>
-  <?php
-		endif;
-		echo $this->Form->submit('Confirmar', array('class' => 'btn btn-success btn-lg pull-right' , 'div' => false));
-		echo $this->Form->end();
-	?>
   </div>
+  <?php
+    endif;
+    echo $this->Form->submit('Confirmar', array('class' => 'btn btn-success btn-lg pull-right' , 'div' => false));
+    echo $this->Form->end();
+  ?>
 </div>
+<script type="text/javascript">
+  $("#actualizarProds").on('click',function(e){
+    var id = $("#Precio0ListaId").val();
+	  $.ajax({
+	    method: "POST",
+	    url: "../../productos/getProductos",
+      data: { lista_id : id }
+    })
+	  .done(function( data ) {
+			$("#lista-precios").html(data);
+	  });
+  });
+
+</script>

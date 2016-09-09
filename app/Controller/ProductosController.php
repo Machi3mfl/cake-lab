@@ -1,6 +1,5 @@
 <?php
 App::uses('AppController', 'Controller');
-
 /**
  * Productos Controller
  *
@@ -209,5 +208,33 @@ class ProductosController extends AppController {
 			}
 			$this->set('tamanos', $tamano_ids);
 		}
+	}
+
+	public function getProductos(){
+		$this->loadModel('Precio');
+		$lista_id = $this->request->data['lista_id'];
+		$this->layout=false;
+
+		$productos = $this->Producto->find("all", array(
+			'order' => 'Categoria.nombre','Superficie.tipo','Tamano.tamano'),array(
+			'contain' => 'precios.author = '.$lista_id ));
+
+		foreach($productos as $prod){
+			if(empty($prod['precios'])){
+				$this->Precio->create();
+				$precio['producto_id']= $prod['Producto']['id'];
+				$precio['lista_id']= $lista_id;
+				if($this->Precio->save($precio)){
+					$this->Session->setFlash('Producto agregado','success');
+				}else{
+					$this->Session->setFlash('Producto no agregado','error');
+				}
+			}
+		}
+		$this->Producto->contain('Categoria','Superficie','Tamano','precios', array('precios.lista_id = "'.$lista_id.'"'));
+		$productos_actualizados = $this->Producto->find("all",array('order' => 'Categoria.nombre','Superficie.tipo','Tamano.tamano'));
+
+		$this->set("lista_id",$lista_id);
+		$this->set("productos",$productos_actualizados);
 	}
 }
