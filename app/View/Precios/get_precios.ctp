@@ -23,6 +23,21 @@
           $copias_total=0;
           $importe=0;
           foreach($precios as $precio) :  ?>
+          <?php
+            if(!function_exists('money_format')){
+              $pre = number_format($precio['Precio']['precio'], 2);
+              $subtotal = $pre * $data['Copias'][$cant]['cantidad'];
+              $subtotal = number_format($subtotal, 2);
+              $importe= $importe + $subtotal;
+              $importe = number_format($importe, 2);
+            }else{
+              $pre = money_format('%(#10n',$precio['Precio']['precio']);
+              $subtotal = $pre * $data['Copias'][$cant]['cantidad'];
+              $subtotal = money_format('%(#10n',$subtotal);
+              $importe= $importe + $subtotal;
+              $importe = money_format('%(#10n',$importe);
+            }
+          ?>
           <tr>
             <td id='<?php echo 'nombre'.$cant; ?>'><?php echo $data['Upload'][$cant]['photo']; ?></td>
               <?php echo $this->Form->input('Copias.'.$cant.'.producto_id',array('type'=> 'hidden','value'=>$precio['Precio']['producto_id'])); ?>
@@ -47,19 +62,17 @@
               ?>
             </td>
             <td id='precio'>
-              <?php echo $this->Form->input('Copias.'.$cant.'.precio',array('type'=> 'hidden','value'=>$precio['Precio']['precio'])); ?>
-              $ <?php echo money_format('%(#10n',$precio['Precio']['precio']); ?>
+              <?php echo $this->Form->input('Copias.'.$cant.'.precio',array('type'=> 'hidden','value'=>$pre)); ?>
+              $ <?php echo $pre; ?>
             </td>
             <td id='subtotal'>
               <?php
-                $subtotal= $precio['Precio']['precio']*$data['Copias'][$cant]['cantidad'];
-                echo '$ '.money_format('%(#10n',$subtotal);
+                echo '$ '.$subtotal;
                 ?>
             </td>
           </tr>
           <?php
           $copias_total= $copias_total+$data['Copias'][$cant]['cantidad'];
-          $importe=$importe+($data['Copias'][$cant]['cantidad']*$precio['Precio']['precio']);
           $cant++;
           endforeach;
         }
@@ -75,7 +88,7 @@
           <td class="thick-line text-right">
             <?php echo $this->Form->input('cantidad',array('type'=> 'hidden','value'=>$copias_total)); ?>
             <?php echo $this->Form->input('importe',array('type'=> 'hidden','value'=>$importe)); ?>
-            <h4 id="importe-total"> $ <?php echo money_format('%(#10n',$importe) ?></h4>
+            <h4 id="importe-total"> $ <?php echo $importe; ?></h4>
           </td>
         </tr>
       </tbody>

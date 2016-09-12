@@ -31,10 +31,17 @@
       <tbody>
   <?php
 	 foreach ($pedidos as $pedido): ?>
+   <?php
+     if(!function_exists('money_format')){
+      $imp = number_format($pedido['Pedido']['importe'], 2);
+     }else{
+      $imp = money_format('%(#10n',$pedido['Pedido']['importe']);
+     }
+   ?>
 	<tr>
 		<td><?php echo h($pedido['Pedido']['id']); ?>&nbsp;</td>
 		<td><?php echo h($pedido['Pedido']['fecha']); ?>&nbsp;</td>
-		<td>$ <?php echo money_format('%(#10n',$pedido['Pedido']['importe']); ?></td>
+    <td>$ <?php echo $imp; ?></td>
 		<td><?php echo h($pedido['Pedido']['cantidad']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($pedido['Cliente']["apellido"]." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>

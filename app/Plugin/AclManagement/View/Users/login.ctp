@@ -1,7 +1,7 @@
 <style>
     body {
-        
-        background-color: #EBEBEB;        
+
+        background-color: #444;
     }
     .form-signin input[type="text"] {
         margin-bottom: 5px;
@@ -13,7 +13,7 @@
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
-    
+
     .form-signin .form-control {
         position: relative;
         font-size: 16px;
@@ -24,7 +24,7 @@
         -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
-    
+
     .vertical-offset-100 {
         padding-top: 100px;
     }
@@ -36,18 +36,18 @@
     }
     .panel {
     margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: #FEFEFE !important;
     border: 1px solid transparent;
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     }
-    
+
 </style>
 <div class="row vertical-offset-100">
                     <div class="col-md-4 col-md-offset-4">
                         <div class="panel panel-default">
-                            <div class="panel-heading">                                
+                            <div class="panel-heading">
                                 <div class="row-fluid user-row">
                                     <img src="img/login/logo.png" class="img-responsive" alt="Conxole Admin"/>
                                 </div>
@@ -60,12 +60,12 @@
                                                                     ));
                                 ?>
 
-                                
+
                                     <fieldset>
                                         <label class="panel-login">
                                             <div class="login_result"></div>
                                         </label>
-                                        
+
                                         <?php
                                         echo $this->Form->input('email',array('class'=>'form-control','label'=>false,'placeHolder'=>'Usuario'), array('div'=>'clearfix',
                                             'before'=>'<div class="form-group">',
@@ -80,7 +80,7 @@
                                         ?>
                                         <br></br>
                                         <?php echo $this->Form->submit(__('Ingresar'), array('class'=>'btn btn-lg btn-success btn-block','id'=>'login', 'div'=>false));?>
-                                        
+
                                     </fieldset>
                                 </form>
                             </div>
@@ -102,7 +102,7 @@ $(document).ready(function() {
         },
         fields: {
             'data[User][email]': {
-                
+
                 validators: {
                     notEmpty: {
                         message: 'El campo Usuario es obligatorio y no puede estar vacio'
@@ -110,7 +110,7 @@ $(document).ready(function() {
                 }
             },
             'data[User][password]': {
-                
+
                 validators: {
                     notEmpty: {
                         message: 'El campo Contraseña es obligatorio y no puede estar vacio'
@@ -121,4 +121,3 @@ $(document).ready(function() {
     });
 });
 </script>
-

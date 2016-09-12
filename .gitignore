@@ -11,3 +11,9 @@
 nbproject/private/private.xml
 app/Console/myapp/Config/database.php
 *.jpg
+.htaccess
+.htaccess
+app/.htaccess
+.htaccess
+.htaccess
+app/webroot/.htaccess

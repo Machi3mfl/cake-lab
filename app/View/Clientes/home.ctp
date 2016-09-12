@@ -1,6 +1,7 @@
 <style>
 body {
     padding-top:40px;
+    background-color: #444 !important;
 
 }
 .panel-body .btn:not(.btn-block) {
@@ -120,7 +121,7 @@ background-image: linear-gradient(45deg, rgba(235, 235, 235, 0.15) 25%, rgba(0, 
                           <a href="<?php echo Router::url('/').'users/logout'; ?>" class="btn btn-danger btn-lg" role="button"><span class="fa fa-power-off"></span> <br/>Cerrar sesión</a>
                     </div>
                     <div class="row col-xs-12">
-                    <a href="http://www.google.com/" id="site" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-globe"></span> Volver al Sitio</a>
+                    <a href="http://localhost/laboratorio" id="site" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-globe"></span> Volver al Sitio</a>
                     </div>
                 </div>
             </div>

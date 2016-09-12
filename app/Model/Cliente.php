@@ -14,7 +14,8 @@ class Cliente extends AppModel {
  */
 
  	public $virtualFields = array(
-     'nombre_completo' => 'CONCAT(Cliente.nombre, " ", Cliente.apellido)'
+     'nombre_completo' => 'CONCAT(Cliente.nombre, " ", Cliente.apellido)',
+     'direccion' => 'CONCAT(Cliente.calle, " ", Cliente.numero)'
  	);
 
 	public $validate = array(

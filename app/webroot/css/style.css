@@ -337,6 +337,81 @@ div.dataTables_wrapper div.dataTables_paginate{
 
 /* TICKET
 -------------------------------------------------- */
-#ticket-prod {
-  border: 1px solid #cccccc !important;
+
+#botones {
+  margin: 2% 0 0;
+}
+
+#recibo {
+  margin-bottom: 5%;
+}
+
+#info-productos {
+  border: 1px solid #f1f1f1 !important;
+  padding: 1% 1.5% !important;
+}
+
+#info-observaciones {
+  border-top: 1px solid #d9d9d9;
+  margin: 0 auto;
+  width: 90%;
+  padding-bottom:5% !important;
+}
+
+/* NAV BAR
+-------------------------------------------------- */
+
+.navbar-default {
+  background-color: #444 !important;
+  border-color: #444 !important;
+}
+
+.navbar-default .navbar-brand {
+  color: white !important;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+  background-color: #444;
+  color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: white;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+  background-color: #666;
+  color: white;
+}
+
+.dropdown-menu {
+  background-color: #666;
+  border: 1px solid #444;
+}
+
+.dropdown-menu > li > a {
+  color: #C1C1C1;
+}
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+  background-color: #555;
+  color: #C1C1C1;
+}
+
+.navbar {
+  border-radius: 0 !important;
+}
+
+.footer {
+  background-color: #8b8b8b;
+}
+
+.footer p {
+  color: white !important;
+}
+
+.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+  background-color: #444;
+  color: white;
+  text-decoration: none;
 }

@@ -266,7 +266,7 @@ $(document).ready(function(){
     minLength: 2,
     delay: 2,
     source: function (request,response){
-      $.getJSON('/laboratorio/clientes/buscarPorNombre',request, function(data,status,xhr){
+      $.getJSON('/laboratorio/lab/clientes/buscarPorNombre',request, function(data,status,xhr){
         response(data);
       });
     },
@@ -300,7 +300,7 @@ $(document).ready(function(){
 				var data= $.parseJSON(request.responseText);
 				llenarCliente(data);
 			},
-			url:'/laboratorio/clientes/buscarPorId',
+			url:'/laboratorio/lab/clientes/buscarPorId',
 			data: {id: $id}
 		})
 	}
@@ -451,7 +451,7 @@ function borrar(id,posicion){
 	$.ajax({
 		async: true,
 		method: "post",
-		url: "/laboratorio/uploads/borrarUpload",
+		url: "/laboratorio/lab/uploads/borrarUpload",
 		data: {upload_id:  value, posicion: posicion}
 	}).done(function(respuesta){
 		$("#copia"+posicion).remove();

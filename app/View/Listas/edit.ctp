@@ -43,6 +43,13 @@
 		      $i = 0;
 		      foreach ($lista['precios'] as $precios):
 				?>
+        <?php
+          if(!function_exists('money_format')){
+           $precio = number_format($precios['precio'], 2);
+          }else{
+           $precio = money_format('%(#10n',$precios['precio']);
+          }
+        ?>
 		    <tr>
 		      <td>
               <?php echo $this->Form->input( 'Precio.'.$i.'.lista_id',array('value'=>$lista['Lista']['id'],'type'=>'hidden'));  ?>
@@ -54,9 +61,8 @@
 		      <td><?php echo $precios['productos']['Tamano']['tamano']; ?></td>
 		      <td>
 						<?php
-              $precio_formateado=money_format('%(#10n',$precios['precio']);
 							echo $this->Form->input('Precio.'.$i.'.precio' , array(
-								'value' => $precios['precio'] , 'type' => 'number' , 'label' => false ,
+								'value' => $precio  , 'label' => false ,
 								'class' => 'form-control' , 'required' => true, 'div' => 'form-group',
 								'after' => '<div class="help-block with-errors"></div>'));
 						?>
