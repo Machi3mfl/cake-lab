@@ -37,6 +37,11 @@ class ClientesController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+
+    if ($this->request->is('ajax')) {
+      $this->layout = 'ajax';
+      $id = $this->request->data['id'];
+    }
 		$this->Cliente->id = $id;
 		if (!$this->Cliente->exists()) {
 			throw new NotFoundException(__('Cliente incorrecto','error'));

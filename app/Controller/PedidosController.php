@@ -343,6 +343,11 @@ class PedidosController extends AppController {
       $this->loadModel("Producto");
       $this->Producto->recursive = 2;
 
+      if ($this->request->is('ajax')) {
+        $this->layout = 'ajax';
+        $id = $this->request->data['id'];
+      }
+
       $this->Pedido->id=$id;
       if (!$this->Pedido->exists()) {
         throw new NotFoundException(__('Pedido incorrecto'));

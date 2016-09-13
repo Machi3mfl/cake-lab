@@ -44,7 +44,11 @@
     <td>$ <?php echo $imp; ?></td>
 		<td><?php echo h($pedido['Pedido']['cantidad']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($pedido['Cliente']["apellido"]." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>
+			<?php echo $this->Html->link($pedido['Cliente']["apellido"]." ".$pedido['Cliente']['nombre'], array(
+        'controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id']),array(
+          'id' => $pedido['Cliente']['id'],
+          'class' => 'clienteid'
+        )); ?>
 		</td>
 		<td><?php echo h($pedido['Pedido']['observaciones']); ?>&nbsp;</td>
     <td><?php echo h($pedido['Estado']['nombre']); ?>&nbsp;</td>
@@ -67,7 +71,9 @@
                         ?>
       <?php echo $this->Html->link(__('Recibo'), array('action' => 'recibo', $pedido['Pedido']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-primary btn-xs')
+                            'class'=>'btn btn-primary btn-xs recibo',
+                            'value' => $pedido['Pedido']['id']
+                            )
                             );
                         ?>
 		</td>
@@ -81,41 +87,36 @@
     </div>
   </div>
 </div>
-<script>
-/*
-$(document).ready(function() {
-    $('#pedidos').DataTable({
-      "language": {
-          "sProcessing":     "Procesando...",
-          "sLengthMenu":     "Mostrar _MENU_ registros",
-          "sZeroRecords":    "No se encontraron resultados",
-          "sEmptyTable":     "Ningún dato disponible en esta tabla",
-          "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-          "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-          "sInfoPostFix":    "",
-          "sSearch":         "Buscar:",
-          "sUrl":            "",
-          "sInfoThousands":  ",",
-          "sLoadingRecords": "Cargando...",
-          "oPaginate": {
-          "sFirst":    "Primero",
-          "sLast":     "Último",
-          "sNext":     "Siguiente",
-          "sPrevious": "Anterior"
-          },
-          "oAria": {
-            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-          }
-        },
-      //"order": [[ 1, "desc" ]],
-      //"iDisplayLength" : 50,
-      "order": [],
-      "bPaginate": false,
-      "bLengthChange": false,
-      "bInfo": false,
-      "bSort": false
-    });
-});*/
+<script type="text/javascript">
+  $(".clienteid").on('click',function(e){
+    e.preventDefault();
+    var cliente = $(this).attr('id');
+    $.ajax({
+           type: "POST",
+           url: 'clientes/view/'+cliente,
+           data: ({id : cliente}),
+           success: function (data, textStatus){
+               $("#modal .modal-title").empty().html("Datos de cliente");
+               $("#modal .modal-body").empty().html(data);
+               $("#modal").modal();
+           }
+       });
+
+  });
+
+  $(".recibo").on('click',function(e){
+    e.preventDefault();
+    var pedido = $(this).attr('value');
+    $.ajax({
+           type: "POST",
+           url: 'pedidos/recibo/'+pedido,
+           data: ({id : pedido}),
+           success: function (data, textStatus){
+               $("#modal .modal-title").empty().html("Recibo de pedido");
+               $("#modal .modal-body").empty().html(data);
+               $("#modal").modal();
+           }
+       });
+
+  });
 </script>
