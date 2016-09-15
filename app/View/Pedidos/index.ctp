@@ -1,16 +1,8 @@
 <?php
   $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
 ?>
-<div class="col-sm-3 col-md-2 sidebar">
-    <legend><h3><?php echo __('Acciones'); ?></h3></legend>
-    <ul class="nav nav-colapse">
-      <li><?php echo $this->Html->link(__('Nuevo Pedido'), array('action' => 'add')); ?></li>
-      <li><hr></li>
-      <li><?php echo $this->Html->link(__('Listar Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
-      <li><?php echo $this->Html->link(__('Nuevo Cliente'), array('controller' => 'clientes', 'action' => 'add')); ?> </li>
-    </ul>
-</div>
-<div class="col-md-10">
+
+<div class="col-md-12">
     <leyend>
         <h3>Pedidos <small> > Administración</small></h3>
     </leyend>
@@ -46,33 +38,40 @@
 		<td>
 			<?php echo $this->Html->link($pedido['Cliente']["apellido"]." ".$pedido['Cliente']['nombre'], array(
         'controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id']),array(
-          'id' => $pedido['Cliente']['id'],
+          'value' => $pedido['Cliente']['id'],
           'class' => 'clienteid'
         )); ?>
 		</td>
 		<td><?php echo h($pedido['Pedido']['observaciones']); ?>&nbsp;</td>
     <td><?php echo h($pedido['Estado']['nombre']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $pedido['Pedido']['id']),array(
-                            'type'=>'button',
-                            'class'=>'btn btn-success btn-xs')
-                                );
+			<?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'ti-eye')), array(
+        'action' => 'view', $pedido['Pedido']['id']),array(
+            'type'=>'button',
+            'class'=>'btn btn-simple btn-info btn-icon table-action view',
+            'escape' => false));
                         ?>
-			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $pedido['Pedido']['id']),array(
+			<?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'ti-pencil-alt')), array(
+        'action' => 'edit', $pedido['Pedido']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-warning btn-xs')
+                            'class'=>'btn btn-simple btn-warning btn-icon edit',
+                            'escape' => false)
                             );
                         ?>
-			<?php echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $pedido['Pedido']['id']),array(
+			<?php echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'ti-trash')), array(
+        'action' => 'delete', $pedido['Pedido']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-danger btn-xs'),
+                            'class'=>'btn btn-simple btn-danger btn-icon remove',
+                            'escape' => false),
                             __('Are you sure you want to delete # %s?', $pedido['Pedido']['id'])
                                 );
                         ?>
-      <?php echo $this->Html->link(__('Recibo'), array('action' => 'recibo', $pedido['Pedido']['id']),array(
+      <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'ti-printer')), array(
+        'action' => 'recibo', $pedido['Pedido']['id']),array(
                             'type'=>'button',
-                            'class'=>'btn btn-primary btn-xs recibo',
-                            'value' => $pedido['Pedido']['id']
+                            'class'=>'btn btn-simple btn-success btn-icon recibo',
+                            'value' => $pedido['Pedido']['id'],
+                            'escape' => false
                             )
                             );
                         ?>
@@ -90,7 +89,7 @@
 <script type="text/javascript">
   $(".clienteid").on('click',function(e){
     e.preventDefault();
-    var cliente = $(this).attr('id');
+    var cliente = $(this).attr('value');
     $.ajax({
            type: "POST",
            url: 'clientes/view/'+cliente,
@@ -98,6 +97,7 @@
            success: function (data, textStatus){
                $("#modal .modal-title").empty().html("Datos de cliente");
                $("#modal .modal-body").empty().html(data);
+               $("#modal .modal-body .col-md-2").hide();
                $("#modal").modal();
            }
        });
@@ -114,6 +114,7 @@
            success: function (data, textStatus){
                $("#modal .modal-title").empty().html("Recibo de pedido");
                $("#modal .modal-body").empty().html(data);
+               $("#modal .modal-body .col-md-2").hide();
                $("#modal").modal();
            }
        });

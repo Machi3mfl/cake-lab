@@ -3,23 +3,26 @@ img{
 	cursor:pointer !important;
 }
 </style>
-<?php
-  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
-  $this->Html->addCrumb( 'Ver '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
-?>
-<div class="col-md-2 sidebar">
-	<legend><h3><?php echo __('Acciones'); ?></h3></legend>
-		<ul class="nav nav-colapse">
-			<li><?php echo $this->Html->link(__('Editar Pedido'), array('action' => 'edit', $pedido['Pedido']['id'])); ?> </li>
-			<li><?php echo $this->Form->postLink(__('Borrar Pedido'), array('action' => 'delete', $pedido['Pedido']['id']), null, __('¿Está seguro que desea borrar el pedido # %s?', $pedido['Pedido']['id'])); ?> </li>
-			<li><?php echo $this->Html->link(__('Listar Pedidos'), array('action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('Crear nuevo Pedido'), array('action' => 'add')); ?> </li>
-			<li><hr></li>
-			<li><?php echo $this->Html->link(__('Listar Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('Agregar nuevo Cliente'), array('controller' => 'clientes', 'action' => 'add')); ?> </li>
-		</ul>
+<div id="content" class="col-md-12">
+	<legend>
+	<div id="header" class="row">
+		<div class="dropdown">
+	    <button class="btn btn-default dropdown-toggle btn-rotate" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	      <i class="ti-settings"></i> Acciones
+	      <span class="caret"></span>
+	    </button>
+	    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				<li><?php echo $this->Html->link(__('Editar Pedido'), array('action' => 'edit', $pedido['Pedido']['id'])); ?> </li>
+				<li><?php echo $this->Form->postLink(__('Borrar Pedido'), array('action' => 'delete', $pedido['Pedido']['id']), null, __('¿Está seguro que desea borrar el pedido # %s?', $pedido['Pedido']['id'])); ?> </li>
+				<li><?php echo $this->Html->link(__('Listar Pedidos'), array('action' => 'index')); ?> </li>
+				<li><?php echo $this->Html->link(__('Crear nuevo Pedido'), array('action' => 'add')); ?> </li>
+				<li><hr></li>
+				<li><?php echo $this->Html->link(__('Listar Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
+				<li><?php echo $this->Html->link(__('Agregar nuevo Cliente'), array('controller' => 'clientes', 'action' => 'add')); ?> </li>
+	    </ul>
+		</div>
 	</div>
-<div class="col-md-10">
+	</legend>
   <div id="botones" class="col-md-12 col-md-offset-1">
     <?php echo $this->Html->link(__('Volver'), array('controller' => 'pedidos', 'action' => 'index'),array(
       'class' => 'btn btn-danger pull-left'));

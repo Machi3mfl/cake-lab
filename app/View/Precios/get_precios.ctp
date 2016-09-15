@@ -95,5 +95,6 @@
     </table>
   </div> <!-- FIN DIV tablaPrecios ----------------------->
 </div> <!-- FIN DIV DETALLES ----------------------->
+<input type="button" id="atras" value="Atrás" class="btn btn-primary btn-lg pull-left">
 <input type="submit" id="confirmar" value="Confirmar" class="btn btn-success btn-lg pull-right">
 <?php  echo $this->Form->end(); ?>

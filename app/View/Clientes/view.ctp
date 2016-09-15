@@ -11,7 +11,7 @@
 			<li><?php echo $this->Html->link(__('Agregar Cliente'), array('action' => 'add')); ?> </li>
 		</ul>
 </div>
-<div class="col-md-10">
+<div id="content" class="col-md-10">
 <legend><h3><?php  echo __('Cliente'); ?></h3></legend>
 	<dl class="dl-horizontal">
 		<dt><?php echo __('Id'); ?></dt>

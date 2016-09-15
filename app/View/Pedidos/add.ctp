@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container col-md-12">
 	<!--***************** PASOS TABS *********************-->
-	<div class="row form-group">
+	<div class="row">
     <div class="col-xs-12">
       <ul class="nav nav-pills nav-justified thumbnail setup-panel">
         <li class="active">
@@ -21,7 +21,6 @@
   <div class="row setup-content" id="step-1">
 	<!--******************** PASO 1 ***************************-->
     <div class="col-xs-12 col-md-12">
-      <h3 class="text-center well"><?php echo __('Agregando nuevo Pedido'); ?></h3>
       <legend><h3> Paso 1 <small>: Seleccionar cliente</small></h3></legend>
       <div class="col-xs-12 form-inline" > Buscador de clientes:
       <?php
@@ -61,7 +60,6 @@
         </button>
       </div>
         <?php echo $this->Form->end(); ?>
-      <br>
 	      <?php echo $this->Form->create('Upload.Copias',array('role'=>"form", 'data-toggle' => 'validator', 'class'=>'form-inline','url' =>array(
 						'controller' => 'pedidos','action' => 'confirmar')));
 	      ?>
@@ -82,7 +80,6 @@
 	      <div>
 	        <legend><h3>Imagenes Agregadas</h3></legend>
 	      </div>
-	      <br>
         <?php if(isset($imgs)) :  {?>
      		<!--********************** Table ******************************-->
 		    <div class="table-responsive">
@@ -186,7 +183,7 @@
 	    	</tbody>
 	    </table> <!-- div tabla imagenes -->
 		</div> <!--- TABLA PARA IMAGENES SUBIDAS - ----->
-    <button id="activate-step-2" type="submit" class="<?php echo $disabled_button; ?> btn btn-primary btn-lg pull-right">Siguiente</button>
+    <button id="activate-step-2" type="submit" class="<?php echo $disabled_button; ?> btn btn-success btn-lg pull-right">Siguiente</button>
 		<?php $this->Form->end(); ?>
   	<div class="disabled-div" style="display:block;"></div>
   	</div> <!-- div resultados -->
@@ -195,24 +192,25 @@
 	</div>
   <!-- FIN PASO 1 ------------------------------->
 	<!-- PASO 2 -------------------->
-  <div class="row setup-content" id="step-2">
+  <div class="row setup-content card" id="step-2">
     <div class="col-xs-12 col-md-12">
-      <h3 class="text-center well">Completando pedido</h3>
       <legend><h3> Paso 2 <small>: Confirmación del pedido</small></h3></legend>
-    	<div class="col-md-6">
-        <blockquote>Datos del Cliente
-          <ul type="none" id="datosCliente" class="datosCliente">
-						<input id="ClienteId" name="data[Pedido][cliente_id]" style="visibility:hidden_">
-            <li id="clienteNombre"></li>
-						<li><small>Cliente - Apellido Nombre</small></li>
-            <li id="clienteDir"></li>
-						<li><small> Dirección - Provincia / Localidad / Calle Numero Piso </small></li>
-            <li id="clienteContacto"></li>
-						<li><small> Contacto - Email / Telefono </small></li>
-          </ul>
-        </blockquote>
-      </div> <!-- FIN COL-MD-6 -->
+			<div class="col-md-12">
+				<div class="col-md-6">
+	        <blockquote>Datos del Cliente
+	          <ul type="none" id="datosCliente" class="datosCliente">
+							<input id="ClienteId" name="data[Pedido][cliente_id]" style="visibility:hidden">
+	            <li id="clienteNombre"></li>
+							<li><small>Cliente - Apellido Nombre</small></li>
+	            <li id="clienteDir"></li>
+							<li><small> Dirección - Provincia / Localidad / Calle Numero Piso </small></li>
+	            <li id="clienteContacto"></li>
+							<li><small> Contacto - Email / Telefono </small></li>
+	          </ul>
+	        </blockquote>
+	      </div> <!-- FIN COL-MD-6 -->
       <div id="PedidoDetalle"></div> <!-- FIN COL-MD-5 -->
+			</div>
     </div> <!-- FIN COLS 12 --------------------------->
 	</div> <!-- FIN PASO 2 ------------------------------>
 <!-- Img Modal -->
@@ -230,6 +228,11 @@
   </div>
 </div>
 </div> <!--    FIN CONTAINER GENERAL ---->
+<script>
+	window.onload = function() {
+		$('#minimizeSidebar').trigger("click");
+	}
+</script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		if ($("#UploadPhoto").get(0).files.length == 0)
@@ -381,6 +384,9 @@ $(document).ready(function(){
 	    $('ul.setup-panel li:eq(1)').removeClass('disabled');
 	    $('ul.setup-panel li a[href="#step-2"]').trigger('click');
 	  });
+		$("#atras").on('click',function(){
+			alert("atras");
+		});
 	});
 </script>
 <script>
