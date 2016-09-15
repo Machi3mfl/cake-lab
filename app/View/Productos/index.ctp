@@ -1,26 +1,24 @@
-<?php
-  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
-?>
-<div class="col-md-2">
+<div id="content" class="col-md-12">
+  <div id="header" class="row">
     <legend>
-        <h3><?php echo __('Acciones'); ?></h3>
+        <h4>Producto <br><small> Listado de productos disponibles</small></h4>
     </legend>
-	<ul class="nav nav-sidebar">
-		<li><?php echo $this->Html->link(__('Nuevo Producto'), array('action' => 'add')); ?></li>
-		<li><hr></li>
-    <li><?php echo $this->Html->link(__('Listar Categorias'), array('controller' => 'categorias', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Nueva Categoria'), array('controller' => 'categorias', 'action' => 'add')); ?> </li>
-		<li><hr></li>
-		<li><?php echo $this->Html->link(__('Listar Superficies'), array('controller' => 'superficies', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Nueva Superficie'), array('controller' => 'superficies', 'action' => 'add')); ?> </li>
-		<li><hr></li>
-		<li><?php echo $this->Html->link(__('Listar Tamaños'), array('controller' => 'tamanos', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Nuevo Tamaño'), array('controller' => 'tamanos', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="col-md-10">
-        <h3><?php echo __('Productos '); ?><small> > Listado de productos</small></h3>
-        <div class="table-responsive">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle btn-rotate" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <i class="ti-settings"></i> Acciones
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><?php echo $this->Html->link(__('Categorias'), array('controller' => 'categorias', 'action' => 'index')); ?> </li>
+    		<li><?php echo $this->Html->link(__('Superficies'), array('controller' => 'superficies', 'action' => 'index')); ?> </li>
+    		<li><?php echo $this->Html->link(__('Tamaños'), array('controller' => 'tamanos', 'action' => 'index')); ?> </li>
+        <li><hr></li>
+        <li><?php echo $this->Html->link(__('Crear Producto'), array('action' => 'add')); ?></li>
+      </ul>
+    </div>
+  </div>
+<div class="col-md-10 col-md-offset-1">
+    <div class="table-responsive">
 	<table cellpadding="0" cellspacing="0"  class="table table-hover">
   <thead>
 	<tr>
@@ -76,4 +74,5 @@
 </div>
   <?php echo $this->element('pagination');?>
 
+</div>
 </div>

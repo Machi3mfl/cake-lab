@@ -1,27 +1,26 @@
-<?php
-  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
-  $this->Html->addCrumb( 'Agregar '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
-?>
-<div class="col-md-2">
-    <h3><?php echo __('Acciones'); ?></h3>
-    <ul class="nav nav-sidebar">
+<div id="content" class="col-md-12">
+
+  <div id="header" class="row">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle btn-rotate" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <i class="ti-settings"></i> Acciones
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
         <li><?php echo $this->Html->link(__('Listar Clientes'), array('action' => 'index')); ?></li>
-    </ul>
-</div>
+      </ul>
+    </div>
+  </div>
 <script>
     $(document).ready(function(){
         $('.form-group').append('<div class="help-block with-errors"></div>');
     })
 </script>
-<div class="col-md-10">
-        <legend><?php echo __('Agregando nuevo Cliente'); ?></legend>
-            <blockquote>
-              <p>Para dar de alta un nuevo cliente debera crear primero un usuario. Dicho usuario le servira para poder ingresar al sistema y generar pedidos</p>
-            </blockquote>
-
-        <div class='col-md-9'>
+<div class="col-md-10 col-md-offset-1">
+        <legend><h5><?php echo __('Agregando nuevo Cliente'); ?></h5></legend>
+        <div class='col-md-10 col-md-offset-1 card'>
             <legend>
-                <h3>Cliente: <small> Dar de alta al cliente </small></h3>
+                <h4>Cliente: <small> Dar de alta al cliente </small></h4>
             </legend>
             <?php echo $this->Form->create('Cliente',["data-toggle"=>"validator","role"=>"form"]); ?>
             <div class="form-group col-md-12">
@@ -136,7 +135,7 @@
               <?php echo $this->Form->end(array('label' => 'Agregar Cliente','class'=>'btn btn-success pull-right','div' => false));?>
             </div>
         </div>
-
+  </div>
 </div>
 <script type="text/javascript">
 $( document ).ready(function() {

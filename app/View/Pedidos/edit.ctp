@@ -3,13 +3,17 @@ img{
 	cursor:pointer !important;
 }
 </style>
-<?php
-  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
-  $this->Html->addCrumb( 'Editar '.$this->name , '/'.$this->params['controller'].'/'.$this->params['action'] , array('class' => 'btn btn-default'));
-?>
-<div class="col-md-2 sidebar">
-	<legend><h3><?php echo __('Acciones'); ?></h3></legend>
-		<ul class="nav nav-colapse">
+<div id="content" class="col-md-12">
+	<legend>
+			<h4>Detalle pedido # <?php echo $pedido['Pedido']['id'] ?></h4>
+	</legend>
+<div id="header" class="row">
+	<div class="dropdown">
+		<button class="btn btn-default dropdown-toggle btn-rotate" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			<i class="ti-settings"></i> Acciones
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 			<li><?php echo $this->Form->postLink(__('Borrar Pedido'), array('action' => 'delete', $pedido['Pedido']['id']), null, __('¿Está seguro que desea borrar el pedido # %s?', $pedido['Pedido']['id'])); ?> </li>
 			<li><?php echo $this->Html->link(__('Ver Pedidos'), array('action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('Agregar Pedido'), array('action' => 'add')); ?> </li>
@@ -17,11 +21,12 @@ img{
 			<li><?php echo $this->Html->link(__('Listar Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
 		</ul>
 	</div>
-<div class="col-md-10">
+</div>
+
+<div class="col-md-12">
 	<?php
 		echo $this->Form->create('Pedido');
 	?>
-		<h3><?php  echo __('Pedido'); ?></h3>
 		<div class="table-responsive">
 			<table class="table table-hover">
 			<thead>
@@ -73,7 +78,7 @@ img{
 		</div><!--- FIN TABLE RESPONSIVE --------->
 		<h3><?php echo __('Copias del pedido'); ?></h3>
 	<?php if (!empty($pedido['Copia'])): ?>
-	<div class="table-responsive">
+	<div class="table-responsive card">
 	<table class="table table-hover">
 	<thead>
 		<tr>
@@ -180,6 +185,7 @@ img{
   </div>
 </div>
 
+</div>
 </div>
 <script>
 $(".miniatura").bind("click",function(event){

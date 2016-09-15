@@ -26,6 +26,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <!--?= $this->Html->script('/js/paper/jquery-1.10.2.js') ?-->
     <?= $this->Html->script('/js/paper/jquery-ui.min.js') ?>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-es-AR.js"></script>
     <?= $this->Html->script('/js/validator.js') ?>
 
     <script type="text/javascript">
@@ -106,12 +110,4 @@
 <!--   Sharrre Library    -->
 <?= $this->Html->script('/js/paper/jquery.sharrre.js') ?>
 <!--  Forms Validations Plugin -->
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
-
-<!-- Latest compiled and minified Locales -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-es-AR.js"></script>
-
-<?php echo $this->Html->script('validator'); ?>
-
 </html>

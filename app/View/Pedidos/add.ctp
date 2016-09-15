@@ -38,7 +38,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <legend><h3> Paso 2 <small>: Añadir copias</small></h3></legend>
+        <legend><h3> Paso 1.1 <small>: Añadir copias</small></h3></legend>
       </div>
     </div>
     <div id="paso-2" style="position: relative;">
@@ -175,7 +175,7 @@
 	      ?>
 	    	<!-- Drop Zone -->
 	      <div class="upload-drop-zone" id="drop-zone">
-	        No se han subido fotos todavia. Seleccione las imagenes que desea subir a traves del botón examinar.
+	        No se han subido fotos todavia. Seleccione las imagenes que desea subir a traves del botón "Seleccionar Archivos".
 	      </div>
 	      <?php
 	        endif;

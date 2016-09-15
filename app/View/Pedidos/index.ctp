@@ -1,12 +1,8 @@
-<?php
-  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
-?>
-
 <div class="col-md-12">
-    <leyend>
-        <h3>Pedidos <small> > Administración</small></h3>
-    </leyend>
-    <div class="table-responsive">
+    <legend>
+        <h4>Pedidos <br><small> Listado de pedidos</small></h4>
+    </legend>
+    <div class="table-responsive card">
       <table id="pedidos" class="table table-hover">
       <thead>
         <tr>
