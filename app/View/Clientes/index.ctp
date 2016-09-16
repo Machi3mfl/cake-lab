@@ -43,7 +43,13 @@
 		<td><?php echo h($provincias[$cliente['Cliente']['provincia']]); ?>&nbsp;</td>
 		<td><?php echo h($localidades[$cliente['Cliente']['localidad']]); ?>&nbsp;</td>
 		<td><?php echo h($cliente['User']['email']); ?>&nbsp;</td>
-    <td><?php echo h($cliente['Lista']['nombre']); ?>&nbsp;</td>
+    <td>
+      <?php
+       echo $this->Html->link(
+            $cliente['Lista']['nombre'],'javascript:void(0)',array(
+              'class' => 'verlista' , 'value' => $cliente['Lista']['id']));
+      ?>
+    </td>
 		<td>
       <?php echo $this->Html->link(__('Ver'), array('action' => 'view', $cliente['Cliente']['id']),array(
           'type'=>'button',
@@ -67,16 +73,23 @@
 	</table>
   </div>
 </div>
-<script>
-$(document).ready(function(){
-});
+<script type="text/javascript">
 
-$.extend($.fn.bootstrapTable.columnDefaults, {
-  	sortable: true
-});
-
-$(function() {
-  $table = $('#bootstrap-table').bootstrapTable();
+$('#bootstrap-table').on('click-cell.bs.table', function (e , field, value, row, $element){
+  var lista = $element.children().attr('value');
+  if (field == 'lista'){
+    $.ajax({
+      type: "POST",
+      url: "<?php echo $this->Html->url('/', true).'listas/view/' ?>"+lista,
+      data: ({id : lista}),
+      success: function (data, textStatus){
+         $("#modal .modal-title").empty().html("Lista de Precio");
+         $("#modal .modal-body").empty().html(data);
+         $("#modal .modal-body .col-md-2").hide();
+         $("#modal").modal();
+      }
+    });
+  }
 });
 
 </script>

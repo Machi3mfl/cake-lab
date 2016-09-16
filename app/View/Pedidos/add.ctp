@@ -51,7 +51,7 @@
       <div class="form-group">
         <?php echo $this->Form->input('Upload.photo.', array(
 					'type' => 'file', 'multiple'=>true,'class'=>'filestyle', 'data-buttonBefore' => 'true',
-					'data-placeholder' => "No hay archivos" , 'data-buttonName' => "btn-primary"));
+					'data-placeholder' => "No hay archivos" , 'data-buttonName' => "btn-info btn-fill"));
 				?>
       </div>
       <div class="form-group">
@@ -82,7 +82,7 @@
 	      </div>
         <?php if(isset($imgs)) :  {?>
      		<!--********************** Table ******************************-->
-		    <div class="table-responsive">
+		    <div class="table-responsive card">
 		    <table class="table table-hover">
 	        <thead>
 	          <tr><th>Miniatura</th><th style="width:120px;">Nombre</th><th>Categoria</th><th>Papel</th><th>Tamaño</th><th>Borde</th><th>Cantidad</th><th>Acciones</th>			          </tr>
@@ -269,7 +269,7 @@ $(document).ready(function(){
     minLength: 2,
     delay: 2,
     source: function (request,response){
-      $.getJSON('/laboratorio/lab/clientes/buscarPorNombre',request, function(data,status,xhr){
+      $.getJSON("<?php echo $this->Html->url('/', true).'clientes/buscarPorNombre' ?>",request, function(data,status,xhr){
         response(data);
       });
     },
@@ -303,7 +303,7 @@ $(document).ready(function(){
 				var data= $.parseJSON(request.responseText);
 				llenarCliente(data);
 			},
-			url:'/laboratorio/lab/clientes/buscarPorId',
+			url:"<?php echo $this->Html->url('/', true).'clientes/buscarPorId' ?>",
 			data: {id: $id}
 		})
 	}

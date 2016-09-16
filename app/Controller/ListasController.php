@@ -27,8 +27,13 @@ class ListasController extends AppController {
 	public function view($id = null) {
 			$this->loadModel('Producto');
 			$this->Lista->recursive=3;
-      $this->Lista->id = $id;
-      if (!$this->Lista->exists()) {
+
+			if ($this->request->is('ajax')) {
+	      $this->layout = 'ajax';
+	      $id = $this->request->data['id'];
+	    }
+			$this->Lista->id = $id;
+			if (!$this->Lista->exists()) {
               throw new NotFoundException('Invalid lista','error');
       }else{
 				$prod_lista=$this->contarProductos($id);

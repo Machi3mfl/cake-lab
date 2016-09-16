@@ -54,8 +54,19 @@
   border-radius: 0px !important;
 }
 
+
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-  background-color: none !important;
+  background-color: #0d2a41 !important;
+  color: #ffffff;
+}
+
+.nav > li.disabled > a {
+  color: #0d2a41 !important;
+}
+
+.nav-pills > li > a {
+  border: 2px solid #0d2a41 !important;
+  color: white !important;
 }
 
 /*************** FORMS *****************************************************************/
@@ -318,6 +329,7 @@ div.dataTables_wrapper div.dataTables_paginate{
 
 .modal-body{
   border-bottom: 1px solid #e5e5e5 !important;
+  background-color: #f4f3ef;
 }
 
 .modal-header {
@@ -482,4 +494,8 @@ form fieldset {
   hr {
     margin-bottom: 5px;
     margin-top: 5px;
+  }
+
+  .card legend {
+    padding-left: 1% !important;
   }

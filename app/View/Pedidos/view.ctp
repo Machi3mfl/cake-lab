@@ -25,7 +25,7 @@ img{
 	</div>
 	</legend>
 		<h3><?php  echo __('Pedido'); ?></h3>
-		<div class="table-responsive">
+		<div class="table-responsive card">
 			<table class="table table-hover">
 			<thead>
 			<tr>
@@ -54,7 +54,13 @@ img{
 					?>
 				</td>
 				<td><?php echo h($pedido['Pedido']['cantidad']); ?>&nbsp;</td>
-				<td><?php echo $this->Html->link($pedido['Cliente']['apellido']." ".$pedido['Cliente']['nombre'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>	&nbsp;</td>
+				<td>
+					<?php echo $this->Html->link($pedido['Cliente']["apellido"]." ".$pedido['Cliente']['nombre'], array(
+						'controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id']),array(
+							'value' => $pedido['Cliente']['id'],
+							'class' => 'clienteid'
+						)); ?>
+				</td>
 				<td style="display:none;"><?php echo h($pedido['Pedido']['sucursal']); ?>&nbsp;</td>
 				<td style="display:none;"><?php echo h($pedido['Pedido']['forma_pago']); ?>&nbsp;</td>
 				<td><?php echo h($pedido['Estado']['nombre']); ?>&nbsp;</td>
@@ -65,7 +71,7 @@ img{
 		</div><!--- FIN TABLE RESPONSIVE --------->
 		<h3><?php echo __('Copias del pedido'); ?></h3>
 	<?php if (!empty($pedido['Copia'])): ?>
-	<div class="table-responsive">
+	<div class="table-responsive card">
 	<table class="table table-hover">
 	<thead>
 		<tr>
@@ -176,6 +182,24 @@ img{
 </div>
 
 </div>
+<script>
+	$(".clienteid").on('click',function(e){
+		e.preventDefault();
+		var cliente = $(this).attr('value');
+		$.ajax({
+					 type: "POST",
+					 url: "<?php echo $this->Html->url('/', true).'clientes/view/' ?>"+cliente,
+					 data: ({id : cliente}),
+					 success: function (data, textStatus){
+							 $("#modal .modal-title").empty().html("Datos de cliente");
+							 $("#modal .modal-body").empty().html(data);
+							 $("#modal .modal-body .col-md-2").hide();
+							 $("#modal").modal();
+					 }
+			 });
+
+	});
+</script>
 <script>
 $(".miniatura").bind("click",function(event){
 	var url=$(this).attr('src');

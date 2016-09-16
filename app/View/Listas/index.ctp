@@ -1,20 +1,22 @@
-<?php
-  $this->Html->addCrumb( $this->name , '/'.$this->params['controller'] , array('class' => 'btn btn-default'));
-?>
-<div class="col-md-2">
+<div id="content" class="col-md-12">
+  <div id="header" class="row">
     <legend>
-        <h3><?php echo __('Acciones'); ?></h3>
+        <h4>Precios <br><small> Lista de precios disponibles</small></h4>
     </legend>
-    <ul class="nav nav-sidebar">
-            <li><?php echo $this->Html->link(__('Nueva Lista'), array('action' => 'add')); ?></li>
-            <li><hr></li>
-            <li><?php echo $this->Html->link(__('Listar Precios'), array('controller' => 'precios', 'action' => 'index')); ?> </li>
-            <li><?php echo $this->Html->link(__('Nuevos Precios'), array('controller' => 'precios', 'action' => 'add')); ?> </li>
-    </ul>
-</div>
-<div class="col-md-10">
-	<h3><?php echo __('Listas de precios'); ?></h3>
-        <div class="table-responsive">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle btn-rotate" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <i class="ti-settings"></i> Acciones
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><?php echo $this->Html->link(__('Nueva Lista'), array('action' => 'add')); ?></li>
+        <li><hr></li>
+        <li><?php echo $this->Html->link(__('Listar Precios'), array('controller' => 'precios', 'action' => 'index')); ?> </li>
+        <li><?php echo $this->Html->link(__('Nuevos Precios'), array('controller' => 'precios', 'action' => 'add')); ?> </li>
+      </ul>
+    </div>
+<div class="col-md-8 col-md-offset-2">
+  <div class="table-responsive card">
 	<table cellpadding="0" cellspacing="0" class="table table-hover">
   <thead>
   	<tr>
@@ -32,23 +34,23 @@
             <td>
                 <?php echo $this->Html->link(__('Ver'), array('action' => 'view', $lista['Lista']['id']),array(
                         'type'=>'button',
-                        'class'=>'btn btn-success')
+                        'class'=>'btn btn-success btn-xs')
                             );
                     ?>
                 <?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $lista['Lista']['id']),array(
                     'type'=>'button',
-                    'class'=>'btn btn-warning')
+                    'class'=>'btn btn-warning btn-xs')
                     );
                 ?>
                 <?php echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $lista['Lista']['id']),array(
                     'type'=>'button',
-                    'class'=>'btn btn-danger'),
+                    'class'=>'btn btn-danger btn-xs'),
                     __('Are you sure you want to delete # %s?', $lista['Lista']['id'])
                         );
                 ?>
                 <?php echo $this->Html->link(__('Editar Nombre'), array('action' => 'editarNombre', $lista['Lista']['id']),array(
                     'type'=>'button',
-                    'class'=>'btn btn-primary')
+                    'class'=>'btn btn-primary btn-xs')
                     );
                 ?>
             </td>
@@ -58,4 +60,5 @@
 	</table>
 </div>
 <?php echo $this->element('pagination');?>
+</div>
 </div>

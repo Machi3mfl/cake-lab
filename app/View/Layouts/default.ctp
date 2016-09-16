@@ -110,4 +110,17 @@
 <!--   Sharrre Library    -->
 <?= $this->Html->script('/js/paper/jquery.sharrre.js') ?>
 <!--  Forms Validations Plugin -->
+<script>
+$(document).ready(function(){
+});
+
+$.extend($.fn.bootstrapTable.columnDefaults, {
+  	sortable: true
+});
+
+$(function() {
+  $table = $('#bootstrap-table').bootstrapTable();
+});
+
+</script>
 </html>

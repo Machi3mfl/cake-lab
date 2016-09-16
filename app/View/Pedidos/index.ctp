@@ -41,7 +41,7 @@
 		<td><?php echo h($pedido['Pedido']['observaciones']); ?>&nbsp;</td>
     <td><?php echo h($pedido['Estado']['nombre']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'ti-eye')), array(
+			<?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'ti-camera')), array(
         'action' => 'view', $pedido['Pedido']['id']),array(
             'type'=>'button',
             'class'=>'btn btn-simple btn-info btn-icon table-action view',

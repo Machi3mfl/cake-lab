@@ -15,10 +15,8 @@ img{
 				<li><?php echo $this->Html->link(__('Editar Pedido'), array('action' => 'edit', $pedido['Pedido']['id'])); ?> </li>
 				<li><?php echo $this->Form->postLink(__('Borrar Pedido'), array('action' => 'delete', $pedido['Pedido']['id']), null, __('¿Está seguro que desea borrar el pedido # %s?', $pedido['Pedido']['id'])); ?> </li>
 				<li><?php echo $this->Html->link(__('Listar Pedidos'), array('action' => 'index')); ?> </li>
-				<li><?php echo $this->Html->link(__('Crear nuevo Pedido'), array('action' => 'add')); ?> </li>
 				<li><hr></li>
 				<li><?php echo $this->Html->link(__('Listar Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?> </li>
-				<li><?php echo $this->Html->link(__('Agregar nuevo Cliente'), array('controller' => 'clientes', 'action' => 'add')); ?> </li>
 	    </ul>
 		</div>
 	</div>
@@ -31,7 +29,7 @@ img{
       ));
     ?>
   </div>
-  <div id="recibo" class="col-md-8 col-md-offset-2">
+  <div id="recibo" class="col-md-8 col-md-offset-2 card">
     <legend class="text-center"><h3>Recibo Número #<?php echo $pedido['Pedido']['id']; ?></h3></legend>
     <div id="info-clientes">
       <dl class="dl-horizontal">
