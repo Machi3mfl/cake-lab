@@ -21,8 +21,7 @@
 	      <tr>
           <th data-field="id"><?php echo 'Id'; ?></th>
           <th data-field="nombre"><?php echo 'Nombre'; ?></th>
-          <th data-field="calle"><?php echo 'Calle'; ?></th>
-          <th data-field="numero"><?php echo 'Numero'; ?></th>
+          <th data-field="direccion"><?php echo 'Dirección'; ?></th>
           <th data-field="telefono"><?php echo 'Telefono'; ?></th>
           <th data-field="provincia"><?php echo 'Provincia'; ?></th>
           <th data-field="localidad"><?php echo 'Localidad'; ?></th>
@@ -37,8 +36,7 @@
 	<tr>
 		<td><?php echo h($cliente['Cliente']['id']); ?>&nbsp;</td>
 		<td><?php echo h($cliente['Cliente']['nombre'].' '.$cliente['Cliente']['apellido']); ?>&nbsp;</td>
-		<td><?php echo h($cliente['Cliente']['calle']); ?>&nbsp;</td>
-		<td><?php echo h($cliente['Cliente']['numero']); ?>&nbsp;</td>
+		<td><?php echo h($cliente['Cliente']['direccion']); ?></td>
 		<td><?php echo h($cliente['Cliente']['telefono']); ?>&nbsp;</td>
 		<td><?php echo h($provincias[$cliente['Cliente']['provincia']]); ?>&nbsp;</td>
 		<td><?php echo h($localidades[$cliente['Cliente']['localidad']]); ?>&nbsp;</td>
