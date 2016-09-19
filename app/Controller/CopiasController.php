@@ -115,14 +115,18 @@ class CopiasController extends AppController {
 	}
 
 
+    public function guardarCopiasForm(){
+      $this->autoRender=false;
+      $form = $this->request->data['Copias'];
+      if ($this->Session->check('CopiasForm')){
+        $this->Session->delete('CopiasForm');
+        $this->Session->write('CopiasForm',$form);
+      } else{
+        $this->Session->write('CopiasForm',$form);
+      }
 
-        public function add_inline(){
-
-        }
-
-        public function add_pedido(){
-
-        }
+      debug($this->Session->read('CopiasForm'));
+    }
 
 
       public function guardarCopias(array $copias, $pedido_id){

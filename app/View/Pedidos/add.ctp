@@ -1,3 +1,7 @@
+<?php
+	$copias = $this->Session->read('CopiasForm');
+	debug($copias);
+?>
 <div class="container col-md-12">
 	<!--***************** PASOS TABS *********************-->
 	<div class="row">
@@ -114,8 +118,10 @@
 				    </td>
 				    <td>
 							<div class="form-group">
-				      	<?php echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array(
-				        	'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control', 'required'=>true));
+				      	<?php
+								echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array(
+				        	'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control', 'required'=>true
+								));
 								?>
 				   		</div>
 						</td>
@@ -228,6 +234,41 @@
   </div>
 </div>
 </div> <!--    FIN CONTAINER GENERAL ---->
+<script>
+	$(document).ready(function(){
+		var copias = '<?php echo json_encode($copias); ?>';
+		if(copias !== undefined){
+			console.log(copias);
+			var option = [];
+			var index = 0 ;
+			$("select#UploadCopias0Categoria option").each(function() {
+
+
+			});
+			console.log(option);
+		}
+	});
+</script>
+<script>
+$(function () {
+	$("#UploadAddForm").on('submit',function (e){
+		e.preventDefault();
+		var data = $('#UploadCopiasAddForm').find('select, input').serialize();
+		if(data !== undefined){
+			$.ajax({
+				type: 'post',
+				url:"<?php echo $this->Html->url('/', true).'copias/guardarCopiasForm' ?>" ,
+				data: data,
+				complete : function (respuesta){
+					$("#UploadAddForm").unbind("submit").submit();
+				}
+			});
+
+		}
+		 //
+  });
+});
+</script>
 <script>
 	window.onload = function() {
 		$('#minimizeSidebar').trigger("click");
@@ -435,7 +476,7 @@ $(document).ready(function(){
 		$.ajax({
 			async: true,
 			method: "post",
-			url: "../pedidos/duplicarUpload",
+			url: "<?php echo $this->Html->url('/', true).'uploads/duplicarUpload' ?>",
 			data: {upload_id:  value}
 		}).done(function(respuesta){
 			var nueva_cant=parseInt($("#resultados #UploadCopiasCantidad").val())+1;
@@ -457,7 +498,7 @@ function borrar(id,posicion){
 	$.ajax({
 		async: true,
 		method: "post",
-		url: "/laboratorio/lab/uploads/borrarUpload",
+		url: "<?php echo $this->Html->url('/', true).'uploads/borrarUpload' ?>",
 		data: {upload_id:  value, posicion: posicion}
 	}).done(function(respuesta){
 		$("#copia"+posicion).remove();

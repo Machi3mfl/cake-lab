@@ -139,7 +139,9 @@ class PedidosController extends AppController {
       $guardados=array();
       $files=array(); // PARA DESPUES : GUARDAR FILES TEMPORALES Y LUEGO GUARDAR EN BD - USAR TMP EN FORMULARIO
       $this->inicializarPedido();
+
       if (!empty($this->request->data)){ // SI HAY FILES EN REQUEST DATA
+
           foreach($this->request->data["Upload"]["photo"] as $file) { // por cada photo setea un file
             $this->Upload->set(array('photo' => $file));
             $photo = $this->Upload->data;
@@ -151,7 +153,9 @@ class PedidosController extends AppController {
               array_push($guardados,$ultimo); //guarda en array los id files guardados
             }
           } /**** fin foreach ***/
+
         $imgs=$this->listarGuardados($guardados);
+
         if (!empty($this->Session->read('imagenes'))){ //SI YA HAY IMAGENES CARGADAS ,lee las imagenes de la session,las apila y guarda
           $ant = $this->Session->read('imagenes');
           foreach($imgs as $img) {
@@ -164,7 +168,9 @@ class PedidosController extends AppController {
           $this->Session->write('imagenes',$imgs);
           $this->set('imgs',$imgs);
         }
+
       $this->setearModelos();
+
     } elseif ($this->Session->check('imagenes')){ //Muestra si se recarga la pagina
         $this->set('imgs',$this->Session->read('imagenes'));
         $this->set('cantidad',count($this->Session->read('imagenes')));
