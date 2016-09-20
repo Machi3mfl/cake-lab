@@ -94,7 +94,9 @@
     })
 	  .done(function( data ) {
 			$("#lista-precios").html(data);
+
 	  });
+    $('#PreciosEditForm').validator('update');
   });
 
 </script>

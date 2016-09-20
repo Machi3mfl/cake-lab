@@ -59,6 +59,9 @@
           </div>
         </div> <!-- /container -->
       </div>
+      <div id="loading-div" style="display:none;width:69px;height:89px;position:absolute;top:50%;left:50%;padding:2px;">
+        <?= $this->Html->image('/images/loading',[ 'height' => '64' , 'width' => '64' ]); ?>
+      </div>
     </div>
 </div>
 <div id="modal" class="modal fade" tabindex="-1" role="dialog">
@@ -122,5 +125,16 @@ $(function() {
   $table = $('#bootstrap-table').bootstrapTable();
 });
 
+</script>
+<script>
+  $(document).ready(function(){
+    $(document).ajaxStart(function(){
+      $("#loading-div").css("display", "block");
+    });
+
+    $(document).ajaxComplete(function(){
+      $("#loading-div").css("display", "none");
+    });
+  });
 </script>
 </html>

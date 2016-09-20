@@ -1,6 +1,5 @@
 <?php
 	$copias = $this->Session->read('CopiasForm');
-	debug($copias);
 ?>
 <div class="container col-md-12">
 	<!--***************** PASOS TABS *********************-->
@@ -120,8 +119,7 @@
 							<div class="form-group">
 				      	<?php
 								echo $this->Form->select('Upload.Copias.'.$cant.'.categoria', $categorias ,array(
-				        	'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control', 'required'=>true
-								));
+				        	'name' => 'data[Copias]['.$cant.'][categoria]','class'=>'form-control', 'required'=>true));
 								?>
 				   		</div>
 						</td>
@@ -514,26 +512,28 @@ $(function () {
 </script>
 <script>
 	$(document).ready(function(){
-		var copias = '<?php echo json_encode($copias); ?>';
-		var cop = $.parseJSON(copias);
-		if(copias !== undefined){
-			$.each(cop, function(index, value) {
-				console.log(value.tamano);
+
+		var copias = $.parseJSON('<?php echo json_encode($copias); ?>');
+
+		if(copias !== undefined &&  copias !== null){
+
+			$.each(copias, function(index, value) {
+
 				$('#UploadCopias'+ index +'Categoria option[value="' + value.categoria + '"]').attr('selected','selected');
 				$('#UploadCopias'+ index +'Categoria').change();
 
 				$('#UploadCopias'+ index +'Borde option[value="' + value.borde + '"]').attr('selected','selected');
 				$('#UploadCopias'+ index +'Borde').change();
 
-				$('#UploadCopias'+ index +'Superficie option[value="' + value.superficie + '"]').attr('selected','selected');
-				$('#UploadCopias'+ index +'Superficie').change();
+				$('#UploadCopias'+ index +'Papel option[value="' + value.superficie + '"]').attr('selected','selected');
+				$('#UploadCopias'+ index +'Papel').change();
 
 				$('#UploadCopias'+ index +'Tamano option[value="' + value.tamano + '"]').attr('selected','selected');
 				$('#UploadCopias'+ index +'Tamano').change();
 
 				$('#UploadCopias'+ index +'Cantidad').val(value.cantidad);
-			});
 
+			});
 
 		}
 

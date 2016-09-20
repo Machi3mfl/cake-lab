@@ -28,9 +28,9 @@ class UploadBehavior extends ModelBehavior {
 		'pathMethod' => 'flat',
 		'path' => '{ROOT}webroot{DS}files{DS}{model}{DS}{field}{DS}',
 		'fields' => array('dir' => 'dir', 'type' => 'type', 'size' => 'size'),
-		'mimetypes' => array(),
+		'mimetypes' => array('image/jpeg', 'image/png',),
 		'extensions' => array(),
-		'maxSize' => 2097152,
+		'maxSize' => 10485760,
 		'minSize' => 8,
 		'maxHeight' => 0,
 		'minHeight' => 0,
@@ -60,9 +60,9 @@ class UploadBehavior extends ModelBehavior {
 		'image/jpeg',
 		'image/pjpeg',
 		'image/png',
-		'image/vnd.microsoft.icon',
 		'image/x-icon',
 		'image/x-png',
+		'image/'
 	);
 
 	protected $_mediaMimetypes = array(
