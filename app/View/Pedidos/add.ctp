@@ -234,41 +234,7 @@
   </div>
 </div>
 </div> <!--    FIN CONTAINER GENERAL ---->
-<script>
-	$(document).ready(function(){
-		var copias = '<?php echo json_encode($copias); ?>';
-		if(copias !== undefined){
-			console.log(copias);
-			var option = [];
-			var index = 0 ;
-			$("select#UploadCopias0Categoria option").each(function() {
-
-
-			});
-			console.log(option);
-		}
-	});
-</script>
-<script>
-$(function () {
-	$("#UploadAddForm").on('submit',function (e){
-		e.preventDefault();
-		var data = $('#UploadCopiasAddForm').find('select, input').serialize();
-		if(data !== undefined){
-			$.ajax({
-				type: 'post',
-				url:"<?php echo $this->Html->url('/', true).'copias/guardarCopiasForm' ?>" ,
-				data: data,
-				complete : function (respuesta){
-					$("#UploadAddForm").unbind("submit").submit();
-				}
-			});
-
-		}
-		 //
-  });
-});
-</script>
+<?php echo $this->Html->script('Pedidos/add');?>
 <script>
 	window.onload = function() {
 		$('#minimizeSidebar').trigger("click");
@@ -528,7 +494,51 @@ function borrar(id,posicion){
     $("#imgModal img").attr('src',url);
   }
 </script>
-<?php echo $this->Html->script('Pedidos/add');?>
+<script>
+$(function () {
+	$("#UploadAddForm").on('submit',function (e){
+		e.preventDefault();
+		var data = $('#UploadCopiasAddForm').find('select, input').serialize();
+		if(data !== undefined){
+			$.ajax({
+				type: 'post',
+				url:"<?php echo $this->Html->url('/', true).'copias/guardarCopiasForm' ?>" ,
+				data: data,
+				complete : function (respuesta){
+					$("#UploadAddForm").unbind("submit").submit();
+				}
+			});
+		}
+  });
+});
+</script>
+<script>
+	$(document).ready(function(){
+		var copias = '<?php echo json_encode($copias); ?>';
+		var cop = $.parseJSON(copias);
+		if(copias !== undefined){
+			$.each(cop, function(index, value) {
+				console.log(value.tamano);
+				$('#UploadCopias'+ index +'Categoria option[value="' + value.categoria + '"]').attr('selected','selected');
+				$('#UploadCopias'+ index +'Categoria').change();
+
+				$('#UploadCopias'+ index +'Borde option[value="' + value.borde + '"]').attr('selected','selected');
+				$('#UploadCopias'+ index +'Borde').change();
+
+				$('#UploadCopias'+ index +'Superficie option[value="' + value.superficie + '"]').attr('selected','selected');
+				$('#UploadCopias'+ index +'Superficie').change();
+
+				$('#UploadCopias'+ index +'Tamano option[value="' + value.tamano + '"]').attr('selected','selected');
+				$('#UploadCopias'+ index +'Tamano').change();
+
+				$('#UploadCopias'+ index +'Cantidad').val(value.cantidad);
+			});
+
+
+		}
+
+	});
+</script>
 <style>
     .disabled-div{
         background-color: #555;
