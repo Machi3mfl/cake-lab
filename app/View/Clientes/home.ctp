@@ -1,9 +1,17 @@
 <style>
 body{
-  background:url(../img/background-2.jpg) no-repeat left !important;
+  background: rgba(0, 0, 0, 0) url(../img/background-2.jpg) no-repeat scroll center center / cover !important;
 }
 .wrapper{
   background-color: transparent !important;
+}
+
+header{
+  height: 40% !important;
+}
+
+header, header span{
+  color:white !important;
 }
 </style>
 <?php
@@ -19,7 +27,7 @@ body{
 				<nav id="menu" class="nav">
 					<ul>
 						<li>
-							<a href="#">
+							<a href="<?php echo Router::url('/'); ?>">
 								<span class="icon">
 									<i aria-hidden="true" class="ti-home btn-magnify"></i>
 								</span>
@@ -27,7 +35,7 @@ body{
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="<?php echo Router::url('/').'pedidos/nuevo'; ?>">
 								<span class="icon">
 									<i aria-hidden="true" class="ti-write"></i>
 								</span>
@@ -35,7 +43,7 @@ body{
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="<?php echo Router::url('/').'pedidos/ver'; ?>">
 								<span class="icon">
 									<i aria-hidden="true" class="ti-shopping-cart"></i>
 								</span>
@@ -43,7 +51,7 @@ body{
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="<?php echo Router::url('/').'users/logout'; ?>">
 								<span class="icon">
 									<i aria-hidden="true" class="ti-power-off"></i>
 								</span>

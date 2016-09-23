@@ -34,7 +34,8 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle btn-magnify" data-toggle="dropdown">
                         <i class="ti-user"></i>
-			                  <p>Usuario<b class="caret"></b></p>
+
+			                  <p><?php echo ucfirst($this->Session->read('Auth.User.name'));?> <b class="caret"></b></p>
                   </a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Perfil</a></li>

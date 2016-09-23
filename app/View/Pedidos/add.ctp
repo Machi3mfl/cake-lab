@@ -484,7 +484,7 @@ function borrar(id,posicion){
   });
 
   if ( $('#buscador').val() ){
-      $('#paso-2 .disabled-div').hide();
+    $('#paso-2 .disabled-div').hide();
   }
 
   function asignarImagen(url,nombre){
